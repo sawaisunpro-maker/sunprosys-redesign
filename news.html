@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>お知らせ | 株式会社サンプロシステム</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700;900&family=Inter:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/style.css">
+<style>
+.news-page{padding:clamp(4rem,8vh,7rem) 0;background:#fff;position:relative;overflow:hidden}
+
+/* Filter tabs */
+.news-filter{
+  display:flex;gap:.6rem;margin-bottom:2rem;flex-wrap:wrap;justify-content:center;
+}
+.news-filter button{
+  padding:.6rem 1.4rem;border-radius:100px;
+  font-size:.78rem;font-weight:700;letter-spacing:.05em;
+  background:var(--bg);color:var(--text-soft);border:1px solid transparent;
+  transition:all .3s var(--ease);
+}
+.news-filter button:hover{background:#fff;color:var(--primary);border-color:var(--primary-soft)}
+.news-filter button.active{background:var(--grad);color:#fff;box-shadow:0 6px 16px rgba(43,184,217,.3)}
+
+/* News List */
+.news-list{max-width:880px;margin:0 auto;background:#fff;border-radius:20px;box-shadow:var(--shadow-sm);overflow:hidden}
+.news-item{
+  display:grid;grid-template-columns:100px 90px 1fr auto;gap:1.5rem;align-items:center;
+  padding:1.5rem 2rem;border-bottom:1px solid var(--border);
+  transition:background .3s,padding-left .3s;cursor:pointer;
+}
+.news-item:last-child{border-bottom:none}
+.news-item:hover{background:var(--bg);padding-left:2.5rem}
+.news-date{font-size:.8rem;color:var(--text-soft);font-family:'Inter',sans-serif;letter-spacing:.02em}
+.news-cat{
+  font-size:.65rem;letter-spacing:.1em;color:var(--primary);font-weight:700;text-align:center;
+  padding:.3rem .6rem;background:var(--primary-soft);border-radius:6px;text-transform:uppercase;
+}
+.news-cat.education{color:#5fc9a8;background:#dff5ec}
+.news-cat.sports{color:#f59e0b;background:#fef3c7}
+.news-cat.recruit{color:#a855f7;background:#f3e8ff}
+.news-cat.business{color:#06b6d4;background:#cffafe}
+.news-title{font-size:.92rem;color:var(--text);font-weight:500;line-height:1.5}
+.news-item:hover .news-title{color:var(--primary)}
+.news-arrow{font-size:.9rem;color:var(--primary);transition:transform .3s}
+.news-item:hover .news-arrow{transform:translateX(8px)}
+
+.news-empty{padding:4rem 2rem;text-align:center;color:var(--text-mute)}
+
+/* Pagination */
+.pagination{display:flex;justify-content:center;gap:.5rem;margin-top:3rem}
+.pagination a,.pagination span{
+  width:40px;height:40px;border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  background:#fff;color:var(--text);font-weight:700;font-size:.85rem;
+  border:1px solid var(--border);
+  transition:all .3s;
+}
+.pagination a:hover{background:var(--primary-soft);color:var(--primary);border-color:var(--primary)}
+.pagination span.current{background:var(--grad);color:#fff;border-color:transparent;box-shadow:0 4px 12px rgba(43,184,217,.3)}
+
+.cta-section{padding:clamp(4rem,8vh,7rem) 0;background:linear-gradient(135deg,#1a2940 0%,#2bb8d9 100%);color:#fff;text-align:center;position:relative;overflow:hidden}
+.cta-section h2{font-size:clamp(1.6rem,3vw,2.6rem);font-weight:900;line-height:1.3;color:#fff}
+.cta-section p{margin:1.2rem auto 2rem;max-width:520px;color:rgba(255,255,255,.9);line-height:1.95}
+
+@media(max-width:768px){
+  .news-item{grid-template-columns:1fr;gap:.6rem;padding:1.3rem 1.5rem}
+  .news-arrow{display:none}
+  .news-cat{justify-self:start}
+}
+</style>
+</head>
+<body>
+
+<div class="page-intro"><img class="pi-logo" src="https://sunprosys.co.jp/cont/wp-content/themes/sunpro_theme/img/common/h_logo.png" alt=""><div class="pi-bar"></div></div>
+
+<div class="mnav">
+  <button class="mnav-close" aria-label="close">×</button>
+  <a href="index.html">トップ</a><a href="business.html">事業内容</a><a href="robot.html">ロボット教室</a><a href="about.html">私たちの想い</a><a href="company.html">会社情報</a><a href="recruit.html">採用情報</a><a href="news.html">お知らせ</a><a href="contact.html">お問い合わせ</a>
+</div>
+
+<header>
+  <a href="index.html" class="h-logo"><img src="https://sunprosys.co.jp/cont/wp-content/themes/sunpro_theme/img/common/h_logo.png" alt="サンプロシステム"></a>
+  <nav class="h-nav"><a href="business.html">事業内容</a><a href="robot.html">ロボット教室</a><a href="about.html">私たちの想い</a><a href="company.html">会社情報</a><a href="recruit.html">採用情報</a><a href="news.html">お知らせ</a></nav>
+  <div class="h-contact">
+    <div class="h-tel"><span class="h-tel-num">082-507-1067</span><span class="h-tel-label">TEL / 9:00-17:00</span></div>
+    <a href="contact.html" class="h-cta">お問い合わせ</a>
+  </div>
+  <div class="burger"><span></span><span></span><span></span></div>
+</header>
+
+<section class="page-head">
+  <div class="container">
+    <div class="breadcrumb"><a href="index.html">Home</a> <span class="sep">/</span> News</div>
+    <div class="page-head-eyebrow">News</div>
+    <h1>NEWS<span class="ja">お知らせ</span></h1>
+  </div>
+  <div class="deco-dots"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div>
+</section>
+
+<!-- NEWS -->
+<section class="news-page">
+  <div class="container">
+    <div class="news-filter r" id="nf">
+      <button class="active" data-cat="all">ALL</button>
+      <button data-cat="info">お知らせ</button>
+      <button data-cat="education">教育</button>
+      <button data-cat="sports">スポーツ</button>
+      <button data-cat="recruit">採用</button>
+      <button data-cat="business">事業</button>
+    </div>
+
+    <div class="news-list r d1" id="nl">
+      <div class="news-item" data-cat="info">
+        <span class="news-date">2024.03.15</span>
+        <span class="news-cat">お知らせ</span>
+        <span class="news-title">ISO9001:2015 認証 更新審査に合格いたしました</span>
+        <span class="news-arrow">→</span>
+      </div>
+      <div class="news-item" data-cat="education">
+        <span class="news-date">2024.02.20</span>
+        <span class="news-cat education">教育</span>
+        <span class="news-title">2024年度 ロボット教室・プログラミング教室 新規受講生募集中</span>
+        <span class="news-arrow">→</span>
+      </div>
+      <div class="news-item" data-cat="sports">
+        <span class="news-date">2024.01.10</span>
+        <span class="news-cat sports">スポーツ</span>
+        <span class="news-title">広島ドラゴンフライズ ゴールドパートナー契約継続のお知らせ</span>
+        <span class="news-arrow">→</span>
+      </div>
+      <div class="news-item" data-cat="recruit">
+        <span class="news-date">2023.11.01</span>
+        <span class="news-cat recruit">採用</span>
+        <span class="news-title">2024年度 新卒採用エントリー受付を開始しました</span>
+        <span class="news-arrow">→</span>
+      </div>
+      <div class="news-item" data-cat="business">
+        <span class="news-date">2023.09.20</span>
+        <span class="news-cat business">事業</span>
+        <span class="news-title">電磁誘導加熱機器の新製品リリースのお知らせ</span>
+        <span class="news-arrow">→</span>
+      </div>
+      <div class="news-item" data-cat="info">
+        <span class="news-date">2023.08.05</span>
+        <span class="news-cat">お知らせ</span>
+        <span class="news-title">夏季休業期間のお知らせ（8/12〜8/16）</span>
+        <span class="news-arrow">→</span>
+      </div>
+      <div class="news-item" data-cat="business">
+        <span class="news-date">2023.06.10</span>
+        <span class="news-cat business">事業</span>
+        <span class="news-title">自動車部品向け新型検査装置の納入実績について</span>
+        <span class="news-arrow">→</span>
+      </div>
+      <div class="news-item" data-cat="education">
+        <span class="news-date">2023.04.05</span>
+        <span class="news-cat education">教育</span>
+        <span class="news-title">ロボティクスプロフェッサー教室 体験会のご案内</span>
+        <span class="news-arrow">→</span>
+      </div>
+      <div class="news-item" data-cat="info">
+        <span class="news-date">2023.01.15</span>
+        <span class="news-cat">お知らせ</span>
+        <span class="news-title">年始営業のお知らせ（1月5日より通常営業）</span>
+        <span class="news-arrow">→</span>
+      </div>
+      <div class="news-item" data-cat="sports">
+        <span class="news-date">2022.10.20</span>
+        <span class="news-cat sports">スポーツ</span>
+        <span class="news-title">広島ドラゴンフライズ ホームゲーム協賛のご報告</span>
+        <span class="news-arrow">→</span>
+      </div>
+    </div>
+
+    <div class="pagination r d2">
+      <span class="current">1</span>
+      <a href="#">2</a>
+      <a href="#">3</a>
+      <a href="#">→</a>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section">
+  <div class="container">
+    <h2 class="r">お問い合わせ</h2>
+    <p class="r d1">サンプロシステムに関するご質問やお問い合わせは、こちらから。</p>
+    <div class="r d2"><a href="contact.html" class="btn btn-primary magnetic" style="background:#fff;color:var(--primary)">お問い合わせ<span class="arrow"></span></a></div>
+  </div>
+</section>
+
+<footer>
+  <div class="container">
+    <div class="f-top">
+      <div class="f-brand">
+        <img src="https://sunprosys.co.jp/cont/wp-content/themes/sunpro_theme/img/common/h_logo.png" alt="サンプロシステム">
+        <p>"確かな技術" と "こだわりのモノづくり"<br>広島から日本のものづくりを支える<br>エンジニアリングカンパニー。</p>
+        <div class="f-addr">〒733-0822 広島県広島市西区庚午中3丁目13-6</div>
+        <div class="f-tel">TEL: 082-507-1067</div>
+      </div>
+      <div class="f-col"><h5>Business</h5><ul><li><a href="business.html">事業内容</a></li><li><a href="business.html#b01">機械設計・製作</a></li><li><a href="business.html#b02">制御設計・製作</a></li><li><a href="business.html#b03">開発設備生産</a></li></ul></div>
+      <div class="f-col"><h5>Education</h5><ul><li><a href="robot.html">ロボット教室</a></li><li><a href="robot.html">プログラミング教室</a></li><li><a href="robot.html">ロボプロフェッサー</a></li></ul></div>
+      <div class="f-col"><h5>Company</h5><ul><li><a href="about.html">私たちの想い</a></li><li><a href="company.html">会社情報</a></li><li><a href="recruit.html">採用情報</a></li><li><a href="news.html">お知らせ</a></li><li><a href="contact.html">お問い合わせ</a></li></ul></div>
+    </div>
+    <div class="f-bottom"><p>© 2024 株式会社サンプロシステム. All rights reserved.</p><p>〒733-0822 広島県広島市西区庚午中3丁目13-6 ｜ TEL: 082-507-1067</p></div>
+  </div>
+</footer>
+
+<script src="assets/js/main.js"></script>
+<script>
+/* News category filter */
+document.querySelectorAll('#nf button').forEach(b=>{
+  b.addEventListener('click',()=>{
+    document.querySelectorAll('#nf button').forEach(x=>x.classList.remove('active'));
+    b.classList.add('active');
+    const cat=b.dataset.cat;
+    document.querySelectorAll('#nl .news-item').forEach(it=>{
+      const show = cat==='all' || it.dataset.cat===cat;
+      it.style.display = show ? 'grid' : 'none';
+    });
+  });
+});
+</script>
+</body>
+</html>

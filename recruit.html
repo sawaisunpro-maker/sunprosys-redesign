@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>採用情報 | 株式会社サンプロシステム</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700;900&family=Inter:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/style.css">
+<style>
+.intro{padding:clamp(4rem,8vh,7rem) 0;background:#fff;position:relative;overflow:hidden}
+.intro-inner{display:grid;grid-template-columns:1fr 1.1fr;gap:5rem;align-items:center;max-width:1280px;margin:0 auto;padding:0 clamp(1.5rem,5vw,4rem)}
+.intro-img{position:relative;height:520px;border-radius:24px;overflow:hidden;box-shadow:var(--shadow-lg)}
+.intro-img img{width:100%;height:100%;object-fit:cover;transition:transform 1s var(--ease)}
+.intro-img:hover img{transform:scale(1.06)}
+.intro h2{font-size:clamp(1.8rem,3.5vw,2.8rem);font-weight:900;line-height:1.3;margin:1.2rem 0 1.5rem}
+.intro h2 .em{background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.intro p{color:var(--text-soft);line-height:2;font-size:.94rem;margin-bottom:1.2rem}
+
+/* Target Person */
+.target{padding:clamp(4rem,8vh,7rem) 0;background:var(--bg)}
+.target-head{text-align:center;margin-bottom:4rem}
+.target-head .s-label{margin:0 auto 1rem}
+.target-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1.5rem;max-width:900px;margin:0 auto}
+.target-card{
+  background:#fff;border-radius:20px;padding:2.5rem;text-align:center;position:relative;overflow:hidden;
+  transition:transform .4s var(--ease),box-shadow .4s;
+}
+.target-card:hover{transform:translateY(-8px);box-shadow:var(--shadow-lg)}
+.target-card::before{
+  content:'';position:absolute;top:-50%;left:50%;transform:translateX(-50%);
+  width:300px;height:300px;border-radius:50%;background:var(--grad);
+  opacity:0;filter:blur(60px);transition:opacity .5s;
+}
+.target-card:hover::before{opacity:.2}
+.target-icon{width:80px;height:80px;margin:0 auto 1.5rem;border-radius:50%;background:var(--grad);color:#fff;
+  display:flex;align-items:center;justify-content:center;font-size:2rem;position:relative;z-index:1;
+  box-shadow:0 8px 24px rgba(43,184,217,.3);
+  transition:transform .5s var(--ease);
+}
+.target-card:hover .target-icon{transform:scale(1.1) rotate(10deg)}
+.target-card h3{font-size:1.2rem;font-weight:900;margin-bottom:.8rem;position:relative;z-index:1}
+.target-card p{font-size:.88rem;color:var(--text-soft);line-height:1.85;position:relative;z-index:1}
+
+/* Work */
+.work{padding:clamp(4rem,8vh,7rem) 0;background:#fff;position:relative;overflow:hidden}
+.work-inner{display:grid;grid-template-columns:1.1fr 1fr;gap:5rem;align-items:center;max-width:1280px;margin:0 auto;padding:0 clamp(1.5rem,5vw,4rem)}
+.work-img{position:relative;height:480px;border-radius:24px;overflow:hidden;box-shadow:var(--shadow-lg)}
+.work-img img{width:100%;height:100%;object-fit:cover;transition:transform 1s var(--ease)}
+.work-img:hover img{transform:scale(1.06)}
+.work-jobs{display:flex;flex-direction:column;gap:1rem;margin-top:1.5rem}
+.work-job{display:flex;align-items:center;gap:1.2rem;padding:1.3rem 1.5rem;background:var(--bg);border-radius:14px;border:1px solid transparent;transition:transform .3s,border-color .3s,background .3s}
+.work-job:hover{transform:translateX(8px);background:#fff;border-color:var(--primary-soft);box-shadow:var(--shadow-sm)}
+.work-job-num{
+  width:42px;height:42px;border-radius:50%;background:var(--primary-soft);color:var(--primary);
+  display:flex;align-items:center;justify-content:center;font-weight:900;font-family:'Inter',sans-serif;flex-shrink:0;
+  transition:background .3s,color .3s;
+}
+.work-job:hover .work-job-num{background:var(--grad);color:#fff}
+.work-job h4{font-size:.95rem;font-weight:700;margin-bottom:.2rem}
+.work-job p{font-size:.78rem;color:var(--text-soft);line-height:1.6}
+
+/* Benefits */
+.benefits{padding:clamp(4rem,8vh,7rem) 0;background:var(--bg)}
+.benefits-head{text-align:center;margin-bottom:4rem}
+.benefits-head .s-label{margin:0 auto 1rem}
+.benefits-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;max-width:1100px;margin:0 auto}
+.benefit{
+  background:#fff;border-radius:18px;padding:2rem;text-align:center;
+  transition:transform .4s var(--ease),box-shadow .4s;border:1px solid transparent;
+}
+.benefit:hover{transform:translateY(-8px);box-shadow:var(--shadow);border-color:var(--primary-soft)}
+.benefit-icon{
+  width:50px;height:50px;margin:0 auto 1rem;border-radius:14px;background:var(--primary-soft);color:var(--primary);
+  display:flex;align-items:center;justify-content:center;font-size:1.4rem;
+  transition:transform .4s var(--ease),background .4s,color .4s;
+}
+.benefit:hover .benefit-icon{background:var(--grad);color:#fff;transform:rotate(360deg)}
+.benefit h4{font-size:.95rem;font-weight:700;margin-bottom:.5rem}
+.benefit p{font-size:.8rem;color:var(--text-soft);line-height:1.7}
+
+/* Status */
+.status{padding:clamp(4rem,8vh,7rem) 0;background:#fff;text-align:center;position:relative;overflow:hidden}
+.status-inner{max-width:780px;margin:0 auto}
+.status-badge{
+  display:inline-flex;align-items:center;gap:.6rem;
+  padding:.6rem 1.5rem;background:var(--accent-soft);color:var(--accent);
+  border-radius:100px;font-size:.8rem;font-weight:700;letter-spacing:.05em;margin-bottom:1.5rem;
+}
+.status-badge::before{content:'';width:8px;height:8px;border-radius:50%;background:var(--accent);animation:pulse2 1.6s infinite}
+@keyframes pulse2{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.5;transform:scale(1.4)}}
+.status h2{font-size:clamp(1.8rem,3.5vw,2.6rem);font-weight:900;line-height:1.3;margin-bottom:1.5rem}
+.status p{color:var(--text-soft);font-size:.92rem;line-height:2;margin-bottom:2rem}
+
+.cta-section{padding:clamp(4rem,8vh,7rem) 0;background:linear-gradient(135deg,#1a2940 0%,#2bb8d9 100%);color:#fff;text-align:center;position:relative;overflow:hidden}
+.cta-section h2{font-size:clamp(1.6rem,3vw,2.6rem);font-weight:900;line-height:1.3;color:#fff}
+.cta-section p{margin:1.2rem auto 2rem;max-width:520px;color:rgba(255,255,255,.9);line-height:1.95}
+
+@media(max-width:980px){
+  .intro-inner,.work-inner{grid-template-columns:1fr;gap:3rem}
+  .intro-img,.work-img{height:380px}
+  .target-grid{grid-template-columns:1fr}
+  .benefits-grid{grid-template-columns:1fr 1fr}
+}
+@media(max-width:560px){
+  .benefits-grid{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+
+<div class="page-intro"><img class="pi-logo" src="https://sunprosys.co.jp/cont/wp-content/themes/sunpro_theme/img/common/h_logo.png" alt=""><div class="pi-bar"></div></div>
+
+<div class="mnav">
+  <button class="mnav-close" aria-label="close">×</button>
+  <a href="index.html">トップ</a><a href="business.html">事業内容</a><a href="robot.html">ロボット教室</a><a href="about.html">私たちの想い</a><a href="company.html">会社情報</a><a href="recruit.html">採用情報</a><a href="news.html">お知らせ</a><a href="contact.html">お問い合わせ</a>
+</div>
+
+<header>
+  <a href="index.html" class="h-logo"><img src="https://sunprosys.co.jp/cont/wp-content/themes/sunpro_theme/img/common/h_logo.png" alt="サンプロシステム"></a>
+  <nav class="h-nav"><a href="business.html">事業内容</a><a href="robot.html">ロボット教室</a><a href="about.html">私たちの想い</a><a href="company.html">会社情報</a><a href="recruit.html">採用情報</a><a href="news.html">お知らせ</a></nav>
+  <div class="h-contact">
+    <div class="h-tel"><span class="h-tel-num">082-507-1067</span><span class="h-tel-label">TEL / 9:00-17:00</span></div>
+    <a href="contact.html" class="h-cta">お問い合わせ</a>
+  </div>
+  <div class="burger"><span></span><span></span><span></span></div>
+</header>
+
+<section class="page-head">
+  <div class="container">
+    <div class="breadcrumb"><a href="index.html">Home</a> <span class="sep">/</span> Recruit</div>
+    <div class="page-head-eyebrow">Recruit</div>
+    <h1>RECRUIT<span class="ja">採用情報</span></h1>
+  </div>
+  <div class="deco-dots"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div>
+</section>
+
+<!-- INTRO -->
+<section class="intro">
+  <div class="intro-inner">
+    <div class="intro-img r-l clip-reveal">
+      <img src="https://sunprosys.co.jp/cont/wp-content/themes/sunpro_theme/img/top/top04_recruit.jpg" alt="サンプロシステム 採用">
+    </div>
+    <div>
+      <p class="s-label r">Welcome</p>
+      <h2 class="r d1">ともに、<br>ものづくりを<span class="em">楽しもう。</span></h2>
+      <p class="r d2">少数精鋭のチームで、一人ひとりが大きな役割を担います。一つの仕事を一人の担当者に任せるスタイルで、社員の裁量が大きい職場です。</p>
+      <p class="r d3">学習支援環境を整え、新しい技術への挑戦を歓迎。広々とした社屋と「サンプロ農園」など、働きやすい環境づくりにも力を入れています。</p>
+    </div>
+  </div>
+</section>
+
+<!-- TARGET PERSON -->
+<section class="target">
+  <div class="container">
+    <div class="target-head">
+      <p class="s-label r">Target Person</p>
+      <h2 class="s-h2 r d1">こんな方を<br><span class="em">お待ちしています。</span></h2>
+    </div>
+    <div class="target-grid">
+      <div class="target-card r tilt">
+        <div class="target-icon">💡</div>
+        <h3>自発的に考えて行動できる人</h3>
+        <p>マニュアルに頼らず、自分で考え、判断し、動ける方。お客様の課題と真摯に向き合える人を歓迎します。</p>
+      </div>
+      <div class="target-card r d1 tilt">
+        <div class="target-icon">🚀</div>
+        <h3>挑戦することを楽しめる人</h3>
+        <p>新しい技術、未知の課題、難しいオーダー。挑戦を楽しめる方なら、サンプロシステムで大きく成長できます。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WORK -->
+<section class="work">
+  <div class="work-inner">
+    <div>
+      <p class="s-label r">Job</p>
+      <h2 class="s-h2 r d1">職務<span class="em">内容</span></h2>
+      <p class="r d2" style="color:var(--text-soft);line-height:2;font-size:.92rem;margin:1.2rem 0 .5rem">
+        以下の業務に携わっていただきます。一つの仕事を最初から最後まで担当できる、やりがいある仕事です。
+      </p>
+      <div class="work-jobs">
+        <div class="work-job r d2"><div class="work-job-num">01</div><div><h4>機械設計・製作</h4><p>部品組立設備・検査機などの生産設備の設計・製作</p></div></div>
+        <div class="work-job r d3"><div class="work-job-num">02</div><div><h4>制御設計・製作</h4><p>マイコンシステム・制御回路の設計・製作</p></div></div>
+        <div class="work-job r d4"><div class="work-job-num">03</div><div><h4>ソフトウェア開発</h4><p>C・C#・VBによる制御ソフトウェア開発</p></div></div>
+        <div class="work-job r d5"><div class="work-job-num">04</div><div><h4>営業</h4><p>お客様のニーズヒアリング、設計チームへの引き継ぎ</p></div></div>
+      </div>
+    </div>
+    <div class="work-img r-r clip-reveal">
+      <img src="https://sunprosys.co.jp/cont/wp-content/themes/sunpro_theme/img/top/main_image02.jpg" alt="サンプロシステム 職場">
+    </div>
+  </div>
+</section>
+
+<!-- BENEFITS -->
+<section class="benefits">
+  <div class="container">
+    <div class="benefits-head">
+      <p class="s-label r">Environment</p>
+      <h2 class="s-h2 r d1">働く<span class="em">環境</span></h2>
+    </div>
+    <div class="benefits-grid">
+      <div class="benefit r"><div class="benefit-icon">🎓</div><h4>学習支援</h4><p>新しい技術への挑戦を歓迎。学習機会を会社が支援します。</p></div>
+      <div class="benefit r d1"><div class="benefit-icon">🏢</div><h4>新しい社屋</h4><p>2015年完成の広々とした社屋。働きやすい空間。</p></div>
+      <div class="benefit r d2"><div class="benefit-icon">🌱</div><h4>サンプロ農園</h4><p>社内の農園で、リフレッシュやコミュニケーションを。</p></div>
+      <div class="benefit r d3"><div class="benefit-icon">⚖️</div><h4>ワークライフ<br>バランス</h4><p>男女問わず、ライフステージに応じて働ける環境。</p></div>
+      <div class="benefit r d4"><div class="benefit-icon">🤝</div><h4>相談しやすい社風</h4><p>分からないことは何度でも聞ける、フラットな組織。</p></div>
+      <div class="benefit r d5"><div class="benefit-icon">🎯</div><h4>大きな裁量権</h4><p>一つの仕事を一人で任される。やりがいと責任。</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- STATUS -->
+<section class="status">
+  <div class="container">
+    <div class="status-inner">
+      <div class="status-badge r">CURRENT STATUS</div>
+      <h2 class="r d1">現在の<br><span style="background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent">募集状況</span></h2>
+      <p class="r d2">
+        現在の募集はございません。<br>
+        将来的に募集を再開する際は、こちらのページとお知らせ欄でご案内いたします。<br>
+        サンプロシステムにご興味をお持ちいただいた方は、お問い合わせフォームよりご連絡ください。
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section">
+  <div class="container">
+    <h2 class="r">お問い合わせ・<br>ご質問はこちらから。</h2>
+    <p class="r d1">サンプロシステムにご興味をお持ちいただいた方は、お気軽にお問い合わせください。</p>
+    <div class="r d2" style="display:flex;gap:1rem;justify-content:center;flex-wrap:wrap">
+      <a href="contact.html" class="btn btn-primary magnetic" style="background:#fff;color:var(--primary)">お問い合わせ<span class="arrow"></span></a>
+      <a href="tel:0825071067" class="btn btn-outline magnetic" style="border-color:#fff;color:#fff">📞 082-507-1067</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="container">
+    <div class="f-top">
+      <div class="f-brand">
+        <img src="https://sunprosys.co.jp/cont/wp-content/themes/sunpro_theme/img/common/h_logo.png" alt="サンプロシステム">
+        <p>"確かな技術" と "こだわりのモノづくり"<br>広島から日本のものづくりを支える<br>エンジニアリングカンパニー。</p>
+        <div class="f-addr">〒733-0822 広島県広島市西区庚午中3丁目13-6</div>
+        <div class="f-tel">TEL: 082-507-1067</div>
+      </div>
+      <div class="f-col"><h5>Business</h5><ul><li><a href="business.html">事業内容</a></li><li><a href="business.html#b01">機械設計・製作</a></li><li><a href="business.html#b02">制御設計・製作</a></li><li><a href="business.html#b03">開発設備生産</a></li></ul></div>
+      <div class="f-col"><h5>Education</h5><ul><li><a href="robot.html">ロボット教室</a></li><li><a href="robot.html">プログラミング教室</a></li><li><a href="robot.html">ロボプロフェッサー</a></li></ul></div>
+      <div class="f-col"><h5>Company</h5><ul><li><a href="about.html">私たちの想い</a></li><li><a href="company.html">会社情報</a></li><li><a href="recruit.html">採用情報</a></li><li><a href="news.html">お知らせ</a></li><li><a href="contact.html">お問い合わせ</a></li></ul></div>
+    </div>
+    <div class="f-bottom"><p>© 2024 株式会社サンプロシステム. All rights reserved.</p><p>〒733-0822 広島県広島市西区庚午中3丁目13-6 ｜ TEL: 082-507-1067</p></div>
+  </div>
+</footer>
+
+<script src="assets/js/main.js"></script>
+</body>
+</html>

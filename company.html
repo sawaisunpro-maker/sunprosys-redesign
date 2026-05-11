@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>会社情報 | 株式会社サンプロシステム</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700;900&family=Inter:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/style.css">
+<style>
+.profile{padding:clamp(4rem,8vh,7rem) 0;background:#fff;position:relative;overflow:hidden}
+.profile-head{text-align:center;margin-bottom:4rem;max-width:680px;margin-left:auto;margin-right:auto}
+.profile-head .s-label{margin:0 auto 1rem}
+.profile-grid{display:grid;grid-template-columns:1fr 1.2fr;gap:4rem;align-items:start;max-width:1280px;margin:0 auto;padding:0 clamp(1.5rem,5vw,4rem)}
+.profile-img{position:relative;height:520px;border-radius:24px;overflow:hidden;box-shadow:var(--shadow-lg);position:sticky;top:100px}
+.profile-img img{width:100%;height:100%;object-fit:cover;transition:transform 1s var(--ease)}
+.profile-img:hover img{transform:scale(1.06)}
+.profile-img-badge{position:absolute;top:1.5rem;left:1.5rem;background:rgba(255,255,255,.95);backdrop-filter:blur(10px);padding:.6rem 1.2rem;border-radius:100px;font-size:.7rem;font-weight:700;color:var(--primary);letter-spacing:.1em}
+
+.profile-table{background:#fff;border-radius:16px;overflow:hidden;box-shadow:var(--shadow-sm)}
+.pt-row{
+  display:grid;grid-template-columns:160px 1fr;gap:1.5rem;
+  padding:1.4rem 1.8rem;border-bottom:1px solid var(--border);align-items:start;
+  transition:background .3s;
+}
+.pt-row:last-child{border-bottom:none}
+.pt-row:hover{background:var(--bg)}
+.pt-row dt{font-size:.72rem;letter-spacing:.18em;color:var(--primary);font-weight:700;text-transform:uppercase;padding-top:.2rem}
+.pt-row dd{font-size:.92rem;color:var(--text);line-height:1.8;font-weight:400}
+.pt-row dd strong{font-weight:700;color:var(--text)}
+.pt-row dd ul{list-style:none;display:flex;flex-direction:column;gap:.4rem}
+.pt-row dd ul li{position:relative;padding-left:1rem;font-size:.88rem}
+.pt-row dd ul li::before{content:'';position:absolute;left:0;top:.6em;width:6px;height:1px;background:var(--primary)}
+
+/* History */
+.history{padding:clamp(4rem,8vh,7rem) 0;background:var(--bg);position:relative;overflow:hidden}
+.history-head{text-align:center;margin-bottom:4rem}
+.history-head .s-label{margin:0 auto 1rem}
+.timeline{max-width:780px;margin:0 auto;position:relative}
+.timeline::before{
+  content:'';position:absolute;left:80px;top:0;bottom:0;width:2px;
+  background:linear-gradient(180deg, var(--primary) 0%, var(--secondary) 100%);
+}
+@media(max-width:560px){.timeline::before{left:30px}}
+.t-item{position:relative;padding-left:140px;padding-bottom:3rem}
+@media(max-width:560px){.t-item{padding-left:60px}}
+.t-item:last-child{padding-bottom:0}
+.t-item::before{
+  content:'';position:absolute;left:73px;top:.5rem;width:16px;height:16px;border-radius:50%;
+  background:#fff;border:3px solid var(--primary);box-shadow:0 0 0 6px rgba(43,184,217,.15);
+  transition:transform .4s;
+}
+@media(max-width:560px){.t-item::before{left:23px}}
+.t-item:hover::before{transform:scale(1.3)}
+.t-year{
+  position:absolute;left:0;top:0;font-size:1.2rem;font-weight:900;color:var(--primary);
+  font-family:'Inter',sans-serif;letter-spacing:.02em;
+}
+@media(max-width:560px){.t-year{position:relative;display:block;margin-bottom:.5rem}}
+.t-content{background:#fff;border-radius:16px;padding:1.4rem 1.8rem;box-shadow:var(--shadow-sm);transition:transform .3s,box-shadow .3s}
+.t-item:hover .t-content{transform:translateX(8px);box-shadow:var(--shadow)}
+.t-content h4{font-size:1rem;font-weight:700;margin-bottom:.4rem}
+.t-content p{font-size:.84rem;color:var(--text-soft);line-height:1.7}
+
+/* Access */
+.access{padding:clamp(4rem,8vh,7rem) 0;background:#fff;position:relative;overflow:hidden}
+.access-inner{display:grid;grid-template-columns:1fr 1fr;gap:3rem;align-items:center;max-width:1280px;margin:0 auto;padding:0 clamp(1.5rem,5vw,4rem)}
+.access-map{
+  height:480px;border-radius:24px;overflow:hidden;box-shadow:var(--shadow-lg);
+  background:linear-gradient(135deg, #e8f4fb, #cdeef7);
+  display:flex;align-items:center;justify-content:center;
+  position:relative;
+}
+.access-map iframe{width:100%;height:100%;border:0}
+.access-info h2{font-size:clamp(1.6rem,3vw,2.4rem);font-weight:900;line-height:1.3;margin-bottom:1.2rem}
+.access-info h2 .em{background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.access-rows{margin-top:2rem;display:flex;flex-direction:column;gap:1rem}
+.access-row{display:grid;grid-template-columns:32px 1fr;gap:1rem;padding:1.2rem;background:var(--bg);border-radius:12px;align-items:start;transition:transform .3s,background .3s}
+.access-row:hover{transform:translateX(6px);background:var(--primary-soft)}
+.access-row-icon{font-size:1.2rem;color:var(--primary)}
+.access-row strong{display:block;font-size:.72rem;color:var(--primary);letter-spacing:.15em;text-transform:uppercase;margin-bottom:.3rem;font-weight:700}
+.access-row span{font-size:.92rem;color:var(--text);font-weight:500;line-height:1.6}
+
+/* Clients */
+.clients{padding:clamp(4rem,8vh,7rem) 0;background:var(--bg);position:relative;overflow:hidden}
+.clients-head{text-align:center;margin-bottom:3.5rem}
+.clients-head .s-label{margin:0 auto 1rem}
+.client-tags{display:flex;flex-wrap:wrap;justify-content:center;gap:.8rem;max-width:880px;margin:0 auto}
+.client-tag{
+  padding:.8rem 1.5rem;background:#fff;border-radius:100px;
+  font-size:.85rem;color:var(--text);font-weight:500;
+  box-shadow:var(--shadow-sm);transition:transform .3s,background .3s,color .3s;
+  border:1px solid transparent;
+}
+.client-tag:hover{transform:translateY(-4px);background:var(--grad);color:#fff;box-shadow:var(--shadow)}
+
+.cta-section{padding:clamp(4rem,8vh,7rem) 0;background:linear-gradient(135deg,#1a2940 0%,#2bb8d9 100%);color:#fff;text-align:center;position:relative;overflow:hidden}
+.cta-section h2{font-size:clamp(1.6rem,3vw,2.6rem);font-weight:900;line-height:1.3;color:#fff}
+.cta-section p{margin:1.2rem auto 2rem;max-width:520px;color:rgba(255,255,255,.9);line-height:1.95}
+
+@media(max-width:980px){
+  .profile-grid,.access-inner{grid-template-columns:1fr;gap:3rem}
+  .profile-img{height:360px;position:static}
+}
+@media(max-width:560px){
+  .pt-row{grid-template-columns:1fr;gap:.5rem;padding:1.2rem 1.4rem}
+}
+</style>
+</head>
+<body>
+
+<div class="page-intro"><img class="pi-logo" src="https://sunprosys.co.jp/cont/wp-content/themes/sunpro_theme/img/common/h_logo.png" alt=""><div class="pi-bar"></div></div>
+
+<div class="mnav">
+  <button class="mnav-close" aria-label="close">×</button>
+  <a href="index.html">トップ</a><a href="business.html">事業内容</a><a href="robot.html">ロボット教室</a><a href="about.html">私たちの想い</a><a href="company.html">会社情報</a><a href="recruit.html">採用情報</a><a href="news.html">お知らせ</a><a href="contact.html">お問い合わせ</a>
+</div>
+
+<header>
+  <a href="index.html" class="h-logo"><img src="https://sunprosys.co.jp/cont/wp-content/themes/sunpro_theme/img/common/h_logo.png" alt="サンプロシステム"></a>
+  <nav class="h-nav"><a href="business.html">事業内容</a><a href="robot.html">ロボット教室</a><a href="about.html">私たちの想い</a><a href="company.html">会社情報</a><a href="recruit.html">採用情報</a><a href="news.html">お知らせ</a></nav>
+  <div class="h-contact">
+    <div class="h-tel"><span class="h-tel-num">082-507-1067</span><span class="h-tel-label">TEL / 9:00-17:00</span></div>
+    <a href="contact.html" class="h-cta">お問い合わせ</a>
+  </div>
+  <div class="burger"><span></span><span></span><span></span></div>
+</header>
+
+<section class="page-head">
+  <div class="container">
+    <div class="breadcrumb"><a href="index.html">Home</a> <span class="sep">/</span> Company</div>
+    <div class="page-head-eyebrow">Company</div>
+    <h1>COMPANY<span class="ja">会社情報</span></h1>
+  </div>
+  <div class="deco-dots"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div>
+</section>
+
+<!-- PROFILE -->
+<section class="profile">
+  <div class="profile-head">
+    <p class="s-label r">Profile</p>
+    <h2 class="s-h2 r d1">会社<span class="em">概要</span></h2>
+  </div>
+  <div class="profile-grid">
+    <div class="profile-img r-l clip-reveal">
+      <div class="profile-img-badge">SUNPRO SYSTEM</div>
+      <img src="https://sunprosys.co.jp/cont/wp-content/themes/sunpro_theme/img/top/top04_about.jpg" alt="サンプロシステム 社屋">
+    </div>
+    <dl class="profile-table r-r">
+      <div class="pt-row"><dt>Company</dt><dd><strong>株式会社サンプロシステム</strong></dd></div>
+      <div class="pt-row"><dt>Representative</dt><dd>代表取締役 <strong>奥野 真市</strong></dd></div>
+      <div class="pt-row"><dt>Founded</dt><dd>2000年</dd></div>
+      <div class="pt-row"><dt>Capital</dt><dd>2,000万円</dd></div>
+      <div class="pt-row"><dt>Employees</dt><dd>17名（男性15名 / 女性2名）</dd></div>
+      <div class="pt-row"><dt>Address</dt><dd>〒733-0822<br>広島県広島市西区庚午中3丁目13-6</dd></div>
+      <div class="pt-row"><dt>Contact</dt><dd>TEL: <strong>082-507-1067</strong><br>FAX: 082-507-1065</dd></div>
+      <div class="pt-row"><dt>Business</dt><dd><ul>
+        <li>部品組立設備・検査設備・自動部品組立設備の設計制作</li>
+        <li>マイコン・パソコンシステムの設計・製作</li>
+        <li>3Dプリンタによるモデリング製作</li>
+        <li>部品洗浄乾燥器の製造</li>
+        <li>電磁誘導加熱による応用機器</li>
+      </ul></dd></div>
+      <div class="pt-row"><dt>Certification</dt><dd><strong>ISO9001:2015</strong> 認証取得</dd></div>
+      <div class="pt-row"><dt>Group</dt><dd>
+        ・タイトウ工業株式会社<br>
+        ・株式会社アイエスティ
+      </dd></div>
+    </dl>
+  </div>
+</section>
+
+<!-- HISTORY -->
+<section class="history">
+  <div class="container">
+    <div class="history-head">
+      <p class="s-label r">History</p>
+      <h2 class="s-h2 r d1">沿革<span class="em">History</span></h2>
+    </div>
+    <div class="timeline">
+      <div class="t-item r"><div class="t-year">2000</div><div class="t-content"><h4>株式会社サンプロシステム 設立</h4><p>広島市西区にて、機械設計・制御設計・開発設備生産を専門とする企業として創業。</p></div></div>
+      <div class="t-item r d1"><div class="t-year">2015</div><div class="t-content"><h4>新社屋完成</h4><p>現在の本社所在地（広島市西区庚午中3丁目）にて新社屋が完成。生産能力を強化。</p></div></div>
+      <div class="t-item r d2"><div class="t-year">2017</div><div class="t-content"><h4>タイトウ工業と技術提携</h4><p>食品機械製造のタイトウ工業株式会社とグループ企業として技術提携を開始。</p></div></div>
+      <div class="t-item r d3"><div class="t-year">現在</div><div class="t-content"><h4>ロボット教室を開催</h4><p>社会貢献の一環として、社内でロボット教室・プログラミング教室を開催中。</p></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ACCESS -->
+<section class="access">
+  <div class="access-inner">
+    <div class="r-l">
+      <p class="s-label">Access</p>
+      <h2 class="r">広島から、<br><span class="em">日本のものづくりへ。</span></h2>
+      <div class="access-rows">
+        <div class="access-row"><div class="access-row-icon">📍</div><div><strong>Address</strong><span>〒733-0822<br>広島県広島市西区庚午中3丁目13-6</span></div></div>
+        <div class="access-row"><div class="access-row-icon">📞</div><div><strong>Tel</strong><span>082-507-1067</span></div></div>
+        <div class="access-row"><div class="access-row-icon">📠</div><div><strong>Fax</strong><span>082-507-1065</span></div></div>
+        <div class="access-row"><div class="access-row-icon">🕐</div><div><strong>Business Hours</strong><span>9:00 - 17:00 / 土日祝休</span></div></div>
+      </div>
+    </div>
+    <div class="access-map r-r clip-reveal">
+      <iframe src="https://maps.google.com/maps?q=広島県広島市西区庚午中3丁目13-6&output=embed" loading="lazy" allowfullscreen></iframe>
+    </div>
+  </div>
+</section>
+
+<!-- CLIENTS -->
+<section class="clients">
+  <div class="container">
+    <div class="clients-head">
+      <p class="s-label r">Clients</p>
+      <h2 class="s-h2 r d1">主な<span class="em">取引先</span></h2>
+      <p class="s-desc r d2" style="margin-top:1rem">国内外の幅広い業界のお客様に、製品・サービスをお届けしています。</p>
+    </div>
+    <div class="client-tags">
+      <span class="client-tag r">自動車関連メーカー（国内）</span>
+      <span class="client-tag r">自動車関連メーカー（海外）</span>
+      <span class="client-tag r d1">半導体関連メーカー</span>
+      <span class="client-tag r d1">住宅機器メーカー</span>
+      <span class="client-tag r d2">電子機器メーカー</span>
+      <span class="client-tag r d2">食品機械メーカー</span>
+      <span class="client-tag r d3">産業機械メーカー</span>
+      <span class="client-tag r d3">医療機器メーカー</span>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section">
+  <div class="container">
+    <h2 class="r">お気軽にお問い合わせください。</h2>
+    <p class="r d1">事業内容や会社についてのご質問など、お気軽にどうぞ。</p>
+    <div class="r d2" style="display:flex;gap:1rem;justify-content:center;flex-wrap:wrap">
+      <a href="contact.html" class="btn btn-primary magnetic" style="background:#fff;color:var(--primary)">お問い合わせ<span class="arrow"></span></a>
+      <a href="tel:0825071067" class="btn btn-outline magnetic" style="border-color:#fff;color:#fff">📞 082-507-1067</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="container">
+    <div class="f-top">
+      <div class="f-brand">
+        <img src="https://sunprosys.co.jp/cont/wp-content/themes/sunpro_theme/img/common/h_logo.png" alt="サンプロシステム">
+        <p>"確かな技術" と "こだわりのモノづくり"<br>広島から日本のものづくりを支える<br>エンジニアリングカンパニー。</p>
+        <div class="f-addr">〒733-0822 広島県広島市西区庚午中3丁目13-6</div>
+        <div class="f-tel">TEL: 082-507-1067</div>
+      </div>
+      <div class="f-col"><h5>Business</h5><ul><li><a href="business.html">事業内容</a></li><li><a href="business.html#b01">機械設計・製作</a></li><li><a href="business.html#b02">制御設計・製作</a></li><li><a href="business.html#b03">開発設備生産</a></li></ul></div>
+      <div class="f-col"><h5>Education</h5><ul><li><a href="robot.html">ロボット教室</a></li><li><a href="robot.html">プログラミング教室</a></li><li><a href="robot.html">ロボプロフェッサー</a></li></ul></div>
+      <div class="f-col"><h5>Company</h5><ul><li><a href="about.html">私たちの想い</a></li><li><a href="company.html">会社情報</a></li><li><a href="recruit.html">採用情報</a></li><li><a href="news.html">お知らせ</a></li><li><a href="contact.html">お問い合わせ</a></li></ul></div>
+    </div>
+    <div class="f-bottom"><p>© 2024 株式会社サンプロシステム. All rights reserved.</p><p>〒733-0822 広島県広島市西区庚午中3丁目13-6 ｜ TEL: 082-507-1067</p></div>
+  </div>
+</footer>
+
+<script src="assets/js/main.js"></script>
+</body>
+</html>

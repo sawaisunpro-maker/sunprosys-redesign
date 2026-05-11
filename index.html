@@ -6,914 +6,497 @@
 <title>株式会社サンプロシステム | 確かな技術とこだわりのモノづくり</title>
 <meta name="description" content="広島県広島市の株式会社サンプロシステム。機械設計・制御設計・開発設備生産をワンストップで対応。ISO9001:2015認証取得。">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@100;300;400;500;700;900&family=Inter:wght@100;200;300;400;500;700;900&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700;900&family=Inter:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/style.css">
 <style>
-/* ════════════════════════════════
-   RESET & BASE
-════════════════════════════════ */
-*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-:root{
-  --black:#0a0a0a;
-  --dark:#141414;
-  --dark2:#1c1c1c;
-  --dark3:#252525;
-  --accent:#c8a46e;       /* gold */
-  --accent2:#e8c890;
-  --accent-blue:#3a8dc5;
-  --white:#ffffff;
-  --gray:#888888;
-  --light:#dddddd;
-  --border:rgba(255,255,255,.08);
-  --ease:cubic-bezier(.16,1,.3,1);
-}
-html{scroll-behavior:smooth;font-size:16px}
-body{
-  font-family:'Noto Sans JP','Inter',sans-serif;
-  background:var(--black);color:var(--white);
-  overflow-x:hidden;
-  font-feature-settings:"palt";
-}
-img{display:block;max-width:100%;height:auto}
-a{color:inherit;text-decoration:none}
+/* ════════════ TOP PAGE STYLES ════════════ */
 
-/* ════════════════════════════════
-   CURSOR
-════════════════════════════════ */
-@media(hover:hover){
-  body{cursor:none}
-  #cursor{
-    position:fixed;width:8px;height:8px;
-    background:var(--accent);border-radius:50%;
-    pointer-events:none;z-index:9999;
-    transform:translate(-50%,-50%);
-    transition:transform .25s,background .25s;
-    mix-blend-mode:difference;
-  }
-  #cursor-ring{
-    position:fixed;width:40px;height:40px;
-    border:1px solid rgba(200,164,110,.4);border-radius:50%;
-    pointer-events:none;z-index:9998;
-    transform:translate(-50%,-50%);
-    transition:transform .15s var(--ease),width .25s,height .25s;
-  }
-}
-@media(hover:none){
-  #cursor,#cursor-ring{display:none}
-}
-
-/* ════════════════════════════════
-   LOADER
-════════════════════════════════ */
-#loader{
-  position:fixed;inset:0;background:var(--black);
-  z-index:10000;display:flex;align-items:center;
-  justify-content:center;flex-direction:column;gap:2rem;
-}
-.loader-logo-img{
-  height:38px;opacity:0;filter:brightness(1.6);
-  animation:fadeInUp .8s .3s var(--ease) forwards;
-}
-.loader-bar-wrap{width:240px;height:1px;background:rgba(255,255,255,.12)}
-.loader-bar{height:100%;width:0;background:var(--accent);animation:loadBar 1.6s .5s var(--ease) forwards}
-.loader-num{font-size:.7rem;letter-spacing:.2em;color:var(--gray);opacity:0;animation:fadeInUp .6s .4s forwards;font-family:'Inter',sans-serif}
-@keyframes loadBar{to{width:100%}}
-@keyframes fadeInUp{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
-
-/* ════════════════════════════════
-   HEADER
-════════════════════════════════ */
-header{
-  position:fixed;top:0;left:0;right:0;z-index:1000;
-  padding:0 clamp(1.5rem,4vw,4rem);
-  height:80px;display:flex;align-items:center;
-  justify-content:space-between;
-  transition:background .5s,backdrop-filter .5s,height .3s;
-}
-header.scrolled{
-  background:rgba(10,10,10,.88);
-  backdrop-filter:blur(20px);
-  border-bottom:1px solid var(--border);
-  height:64px;
-}
-.h-logo{display:flex;align-items:center;gap:.8rem}
-.h-logo img{height:36px;filter:brightness(1.5) contrast(1.1);transition:height .3s}
-header.scrolled .h-logo img{height:28px}
-.h-logo-text{
-  display:flex;flex-direction:column;line-height:1.1;
-}
-.h-logo-text .ja{font-size:.7rem;color:var(--gray);letter-spacing:.05em}
-.h-logo-text .en{font-size:.95rem;font-weight:900;letter-spacing:.08em}
-
-nav.h-nav{display:flex;align-items:center;gap:2rem}
-nav.h-nav a{
-  font-size:.72rem;letter-spacing:.15em;text-transform:uppercase;
-  color:rgba(255,255,255,.7);font-weight:300;
-  position:relative;padding:.4rem 0;transition:color .3s;
-}
-nav.h-nav a::after{
-  content:'';position:absolute;bottom:0;left:0;
-  width:0;height:1px;background:var(--accent);transition:width .3s;
-}
-nav.h-nav a:hover{color:var(--accent)}
-nav.h-nav a:hover::after{width:100%}
-.h-contact{
-  display:flex;align-items:center;gap:.8rem;margin-left:1rem;
-  padding-left:1.5rem;border-left:1px solid var(--border);
-}
-.h-tel{
-  display:flex;flex-direction:column;line-height:1.1;
-}
-.h-tel-num{font-size:1rem;font-weight:900;color:var(--accent);font-family:'Inter',sans-serif;letter-spacing:.02em}
-.h-tel-label{font-size:.58rem;color:var(--gray);letter-spacing:.15em}
-.h-cta{
-  background:var(--accent);color:var(--black);
-  padding:.55rem 1.3rem;font-size:.72rem;font-weight:700;
-  letter-spacing:.12em;text-transform:uppercase;
-  transition:background .25s,transform .25s;
-}
-.h-cta:hover{background:var(--accent2);transform:translateY(-2px)}
-.burger{display:none;flex-direction:column;gap:5px;cursor:pointer}
-.burger span{width:24px;height:1px;background:var(--white);transition:.3s}
-
-/* ════════════════════════════════
-   HERO
-════════════════════════════════ */
+/* HERO */
 #hero{
-  position:relative;height:100vh;min-height:640px;
+  position:relative;height:100vh;min-height:680px;
   overflow:hidden;
+  background:linear-gradient(180deg, #f4faff 0%, #e8f4fb 100%);
 }
 .hero-slides{position:absolute;inset:0;z-index:0}
 .hero-slide{
   position:absolute;inset:0;opacity:0;
   background-size:cover;background-position:center;
-  transition:opacity 1.5s ease;
-  transform:scale(1);
-  animation:zoomBg 8s ease-in-out infinite alternate;
+  transition:opacity 1.5s ease,transform 8s ease;
+  transform:scale(1.08);
 }
-.hero-slide.active{opacity:1}
+.hero-slide.active{opacity:.55;transform:scale(1);animation:zoomBg 8s ease-in-out infinite alternate}
 @keyframes zoomBg{from{transform:scale(1)}to{transform:scale(1.08)}}
 .hero-overlay{
   position:absolute;inset:0;z-index:1;
   background:
-    linear-gradient(to bottom, rgba(10,10,10,.45) 0%, rgba(10,10,10,.2) 30%, rgba(10,10,10,.7) 75%, var(--black) 100%),
-    linear-gradient(to right, rgba(10,10,10,.5) 0%, transparent 60%);
+    linear-gradient(135deg, rgba(244,250,255,.7) 0%, rgba(244,250,255,.4) 50%, rgba(244,250,255,.85) 100%),
+    radial-gradient(ellipse 60% 50% at 50% 100%, rgba(43,184,217,.15), transparent 70%);
 }
-.hero-grain{
-  position:absolute;inset:0;z-index:1;pointer-events:none;
-  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)' opacity='.07'/%3E%3C/svg%3E");
+#hero-canvas{position:absolute;inset:0;z-index:1;opacity:.6}
+.hero-grid-pattern{
+  position:absolute;inset:0;z-index:1;
+  background-image:
+    linear-gradient(rgba(43,184,217,.08) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(43,184,217,.08) 1px, transparent 1px);
+  background-size:80px 80px;
+  mask-image:radial-gradient(ellipse 60% 60% at 50% 50%, black 30%, transparent 100%);
 }
-#hero-canvas{position:absolute;inset:0;z-index:2;mix-blend-mode:screen;opacity:.6}
+.hero-shape{position:absolute;z-index:2;animation:floatY 6s ease-in-out infinite alternate}
+.hero-shape svg{display:block}
+.hero-shape.s1{top:15%;right:8%;animation-duration:8s}
+.hero-shape.s2{top:50%;right:25%;animation-duration:10s;animation-delay:-2s}
+.hero-shape.s3{bottom:25%;left:8%;animation-duration:7s;animation-delay:-3s}
+@keyframes floatY{from{transform:translateY(0)}to{transform:translateY(-20px)}}
+
 .hero-content{
-  position:relative;z-index:3;
-  padding:0 clamp(2rem,8vw,8rem);
-  height:100%;display:flex;flex-direction:column;justify-content:flex-end;
-  padding-bottom:clamp(5rem,10vh,7rem);
+  position:relative;z-index:3;height:100%;display:flex;flex-direction:column;justify-content:center;
+  padding:0 clamp(2rem,6vw,6rem);
 }
-.hero-eyebrow{
-  font-size:.7rem;letter-spacing:.3em;text-transform:uppercase;
-  color:var(--accent);font-weight:400;margin-bottom:1.5rem;
-  opacity:0;animation:fadeInUp .8s 2.2s var(--ease) forwards;
-  display:flex;align-items:center;gap:1rem;
+.hero-badge{
+  display:inline-flex;align-items:center;gap:.6rem;
+  background:rgba(255,255,255,.95);backdrop-filter:blur(10px);
+  padding:.5rem 1.2rem;border-radius:100px;
+  font-size:.72rem;letter-spacing:.15em;color:var(--primary);
+  border:1px solid var(--primary-soft);
+  box-shadow:var(--shadow-sm);
+  margin-bottom:1.8rem;width:fit-content;
+  opacity:0;animation:fadeUp .8s 1.6s var(--ease) forwards;
 }
-.hero-eyebrow::before{content:'';width:40px;height:1px;background:var(--accent)}
+.hero-badge::before{
+  content:'';width:8px;height:8px;border-radius:50%;background:var(--primary);
+  animation:pulse 1.6s infinite;
+}
+@keyframes pulse{0%,100%{transform:scale(1);opacity:1}50%{transform:scale(1.4);opacity:.5}}
+@keyframes fadeUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:none}}
+
 .hero-h1{
-  font-size:clamp(2.6rem,8vw,7rem);
-  font-weight:900;line-height:1;letter-spacing:-.02em;
+  font-size:clamp(2.6rem,7vw,6rem);
+  font-weight:900;line-height:1.05;letter-spacing:-.025em;
+  color:var(--text);
 }
 .hero-h1 .line{display:block;overflow:hidden}
-.hero-h1 .line span{
-  display:block;transform:translateY(110%);
-  animation:slideUp 1s var(--ease) forwards;
-}
-.hero-h1 .line:nth-child(1) span{animation-delay:2.3s}
-.hero-h1 .line:nth-child(2) span{animation-delay:2.5s}
-.hero-h1 .accent{color:var(--accent)}
+.hero-h1 .line span{display:inline-block;transform:translateY(110%);animation:slideUp 1s var(--ease) forwards}
+.hero-h1 .line:nth-child(1) span{animation-delay:1.7s}
+.hero-h1 .line:nth-child(2) span{animation-delay:1.85s}
 @keyframes slideUp{to{transform:none}}
+.hero-h1 .em{
+  background:var(--grad);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+  position:relative;
+}
+
 .hero-sub{
-  margin-top:2rem;font-size:clamp(.85rem,1.4vw,1rem);
-  color:rgba(255,255,255,.75);line-height:2;
-  font-weight:300;max-width:480px;
-  opacity:0;animation:fadeInUp .8s 3s var(--ease) forwards;
+  margin-top:2rem;font-size:clamp(.92rem,1.4vw,1.05rem);
+  color:var(--text-soft);line-height:2;max-width:520px;
+  opacity:0;animation:fadeUp .8s 2.4s var(--ease) forwards;
 }
 .hero-ctas{
-  display:flex;gap:1.2rem;margin-top:2.5rem;flex-wrap:wrap;
-  opacity:0;animation:fadeInUp .8s 3.2s var(--ease) forwards;
+  display:flex;gap:1.2rem;margin-top:2.8rem;flex-wrap:wrap;
+  opacity:0;animation:fadeUp .8s 2.6s var(--ease) forwards;
 }
-.btn-primary{
-  display:inline-flex;align-items:center;gap:.9rem;
-  background:var(--accent);color:var(--black);
-  padding:.95rem 2.2rem;font-size:.78rem;font-weight:700;
-  letter-spacing:.15em;text-transform:uppercase;
-  transition:background .3s,transform .3s,gap .3s;
-}
-.btn-primary:hover{background:var(--accent2);transform:translateY(-2px);gap:1.2rem}
-.btn-outline{
-  display:inline-flex;align-items:center;gap:.9rem;
-  border:1px solid rgba(255,255,255,.35);color:var(--white);
-  padding:.95rem 2.2rem;font-size:.78rem;font-weight:400;
-  letter-spacing:.15em;text-transform:uppercase;
-  transition:border-color .3s,color .3s,gap .3s;
-}
-.btn-outline:hover{border-color:var(--accent);color:var(--accent);gap:1.2rem}
-.arrow{display:inline-block;width:18px;height:1px;background:currentColor;position:relative}
-.arrow::after{content:'';position:absolute;right:-1px;top:-3px;width:8px;height:8px;border-top:1px solid currentColor;border-right:1px solid currentColor;transform:rotate(45deg)}
 
 .scroll-ind{
-  position:absolute;bottom:2rem;right:clamp(2rem,4vw,4rem);
-  display:flex;flex-direction:column;align-items:center;gap:.8rem;
-  z-index:3;opacity:0;animation:fadeInUp .8s 3.5s var(--ease) forwards;
+  position:absolute;bottom:2.5rem;left:50%;transform:translateX(-50%);
+  display:flex;flex-direction:column;align-items:center;gap:.6rem;
+  z-index:3;color:var(--primary);
+  opacity:0;animation:fadeUp .8s 3s var(--ease) forwards;
 }
-.scroll-ind span{
-  font-size:.58rem;letter-spacing:.3em;text-transform:uppercase;
-  color:var(--gray);writing-mode:vertical-rl;
+.scroll-ind span{font-size:.62rem;letter-spacing:.3em;text-transform:uppercase}
+.scroll-mouse{
+  width:24px;height:38px;border:1.5px solid var(--primary);border-radius:14px;
+  position:relative;
 }
-.scroll-line{width:1px;height:70px;background:rgba(255,255,255,.15);position:relative;overflow:hidden}
-.scroll-line::after{
-  content:'';position:absolute;top:-100%;left:0;width:100%;height:50%;
-  background:var(--accent);
-  animation:scrollLine 2s 4s ease-in-out infinite;
+.scroll-mouse::after{
+  content:'';position:absolute;top:6px;left:50%;transform:translateX(-50%);
+  width:3px;height:8px;background:var(--primary);border-radius:2px;
+  animation:scrollDot 1.6s ease-in-out infinite;
 }
-@keyframes scrollLine{0%{top:-100%}50%{top:50%}100%{top:200%}}
+@keyframes scrollDot{0%,100%{top:6px;opacity:1}50%{top:20px;opacity:.3}}
 
-.hero-slide-info{
-  position:absolute;bottom:2rem;left:clamp(2rem,8vw,8rem);
-  z-index:3;display:flex;align-items:center;gap:1rem;
-  opacity:0;animation:fadeInUp .8s 3.4s var(--ease) forwards;
+.hero-meta{
+  position:absolute;bottom:2.5rem;right:clamp(2rem,6vw,6rem);
+  z-index:3;display:flex;align-items:center;gap:1.5rem;
+  opacity:0;animation:fadeUp .8s 3.2s var(--ease) forwards;
 }
-.hero-pager{display:flex;gap:.5rem}
+.hero-pager{display:flex;gap:.4rem}
 .hero-pager-dot{
-  width:24px;height:1px;background:rgba(255,255,255,.2);
-  cursor:pointer;transition:background .3s;
+  width:28px;height:2px;background:rgba(43,184,217,.25);
+  border-radius:2px;cursor:pointer;transition:background .3s,width .3s;
 }
-.hero-pager-dot.active{background:var(--accent)}
-.hero-pager-num{
-  font-size:.7rem;color:var(--gray);font-family:'Inter',sans-serif;letter-spacing:.1em;
-}
-.hero-pager-num strong{color:var(--white);font-weight:700}
+.hero-pager-dot.active{background:var(--primary);width:40px}
+.hero-pager-num{font-size:.7rem;color:var(--text-soft);font-family:'Inter',sans-serif;letter-spacing:.05em}
+.hero-pager-num strong{color:var(--text);font-weight:700}
 
-/* ════════════════════════════════
-   MARQUEE
-════════════════════════════════ */
+/* MARQUEE */
 .marquee-section{
-  overflow:hidden;padding:1.4rem 0;
+  overflow:hidden;padding:1.4rem 0;background:#fff;
   border-top:1px solid var(--border);border-bottom:1px solid var(--border);
-  background:var(--dark);
+  position:relative;
 }
-.marquee-track{display:flex;gap:3rem;white-space:nowrap;animation:marquee 35s linear infinite}
-.marquee-track span{font-size:.7rem;letter-spacing:.25em;text-transform:uppercase;color:rgba(255,255,255,.35);font-weight:300}
-.marquee-track span.m-gold{color:var(--accent);opacity:.7}
+.marquee-track{display:flex;gap:3rem;white-space:nowrap;animation:marquee 30s linear infinite}
+.marquee-track span{font-size:.78rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--text)}
+.marquee-track span.dot{color:var(--primary)}
 @keyframes marquee{from{transform:translateX(0)}to{transform:translateX(-50%)}}
 
-/* ════════════════════════════════
-   SECTION COMMONS
-════════════════════════════════ */
-.s-label{
-  font-size:.65rem;letter-spacing:.3em;text-transform:uppercase;
-  color:var(--accent);font-weight:400;
-  display:flex;align-items:center;gap:1rem;margin-bottom:1.2rem;
-}
-.s-label::before{content:'';width:30px;height:1px;background:var(--accent)}
-.s-h2{
-  font-size:clamp(1.8rem,3.5vw,3rem);
-  font-weight:900;line-height:1.2;letter-spacing:-.01em;
-}
-.s-en{
-  font-size:clamp(2.5rem,5vw,5rem);
-  font-weight:900;color:rgba(255,255,255,.04);
-  letter-spacing:-.02em;line-height:1;
-  pointer-events:none;margin-bottom:-1rem;
-  font-family:'Inter',sans-serif;
-}
-
-.r{opacity:0;transform:translateY(40px);transition:opacity 1s var(--ease),transform 1s var(--ease)}
-.r.v{opacity:1;transform:none}
-.r-l{opacity:0;transform:translateX(-40px);transition:opacity 1s var(--ease),transform 1s var(--ease)}
-.r-l.v{opacity:1;transform:none}
-.r-r{opacity:0;transform:translateX(40px);transition:opacity 1s var(--ease),transform 1s var(--ease)}
-.r-r.v{opacity:1;transform:none}
-.r-s{opacity:0;transform:scale(.94);transition:opacity 1s var(--ease),transform 1s var(--ease)}
-.r-s.v{opacity:1;transform:none}
-.d1{transition-delay:.1s!important}
-.d2{transition-delay:.2s!important}
-.d3{transition-delay:.3s!important}
-.d4{transition-delay:.4s!important}
-.d5{transition-delay:.5s!important}
-
-/* clip image reveal */
-.clip-reveal{
-  clip-path:inset(0 100% 0 0);
-  transition:clip-path 1.4s var(--ease);
-}
-.clip-reveal.v{clip-path:inset(0 0 0 0)}
-
-/* ════════════════════════════════
-   PHILOSOPHY / TECHNOLOGY
-════════════════════════════════ */
+/* PHILOSOPHY */
 #philosophy{
-  padding:clamp(6rem,12vh,10rem) clamp(2rem,8vw,8rem);
-  background:var(--black);
-  position:relative;overflow:hidden;
+  position:relative;padding:clamp(5rem,10vh,9rem) 0;
+  background:var(--bg);overflow:hidden;
 }
-.philo-inner{
-  display:grid;grid-template-columns:1fr 1.2fr;
-  gap:5rem;align-items:center;max-width:1300px;margin:0 auto;
-}
-.philo-text{position:relative;z-index:2}
+.philo-inner{display:grid;grid-template-columns:1fr 1.1fr;gap:5rem;align-items:center;position:relative;z-index:1}
 .philo-quote{
-  font-size:clamp(1.6rem,3vw,2.6rem);
-  font-weight:900;line-height:1.5;letter-spacing:.02em;
-  margin-top:1.5rem;
+  font-size:clamp(1.5rem,2.6vw,2.4rem);font-weight:900;line-height:1.6;
+  margin-top:1.5rem;letter-spacing:.01em;
 }
-.philo-quote span{color:var(--accent)}
-.philo-desc{
-  color:rgba(255,255,255,.6);font-size:.92rem;
-  line-height:2;font-weight:300;margin-top:1.8rem;max-width:480px;
+.philo-quote .em{
+  background:var(--grad);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;
 }
-.philo-visual{position:relative;height:600px}
+.philo-desc{font-size:.95rem;color:var(--text-soft);line-height:2;margin-top:1.8rem;max-width:480px}
+.philo-visual{position:relative;height:580px}
 .philo-img{
-  position:absolute;overflow:hidden;
+  position:absolute;overflow:hidden;border-radius:24px;
+  box-shadow:var(--shadow-lg);
 }
-.philo-img img{width:100%;height:100%;object-fit:cover;transition:transform 1s var(--ease)}
-.philo-img:hover img{transform:scale(1.05)}
-.philo-img-1{top:0;left:0;width:65%;height:65%;z-index:1}
-.philo-img-2{bottom:0;right:0;width:55%;height:55%;z-index:2;border:6px solid var(--black)}
-.philo-tag{
-  position:absolute;top:1rem;left:1rem;z-index:3;
-  background:var(--accent);color:var(--black);
-  padding:.4rem 1rem;font-size:.65rem;letter-spacing:.15em;
-  font-weight:700;text-transform:uppercase;
+.philo-img img{width:100%;height:100%;object-fit:cover;transition:transform 1.2s var(--ease)}
+.philo-img:hover img{transform:scale(1.08)}
+.philo-img-1{top:0;right:0;width:75%;height:65%;z-index:1}
+.philo-img-2{
+  bottom:0;left:0;width:55%;height:55%;z-index:2;
+  border:8px solid var(--bg);
 }
-.philo-num-badge{
-  position:absolute;bottom:1rem;right:1rem;z-index:3;
-  background:rgba(10,10,10,.85);backdrop-filter:blur(10px);
-  border:1px solid var(--accent);padding:1rem 1.4rem;
-  display:flex;align-items:center;gap:1rem;
+.philo-badge{
+  position:absolute;background:#fff;border-radius:16px;padding:1.2rem 1.4rem;
+  display:flex;align-items:center;gap:1rem;z-index:3;
+  box-shadow:var(--shadow);
 }
-.philo-num-badge .n{font-size:1.8rem;font-weight:900;color:var(--accent);line-height:1;font-family:'Inter',sans-serif}
-.philo-num-badge .t{font-size:.65rem;color:var(--gray);letter-spacing:.1em;line-height:1.4}
+.philo-badge .n{font-size:1.8rem;font-weight:900;color:var(--primary);line-height:1;font-family:'Inter',sans-serif}
+.philo-badge .t{font-size:.7rem;color:var(--text-soft);letter-spacing:.08em;line-height:1.4}
+.philo-badge-1{top:6%;left:-5%;animation:floatBadge 4s ease-in-out infinite alternate}
+.philo-badge-2{bottom:8%;right:-5%;animation:floatBadge 4s ease-in-out infinite alternate -2s}
+@keyframes floatBadge{from{transform:translateY(0)}to{transform:translateY(-12px)}}
 
-/* ════════════════════════════════
-   BUSINESS / SERVICES
-════════════════════════════════ */
-#business{background:var(--dark);position:relative}
-.biz-head{
-  padding:clamp(5rem,10vh,8rem) clamp(2rem,8vw,8rem) 3rem;
-  max-width:1300px;margin:0 auto;
+/* SERVICES */
+#business-preview{padding:clamp(5rem,10vh,9rem) 0;background:linear-gradient(180deg, var(--bg) 0%, var(--bg-soft) 100%);position:relative;overflow:hidden}
+.biz-head-row{display:flex;justify-content:space-between;align-items:flex-end;gap:2rem;flex-wrap:wrap;margin-bottom:4rem}
+.biz-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.8rem}
+.biz-card{
+  position:relative;background:#fff;border-radius:24px;overflow:hidden;
+  box-shadow:var(--shadow-sm);
+  transition:transform .5s var(--ease),box-shadow .5s var(--ease);
+  display:block;
 }
-.biz-head-row{
-  display:flex;justify-content:space-between;align-items:flex-end;
-  gap:2rem;flex-wrap:wrap;
+.biz-card:hover{transform:translateY(-10px);box-shadow:var(--shadow-lg)}
+.biz-card-img{height:240px;overflow:hidden;position:relative}
+.biz-card-img img{width:100%;height:100%;object-fit:cover;transition:transform .8s var(--ease)}
+.biz-card:hover .biz-card-img img{transform:scale(1.12)}
+.biz-card-img::after{
+  content:'';position:absolute;inset:0;
+  background:linear-gradient(135deg, rgba(43,184,217,.3), rgba(76,216,232,.15));
+  mix-blend-mode:multiply;opacity:.7;
+  transition:opacity .5s;
 }
-.biz-head-row .desc{
-  max-width:380px;font-size:.88rem;color:var(--gray);line-height:1.95;font-weight:300;
+.biz-card:hover .biz-card-img::after{opacity:.3}
+.biz-card-num{
+  position:absolute;top:1.4rem;right:1.4rem;z-index:2;
+  background:rgba(255,255,255,.95);backdrop-filter:blur(10px);
+  padding:.4rem .8rem;border-radius:100px;
+  font-size:.7rem;font-weight:700;color:var(--primary);
+  font-family:'Inter',sans-serif;letter-spacing:.05em;
 }
-.biz-list{
-  display:grid;grid-template-columns:repeat(3,1fr);gap:0;
-  border-top:1px solid var(--border);
+.biz-card-body{padding:2rem}
+.biz-card-cat{font-size:.65rem;letter-spacing:.2em;color:var(--primary);font-weight:700;text-transform:uppercase;margin-bottom:.6rem}
+.biz-card h3{font-size:1.3rem;font-weight:900;line-height:1.3;margin-bottom:.8rem;color:var(--text)}
+.biz-card p{font-size:.85rem;color:var(--text-soft);line-height:1.8}
+.biz-card-arrow{
+  display:inline-flex;align-items:center;gap:.5rem;margin-top:1.4rem;
+  font-size:.72rem;font-weight:700;color:var(--primary);
+  letter-spacing:.15em;text-transform:uppercase;transition:gap .3s;
 }
-.biz-item{
-  position:relative;overflow:hidden;aspect-ratio:3/4.2;
-  border-right:1px solid var(--border);cursor:pointer;
-}
-.biz-item:last-child{border-right:none}
-.biz-img{position:absolute;inset:0;overflow:hidden}
-.biz-img img{
-  width:100%;height:100%;object-fit:cover;
-  transition:transform .9s var(--ease),filter .9s var(--ease);
-  filter:saturate(.85) brightness(.7);
-}
-.biz-item:hover .biz-img img{transform:scale(1.08);filter:saturate(1) brightness(.85)}
-.biz-overlay{
-  position:absolute;inset:0;
-  background:linear-gradient(to top, rgba(10,10,10,.95) 5%, rgba(10,10,10,.4) 50%, transparent 100%);
-}
-.biz-num{
-  position:absolute;top:2.5rem;right:2.5rem;
-  font-size:.7rem;letter-spacing:.2em;color:var(--accent);
-  font-family:'Inter',sans-serif;
-}
-.biz-content{
-  position:absolute;bottom:0;left:0;right:0;padding:2.5rem;
-  transition:transform .6s var(--ease);
-}
-.biz-item:hover .biz-content{transform:translateY(-12px)}
-.biz-cat{
-  font-size:.6rem;letter-spacing:.2em;text-transform:uppercase;
-  color:var(--accent);margin-bottom:.7rem;
-}
-.biz-h3{font-size:1.5rem;font-weight:700;line-height:1.35;margin-bottom:.9rem}
-.biz-p{
-  font-size:.82rem;color:rgba(255,255,255,.6);line-height:1.85;font-weight:300;
-  max-height:0;overflow:hidden;opacity:0;
-  transition:max-height .5s var(--ease),opacity .4s,margin-top .5s;
-}
-.biz-item:hover .biz-p{max-height:200px;opacity:1;margin-top:.5rem}
-.biz-arrow{
-  display:inline-flex;align-items:center;gap:.6rem;
-  margin-top:1.2rem;font-size:.7rem;letter-spacing:.2em;
-  text-transform:uppercase;color:var(--accent);
-  opacity:0;transform:translateX(-12px);
-  transition:opacity .4s,transform .4s;
-}
-.biz-item:hover .biz-arrow{opacity:1;transform:none}
+.biz-card:hover .biz-card-arrow{gap:.8rem}
 
-/* ════════════════════════════════
-   INFOGRAPHICS
-════════════════════════════════ */
-#info{
-  padding:clamp(6rem,12vh,10rem) clamp(2rem,8vw,8rem);
-  background:
-    radial-gradient(ellipse 80% 80% at 50% 0%, rgba(200,164,110,.05) 0%, transparent 70%),
-    var(--dark2);
-}
-.info-head{text-align:center;max-width:700px;margin:0 auto 4rem}
-.info-head .s-label{justify-content:center}
-.info-head p{color:var(--gray);font-size:.88rem;line-height:1.95;margin-top:1.2rem;font-weight:300}
-.info-grid{
-  display:grid;grid-template-columns:repeat(4,1fr);
-  max-width:1200px;margin:0 auto;
-  border-top:1px solid var(--border);border-left:1px solid var(--border);
-}
+/* INFOGRAPHICS */
+#info{padding:clamp(5rem,10vh,9rem) 0;background:#fff;position:relative;overflow:hidden}
+#info::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg, transparent, var(--primary), transparent)}
+.info-head{text-align:center;max-width:680px;margin:0 auto 4rem}
+.info-head .s-label{margin:0 auto 1.2rem}
+.info-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1.5rem}
 .info-cell{
-  padding:3rem 1.5rem;text-align:center;
-  border-right:1px solid var(--border);
-  border-bottom:1px solid var(--border);
-  position:relative;overflow:hidden;
-  transition:background .4s;
+  background:var(--bg);border-radius:20px;padding:2.5rem 1.6rem;
+  text-align:center;position:relative;overflow:hidden;
+  transition:transform .4s var(--ease),background .4s;
+  border:1px solid transparent;
 }
-.info-cell:hover{background:rgba(200,164,110,.04)}
+.info-cell:hover{transform:translateY(-8px);background:#fff;border-color:var(--primary-soft);box-shadow:var(--shadow)}
 .info-cell::before{
-  content:'';position:absolute;top:0;left:50%;transform:translateX(-50%);
-  width:0;height:2px;background:var(--accent);transition:width .5s var(--ease);
+  content:'';position:absolute;top:-50%;left:50%;transform:translateX(-50%);
+  width:200px;height:200px;border-radius:50%;
+  background:var(--grad);opacity:0;filter:blur(40px);transition:opacity .5s;
 }
-.info-cell:hover::before{width:100%}
-.info-icon{font-size:1.4rem;color:var(--accent);margin-bottom:1rem;opacity:.7}
+.info-cell:hover::before{opacity:.2}
+.info-icon{
+  width:56px;height:56px;margin:0 auto 1rem;border-radius:16px;
+  background:var(--grad);color:#fff;
+  display:flex;align-items:center;justify-content:center;font-size:1.4rem;
+  box-shadow:0 6px 20px rgba(43,184,217,.3);position:relative;z-index:1;
+}
 .info-num{
-  font-size:clamp(2.4rem,4vw,3.8rem);font-weight:900;
-  color:var(--accent);line-height:1;font-family:'Inter',sans-serif;
+  font-size:clamp(2.2rem,4vw,3.4rem);font-weight:900;line-height:1;
+  background:var(--grad);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+  font-family:'Inter',sans-serif;position:relative;z-index:1;
 }
-.info-unit{font-size:1rem;color:var(--accent2)}
-.info-label{font-size:.78rem;color:var(--gray);margin-top:.8rem;line-height:1.6;letter-spacing:.05em}
-.info-divider{width:30px;height:1px;background:rgba(200,164,110,.3);margin:.8rem auto 0}
+.info-unit{font-size:1rem;-webkit-text-fill-color:var(--primary)}
+.info-label{font-size:.8rem;color:var(--text-soft);margin-top:.6rem;line-height:1.5;position:relative;z-index:1}
 
-/* ════════════════════════════════
-   PARALLAX QUOTE
-════════════════════════════════ */
-.par-section{
-  position:relative;height:65vh;min-height:420px;
-  overflow:hidden;display:flex;align-items:center;
-}
-.par-bg{
-  position:absolute;inset:-15%;
-  background-size:cover;background-position:center;
-  will-change:transform;filter:brightness(.4) contrast(1.1);
-}
-.par-overlay{position:absolute;inset:0;background:linear-gradient(to right, rgba(10,10,10,.7) 0%, rgba(10,10,10,.3) 60%, transparent 100%)}
-.par-content{position:relative;z-index:1;padding:0 clamp(2rem,8vw,8rem);max-width:900px}
-.par-quote{
-  font-size:clamp(1.8rem,4vw,3.5rem);
-  font-weight:900;line-height:1.4;letter-spacing:-.01em;
-}
-.par-quote span{display:block;color:var(--accent);margin-top:.3rem}
-.par-p{
-  font-size:.9rem;color:rgba(255,255,255,.65);line-height:1.95;
-  margin-top:1.5rem;font-weight:300;max-width:520px;
-}
+/* PARALLAX */
+.par-section{position:relative;height:55vh;min-height:380px;overflow:hidden;display:flex;align-items:center;background:#1a2940}
+.par-bg{position:absolute;inset:-15%;z-index:0;background-size:cover;background-position:center;opacity:.5}
+.par-overlay{position:absolute;inset:0;z-index:1;background:linear-gradient(135deg, rgba(43,184,217,.55), rgba(26,41,64,.7))}
+.par-content{position:relative;z-index:2;color:#fff;padding:0 clamp(2rem,6vw,6rem);max-width:900px}
+.par-content .s-label{color:#fff}
+.par-content .s-label::before{background:#fff}
+.par-quote{font-size:clamp(1.8rem,4vw,3.2rem);font-weight:900;line-height:1.45;letter-spacing:-.01em;color:#fff}
+.par-quote .em{display:inline-block;position:relative;color:#fff}
+.par-quote .em::after{content:'';position:absolute;left:0;bottom:.1em;width:100%;height:.15em;background:var(--secondary);opacity:.6;z-index:-1}
+.par-content p{font-size:.95rem;line-height:1.95;margin-top:1.5rem;max-width:560px;color:rgba(255,255,255,.9)}
 
-/* ════════════════════════════════
-   ROBOT EDUCATION
-════════════════════════════════ */
-#robot{
-  padding:clamp(6rem,12vh,10rem) clamp(2rem,8vw,8rem);
-  background:var(--black);position:relative;
-}
-.robot-inner{
-  max-width:1300px;margin:0 auto;
-  display:grid;grid-template-columns:1.1fr 1fr;gap:5rem;align-items:center;
-}
-.robot-visual{position:relative;height:600px}
-.robot-img-main{
-  position:absolute;top:0;left:0;width:80%;height:75%;
-  overflow:hidden;
-}
+/* ROBOT */
+#robot{padding:clamp(5rem,10vh,9rem) 0;background:var(--bg);position:relative;overflow:hidden}
+.robot-inner{display:grid;grid-template-columns:1.05fr 1fr;gap:5rem;align-items:center;position:relative;z-index:1}
+.robot-visual{position:relative;height:560px}
+.robot-img-main{position:absolute;top:0;left:0;width:78%;height:74%;overflow:hidden;border-radius:24px;box-shadow:var(--shadow-lg)}
 .robot-img-main img{width:100%;height:100%;object-fit:cover;transition:transform 1s var(--ease)}
-.robot-img-main:hover img{transform:scale(1.05)}
+.robot-img-main:hover img{transform:scale(1.08)}
 .robot-img-sub{
   position:absolute;bottom:0;right:0;width:55%;height:50%;
-  background:var(--dark2);border:6px solid var(--black);
+  border-radius:24px;overflow:hidden;background:var(--grad);
+  border:8px solid var(--bg);
   display:flex;align-items:center;justify-content:center;
-  overflow:hidden;
 }
-.robot-emoji{
-  font-size:6rem;
-  filter:drop-shadow(0 0 40px rgba(200,164,110,.5));
-  animation:floatRobot 4s ease-in-out infinite;
-}
-@keyframes floatRobot{0%,100%{transform:translateY(0)}50%{transform:translateY(-12px)}}
-.robot-glow{
-  position:absolute;width:280px;height:280px;
-  border-radius:50%;
-  background:radial-gradient(circle, rgba(200,164,110,.2), transparent 70%);
-  pointer-events:none;
-}
-.robot-tag{
-  position:absolute;top:1.5rem;left:1.5rem;z-index:5;
-  background:var(--accent);color:var(--black);
-  padding:.4rem 1rem;font-size:.65rem;letter-spacing:.15em;
-  font-weight:700;text-transform:uppercase;
-}
+.robot-emoji{font-size:6rem;filter:drop-shadow(0 8px 24px rgba(255,255,255,.4));animation:floatRobot 3s ease-in-out infinite alternate}
+@keyframes floatRobot{from{transform:translateY(0) rotate(-3deg)}to{transform:translateY(-14px) rotate(3deg)}}
 .robot-motto{
   display:inline-block;
   font-size:clamp(1.4rem,2.6vw,2rem);font-weight:900;
-  color:var(--accent);margin-top:1.5rem;
-  position:relative;
-}
-.robot-motto::after{
-  content:'';position:absolute;left:0;bottom:-.3rem;
-  width:100%;height:2px;background:var(--accent);
-  transform:scaleX(0);transform-origin:left;
-  transition:transform .8s var(--ease) .3s;
-}
-.robot-motto.v::after{transform:scaleX(1)}
-.robot-desc{
-  font-size:.9rem;color:var(--gray);line-height:2;
-  font-weight:300;margin-top:1.8rem;max-width:480px;
-}
-.robot-courses{display:flex;flex-direction:column;gap:.9rem;margin-top:2.2rem}
-.r-course{
-  display:flex;align-items:center;gap:1.5rem;
-  padding:1.4rem 1.6rem;border:1px solid var(--border);
-  transition:border-color .3s,background .3s,padding-left .3s;
-  cursor:pointer;
-}
-.r-course:hover{border-color:rgba(200,164,110,.3);background:rgba(200,164,110,.03);padding-left:1.9rem}
-.r-course-n{
-  font-size:2rem;font-weight:900;color:rgba(200,164,110,.25);
-  min-width:2.5rem;font-family:'Inter',sans-serif;line-height:1;
-}
-.r-course-info h4{font-size:.92rem;font-weight:700;margin-bottom:.3rem}
-.r-course-info p{font-size:.76rem;color:var(--gray);line-height:1.6}
-
-/* ════════════════════════════════
-   ABOUT / VISION
-════════════════════════════════ */
-#about{
-  padding:clamp(5rem,10vh,8rem) clamp(2rem,8vw,8rem);
-  background:var(--dark);position:relative;overflow:hidden;
-}
-.about-inner{max-width:1300px;margin:0 auto;display:grid;grid-template-columns:1fr 1.1fr;gap:5rem;align-items:center}
-.about-img{
-  position:relative;height:520px;overflow:hidden;
-}
-.about-img img{width:100%;height:100%;object-fit:cover;transition:transform 1s var(--ease)}
-.about-img:hover img{transform:scale(1.05)}
-.about-img::after{
-  content:'';position:absolute;inset:0;
-  background:linear-gradient(to top, rgba(10,10,10,.4) 0%, transparent 60%);
-}
-.about-big{
-  font-size:clamp(2.2rem,4.8vw,4.5rem);
-  font-weight:900;line-height:1.15;letter-spacing:-.02em;margin-top:1.2rem;
-}
-.about-big .g{
-  background:linear-gradient(90deg, var(--accent), var(--accent2));
+  background:var(--grad);
   -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+  margin-top:1.5rem;
 }
-.about-desc{
-  font-size:.92rem;color:var(--gray);line-height:2;
-  font-weight:300;margin-top:1.8rem;
+.robot-desc{font-size:.94rem;color:var(--text-soft);line-height:1.95;margin-top:1.5rem;max-width:480px}
+.robot-courses{display:flex;flex-direction:column;gap:1rem;margin-top:2.2rem}
+.r-course{
+  display:flex;align-items:center;gap:1.5rem;padding:1.4rem 1.6rem;
+  background:#fff;border-radius:14px;border:1px solid var(--border);
+  transition:transform .3s var(--ease),box-shadow .3s;
 }
-.about-features{
-  display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;margin-top:2.5rem;
-}
-.af-item{
-  padding:1.4rem;border:1px solid var(--border);
-  transition:border-color .3s,background .3s;
-}
-.af-item:hover{border-color:rgba(200,164,110,.3);background:rgba(200,164,110,.03)}
-.af-num{
-  font-size:.6rem;letter-spacing:.2em;color:var(--accent);
-  font-family:'Inter',sans-serif;margin-bottom:.5rem;
-}
-.af-item h4{font-size:.92rem;font-weight:700;margin-bottom:.3rem}
-.af-item p{font-size:.74rem;color:var(--gray);line-height:1.65}
-
-/* ════════════════════════════════
-   COMPANY DETAILS / TABLE
-════════════════════════════════ */
-#company-detail{
-  padding:clamp(5rem,10vh,8rem) clamp(2rem,8vw,8rem);
-  background:var(--dark2);
-}
-.cd-inner{max-width:1100px;margin:0 auto}
-.cd-table{
-  margin-top:3rem;border-top:1px solid var(--border);
-}
-.cd-row{
-  display:grid;grid-template-columns:200px 1fr;
-  gap:2rem;padding:1.5rem 0;
-  border-bottom:1px solid var(--border);
-  align-items:start;
-}
-.cd-row dt{
-  font-size:.72rem;letter-spacing:.18em;text-transform:uppercase;
-  color:var(--accent);font-weight:400;padding-top:.2rem;
-}
-.cd-row dd{font-size:.88rem;color:var(--light);line-height:1.85;font-weight:300}
-.cd-row dd strong{color:var(--white);font-weight:700}
-.cd-history{margin-top:1rem}
-.cd-history li{
-  display:grid;grid-template-columns:80px 1fr;gap:1.5rem;
-  font-size:.85rem;padding:.5rem 0;color:var(--light);
-}
-.cd-history li span{color:var(--accent);font-family:'Inter',sans-serif;font-weight:700}
-
-/* ════════════════════════════════
-   GROUP / PARTNERS
-════════════════════════════════ */
-#partners{
-  padding:clamp(5rem,10vh,8rem) clamp(2rem,8vw,8rem);
-  background:var(--black);
-}
-.partners-inner{max-width:1300px;margin:0 auto}
-.partners-head{text-align:center;margin-bottom:4rem}
-.partners-head .s-label{justify-content:center}
-.partners-grid{
-  display:grid;grid-template-columns:repeat(2,1fr);gap:1.5rem;
-}
-.partner-card{
-  display:flex;align-items:center;gap:2rem;
-  padding:2rem 2.5rem;
-  background:var(--dark2);border:1px solid var(--border);
-  transition:border-color .3s,background .3s,transform .3s;
-}
-.partner-card:hover{
-  border-color:rgba(200,164,110,.3);
-  background:#1f1f1f;transform:translateY(-4px);
-}
-.partner-logo{
-  width:80px;height:80px;flex-shrink:0;
-  background:var(--white);border-radius:8px;
+.r-course:hover{transform:translateX(8px);box-shadow:var(--shadow);border-color:var(--primary-soft)}
+.r-course-n{
+  width:42px;height:42px;border-radius:50%;
+  background:var(--primary-soft);color:var(--primary);
   display:flex;align-items:center;justify-content:center;
-  padding:.5rem;
+  font-weight:900;font-family:'Inter',sans-serif;flex-shrink:0;
+  transition:background .3s,color .3s;
 }
-.partner-logo img{max-width:100%;max-height:100%;object-fit:contain}
-.partner-info .pc-tag{
-  font-size:.6rem;letter-spacing:.2em;text-transform:uppercase;
-  color:var(--accent);margin-bottom:.5rem;
+.r-course:hover .r-course-n{background:var(--grad);color:#fff}
+.r-course h4{font-size:.95rem;font-weight:700;margin-bottom:.2rem;color:var(--text)}
+.r-course p{font-size:.78rem;color:var(--text-soft);line-height:1.55}
+
+/* PARTNERS */
+#partners{padding:clamp(5rem,10vh,9rem) 0;background:#fff;position:relative;overflow:hidden}
+.part-head{text-align:center;margin-bottom:4rem}
+.part-head .s-label{margin:0 auto 1.2rem}
+.part-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;margin-bottom:1.5rem}
+.part-card{
+  display:flex;align-items:center;gap:1.5rem;
+  background:var(--bg);border-radius:20px;padding:1.8rem 2rem;
+  transition:transform .4s var(--ease),box-shadow .4s,background .4s;
+  border:1px solid transparent;
 }
-.partner-info h4{font-size:1rem;font-weight:700;margin-bottom:.4rem}
-.partner-info p{font-size:.78rem;color:var(--gray);line-height:1.65}
-.partner-info a{color:var(--accent);font-size:.72rem;margin-top:.5rem;display:inline-block;letter-spacing:.1em}
+.part-card:hover{transform:translateY(-6px);box-shadow:var(--shadow);background:#fff;border-color:var(--primary-soft)}
+.part-logo{
+  width:80px;height:80px;flex-shrink:0;
+  background:#fff;border-radius:14px;
+  display:flex;align-items:center;justify-content:center;padding:.6rem;
+  box-shadow:var(--shadow-sm);
+}
+.part-logo img{max-width:100%;max-height:100%;object-fit:contain}
+.part-info .tag{font-size:.62rem;letter-spacing:.2em;color:var(--primary);font-weight:700;text-transform:uppercase;margin-bottom:.4rem}
+.part-info h4{font-size:1rem;font-weight:700;color:var(--text);margin-bottom:.4rem}
+.part-info p{font-size:.78rem;color:var(--text-soft);line-height:1.65}
+.part-info a{color:var(--primary);font-size:.72rem;letter-spacing:.08em;margin-top:.3rem;display:inline-block;font-weight:700}
 
 .sponsor-banner{
-  margin-top:2rem;padding:2.5rem;
-  background:linear-gradient(135deg, rgba(200,164,110,.08), rgba(58,141,197,.05));
-  border:1px solid rgba(200,164,110,.2);
-  display:flex;align-items:center;gap:3rem;flex-wrap:wrap;
+  display:flex;align-items:center;gap:2.5rem;padding:2.2rem;
+  background:linear-gradient(135deg, var(--primary-soft) 0%, #fff 100%);
+  border-radius:20px;border:1px solid var(--primary-soft);flex-wrap:wrap;
 }
-.sponsor-banner img{max-height:90px;width:auto;background:var(--white);padding:.5rem 1rem;border-radius:4px}
-.sponsor-banner .sb-text strong{display:block;font-size:1rem;margin-bottom:.4rem}
-.sponsor-banner .sb-text p{font-size:.8rem;color:var(--gray);line-height:1.7}
-.sponsor-banner .sb-tag{
-  display:inline-block;font-size:.6rem;letter-spacing:.2em;color:var(--accent);
-  text-transform:uppercase;margin-bottom:.6rem;
-}
+.sponsor-banner img{max-height:80px;background:#fff;padding:.5rem 1rem;border-radius:8px;box-shadow:var(--shadow-sm)}
+.sponsor-banner .tag{font-size:.62rem;letter-spacing:.2em;color:var(--primary);font-weight:700;text-transform:uppercase;margin-bottom:.5rem}
+.sponsor-banner strong{display:block;font-size:1.1rem;margin-bottom:.4rem;color:var(--text)}
+.sponsor-banner p{font-size:.82rem;color:var(--text-soft);line-height:1.7;max-width:500px}
 
 .iso-banner{
-  margin-top:2rem;padding:2.5rem;
-  background:linear-gradient(135deg, rgba(200,164,110,.1), rgba(200,164,110,.02));
-  border:1px solid rgba(200,164,110,.2);
-  display:flex;align-items:center;gap:2.5rem;flex-wrap:wrap;
+  margin-top:1.5rem;display:flex;align-items:center;gap:2.5rem;padding:2.2rem;
+  background:#fff;border:2px solid var(--primary-soft);border-radius:20px;
+  flex-wrap:wrap;position:relative;overflow:hidden;
+}
+.iso-banner::before{
+  content:'ISO';position:absolute;top:50%;right:-3rem;transform:translateY(-50%);
+  font-size:10rem;font-weight:900;color:var(--primary-soft);opacity:.4;
+  font-family:'Inter',sans-serif;letter-spacing:-.05em;pointer-events:none;
 }
 .iso-label{
-  font-size:1.6rem;font-weight:900;color:var(--accent);
-  border:2px solid var(--accent);padding:.6rem 1.4rem;
+  font-size:1.6rem;font-weight:900;color:#fff;
+  background:var(--grad);padding:.6rem 1.4rem;border-radius:8px;
   white-space:nowrap;font-family:'Inter',sans-serif;letter-spacing:.05em;
+  box-shadow:0 6px 16px rgba(43,184,217,.3);position:relative;z-index:1;
 }
-.iso-text strong{display:block;font-size:1rem;margin-bottom:.4rem}
-.iso-text p{font-size:.82rem;color:var(--gray);line-height:1.7}
+.iso-text{position:relative;z-index:1}
+.iso-text strong{display:block;font-size:1rem;margin-bottom:.4rem;color:var(--text)}
+.iso-text p{font-size:.82rem;color:var(--text-soft);line-height:1.65}
 
-/* ════════════════════════════════
-   NEWS
-════════════════════════════════ */
-#news{padding:clamp(5rem,10vh,8rem) clamp(2rem,8vw,8rem);background:var(--dark)}
-.news-inner{max-width:1100px;margin:0 auto}
-.news-head{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:2.5rem;flex-wrap:wrap;gap:1rem}
-.news-list{}
+/* NEWS */
+#news{padding:clamp(5rem,10vh,9rem) 0;background:var(--bg)}
+.news-head{display:flex;justify-content:space-between;align-items:flex-end;flex-wrap:wrap;gap:1rem;margin-bottom:2.5rem}
+.news-list{background:#fff;border-radius:20px;overflow:hidden;box-shadow:var(--shadow-sm)}
 .news-item{
-  display:flex;align-items:center;gap:2rem;padding:1.4rem 0;
-  border-bottom:1px solid var(--border);transition:padding-left .3s;cursor:pointer;
+  display:grid;grid-template-columns:90px 80px 1fr auto;gap:1.5rem;align-items:center;
+  padding:1.3rem 2rem;border-bottom:1px solid var(--border);
+  transition:background .3s,padding-left .3s;cursor:pointer;
 }
-.news-item:hover{padding-left:.8rem}
-.news-item:first-child{border-top:1px solid var(--border)}
-.news-date{font-size:.75rem;color:var(--gray);font-family:'Inter',sans-serif;white-space:nowrap;min-width:90px}
-.news-cat{
-  font-size:.6rem;letter-spacing:.12em;color:var(--accent);
-  border:1px solid rgba(200,164,110,.3);padding:.2rem .7rem;
-  white-space:nowrap;min-width:70px;text-align:center;
-}
-.news-title{font-size:.9rem;color:var(--light);flex:1;line-height:1.5}
-.news-item:hover .news-title{color:var(--white)}
-.news-arrow{font-size:.7rem;color:var(--gray);transition:transform .3s,color .3s}
-.news-item:hover .news-arrow{transform:translateX(4px);color:var(--accent)}
+.news-item:last-child{border-bottom:none}
+.news-item:hover{background:var(--bg);padding-left:2.5rem}
+.news-date{font-size:.78rem;color:var(--text-soft);font-family:'Inter',sans-serif}
+.news-cat{font-size:.65rem;letter-spacing:.1em;color:var(--primary);font-weight:700;text-align:center;padding:.25rem .5rem;background:var(--primary-soft);border-radius:4px}
+.news-title{font-size:.9rem;color:var(--text);font-weight:500}
+.news-arrow{font-size:.8rem;color:var(--primary);transition:transform .3s}
+.news-item:hover .news-arrow{transform:translateX(6px)}
 
-/* ════════════════════════════════
-   RECRUIT
-════════════════════════════════ */
-#recruit{
-  position:relative;height:60vh;min-height:420px;
-  overflow:hidden;display:flex;align-items:center;
+/* RECRUIT CTA */
+#recruit-cta{
+  padding:clamp(5rem,10vh,9rem) 0;position:relative;overflow:hidden;
+  background:linear-gradient(135deg, #1a2940 0%, #2bb8d9 100%);color:#fff;
 }
-.recruit-bg{
-  position:absolute;inset:-10%;background-size:cover;background-position:center;
-  will-change:transform;filter:brightness(.4) contrast(1.1);
+#recruit-cta::before{
+  content:'';position:absolute;inset:0;
+  background-image:url('https://sunprosys.co.jp/cont/wp-content/themes/sunpro_theme/img/top/top04_recruit.jpg');
+  background-size:cover;background-position:center;
+  opacity:.15;mix-blend-mode:overlay;
 }
-.recruit-overlay{position:absolute;inset:0;background:linear-gradient(to right, rgba(10,10,10,.8) 0%, rgba(10,10,10,.3) 60%, transparent 100%)}
-.recruit-content{position:relative;z-index:1;padding:0 clamp(2rem,8vw,8rem);max-width:700px}
-.recruit-content p{font-size:.9rem;color:rgba(255,255,255,.7);line-height:2;font-weight:300;margin:1.5rem 0 2rem}
+.recruit-inner{position:relative;z-index:1;display:grid;grid-template-columns:1.2fr 1fr;gap:4rem;align-items:center}
+.recruit-inner .s-label{color:#fff}
+.recruit-inner .s-label::before{background:#fff}
+.recruit-inner .s-h2{color:#fff}
+.recruit-inner p{font-size:.94rem;line-height:1.95;color:rgba(255,255,255,.9);margin:1.5rem 0 2rem;max-width:480px}
+.recruit-stats{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem}
+.r-stat{
+  background:rgba(255,255,255,.1);backdrop-filter:blur(10px);
+  border:1px solid rgba(255,255,255,.2);
+  padding:1.8rem;border-radius:16px;
+}
+.r-stat .n{font-size:2rem;font-weight:900;color:#fff;line-height:1;font-family:'Inter',sans-serif;margin-bottom:.5rem}
+.r-stat .l{font-size:.72rem;color:rgba(255,255,255,.8);letter-spacing:.1em}
 
-/* ════════════════════════════════
-   CONTACT
-════════════════════════════════ */
-#contact{
-  padding:clamp(6rem,12vh,10rem) clamp(2rem,8vw,8rem);
-  background:var(--dark2);text-align:center;
-  position:relative;overflow:hidden;
+/* CONTACT CTA */
+#contact-cta{padding:clamp(5rem,10vh,9rem) 0;background:#fff;text-align:center;position:relative;overflow:hidden}
+.contact-cta-inner{max-width:680px;margin:0 auto;position:relative;z-index:1}
+.contact-cta-inner .s-label{margin:0 auto 1.2rem}
+.contact-cta-inner p{font-size:.94rem;color:var(--text-soft);line-height:2;margin:1.5rem 0 2.5rem}
+.contact-cta-btns{display:flex;gap:1.2rem;justify-content:center;flex-wrap:wrap}
+.contact-info{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;margin-top:4rem}
+.ci-item{background:var(--bg);border-radius:16px;padding:1.8rem;transition:transform .3s var(--ease),box-shadow .3s}
+.ci-item:hover{transform:translateY(-6px);box-shadow:var(--shadow)}
+.ci-icon{
+  width:44px;height:44px;border-radius:12px;background:var(--grad);color:#fff;
+  display:flex;align-items:center;justify-content:center;margin:0 auto .8rem;font-size:1.1rem;
 }
-#contact::before{
-  content:'';position:absolute;top:-50%;left:50%;transform:translateX(-50%);
-  width:800px;height:800px;
-  background:radial-gradient(circle, rgba(200,164,110,.06), transparent 70%);
-  pointer-events:none;
-}
-.contact-inner{max-width:800px;margin:0 auto;position:relative}
-.contact-inner .s-label{justify-content:center}
-.contact-inner .s-h2{margin:1rem 0 1.5rem;font-size:clamp(2rem,4vw,3.5rem)}
-.contact-inner .desc{color:var(--gray);font-size:.92rem;line-height:2;margin-bottom:3rem;font-weight:300}
-.contact-btns{display:flex;gap:1.2rem;justify-content:center;flex-wrap:wrap}
-.contact-info{
-  margin-top:4rem;display:grid;grid-template-columns:repeat(3,1fr);
-  gap:1.5rem;
-}
-.ci-item{
-  padding:1.8rem;border:1px solid var(--border);text-align:center;
-  transition:border-color .3s,background .3s;
-}
-.ci-item:hover{border-color:rgba(200,164,110,.3);background:rgba(200,164,110,.03)}
-.ci-label{
-  font-size:.62rem;letter-spacing:.2em;color:var(--accent);
-  text-transform:uppercase;margin-bottom:.6rem;
-}
-.ci-val{font-size:.95rem;font-weight:700;line-height:1.5}
-.ci-sub{font-size:.72rem;color:var(--gray);margin-top:.3rem;line-height:1.5}
+.ci-label{font-size:.62rem;letter-spacing:.2em;color:var(--primary);text-transform:uppercase;font-weight:700;margin-bottom:.4rem}
+.ci-val{font-size:.92rem;color:var(--text);font-weight:700}
+.ci-sub{font-size:.72rem;color:var(--text-mute);margin-top:.3rem}
 
-/* ════════════════════════════════
-   FOOTER
-════════════════════════════════ */
-footer{
-  background:var(--black);border-top:1px solid var(--border);
-  padding:clamp(3rem,6vw,5rem) clamp(2rem,8vw,8rem) 2rem;
-}
-.f-top{
-  display:grid;grid-template-columns:2fr 1fr 1fr 1fr;
-  gap:3rem;max-width:1300px;margin:0 auto;
-  padding-bottom:3rem;border-bottom:1px solid var(--border);
-}
-.f-brand .h-logo{margin-bottom:1.2rem}
-.f-brand p{font-size:.78rem;color:var(--gray);line-height:1.9;font-weight:300}
-.f-brand .f-addr{margin-top:1.2rem;font-size:.75rem;color:var(--light)}
-.f-brand .f-tel{font-size:1.1rem;color:var(--accent);font-family:'Inter',sans-serif;font-weight:700;margin-top:.6rem}
-.f-col h5{font-size:.62rem;letter-spacing:.2em;text-transform:uppercase;color:var(--accent);margin-bottom:1.2rem;font-weight:400}
-.f-col ul{list-style:none;display:flex;flex-direction:column;gap:.7rem}
-.f-col a{font-size:.8rem;color:rgba(255,255,255,.5);transition:color .25s}
-.f-col a:hover{color:var(--accent)}
-.f-bottom{max-width:1300px;margin:2rem auto 0;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem}
-.f-bottom p{font-size:.72rem;color:rgba(255,255,255,.3)}
-
-/* ════════════════════════════════
-   MOBILE NAV
-════════════════════════════════ */
-.mnav{
-  position:fixed;inset:0;background:var(--black);z-index:2000;
-  display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2rem;
-  opacity:0;pointer-events:none;transition:opacity .4s;
-}
-.mnav.open{opacity:1;pointer-events:all}
-.mnav a{font-size:1.3rem;font-weight:700;letter-spacing:.1em;color:var(--white);text-transform:uppercase;transition:color .3s}
-.mnav a:hover{color:var(--accent)}
-.mnav-close{position:absolute;top:1.5rem;right:2rem;font-size:1.5rem;cursor:pointer;color:var(--white);background:none;border:none}
-
-.progress-line{
-  position:fixed;top:0;left:0;height:2px;
-  background:linear-gradient(90deg, var(--accent), var(--accent2));
-  z-index:10001;width:0;transition:width .1s linear;
-}
-
-/* ════════════════════════════════
-   RESPONSIVE
-════════════════════════════════ */
+/* RESPONSIVE */
 @media(max-width:1024px){
-  .philo-inner,.robot-inner,.about-inner{grid-template-columns:1fr;gap:3rem}
-  .philo-visual,.robot-visual,.about-img{height:400px}
+  .philo-inner,.robot-inner,.recruit-inner{grid-template-columns:1fr;gap:3rem}
+  .philo-visual,.robot-visual{height:420px}
+  .biz-grid{grid-template-columns:1fr;gap:1.2rem}
   .info-grid{grid-template-columns:repeat(2,1fr)}
-  .partners-grid{grid-template-columns:1fr}
-  .biz-list{grid-template-columns:1fr;gap:1px;background:var(--border)}
-  .biz-item{border-right:none;aspect-ratio:unset;min-height:380px}
-  .biz-p,.biz-arrow{opacity:1;max-height:none;transform:none}
-  .f-top{grid-template-columns:1fr 1fr}
+  .part-grid{grid-template-columns:1fr}
   .contact-info{grid-template-columns:1fr}
 }
-@media(max-width:768px){
-  nav.h-nav,.h-contact{display:none}
-  .burger{display:flex}
-  .cd-row{grid-template-columns:1fr;gap:.5rem}
-  .news-item{flex-wrap:wrap;gap:.8rem}
-  .news-title{flex:1 0 100%;order:3}
-  .news-arrow{display:none}
-  .about-features{grid-template-columns:1fr}
-  .partner-card{flex-direction:column;text-align:center;gap:1rem;padding:1.8rem}
-  .f-top{grid-template-columns:1fr}
-}
-@media(max-width:500px){
+@media(max-width:560px){
+  #hero{min-height:520px;height:auto;padding:8rem 0 6rem}
+  .hero-meta{position:static;justify-content:center;margin-top:2rem;display:flex}
+  .scroll-ind{display:none}
   .info-grid{grid-template-columns:1fr 1fr}
-  header{height:64px;padding:0 1.2rem}
-  .hero-h1{font-size:2.4rem}
-  .philo-img-1{width:75%;height:60%}
-  .philo-img-2{width:55%;height:50%}
+  .news-item{grid-template-columns:1fr;gap:.5rem;padding:1.2rem 1.4rem}
+  .news-arrow{display:none}
 }
 </style>
 </head>
 <body>
 
-<div id="cursor"></div>
-<div id="cursor-ring"></div>
-<div class="progress-line" id="pline"></div>
-
-<!-- LOADER -->
-<div id="loader">
-  <img class="loader-logo-img" src="https://sunprosys.co.jp/cont/wp-content/themes/sunpro_theme/img/common/h_logo.png" alt="サンプロシステム">
-  <div style="display:flex;flex-direction:column;align-items:center;gap:.8rem">
-    <div class="loader-bar-wrap"><div class="loader-bar"></div></div>
-    <div class="loader-num" id="lnum">0%</div>
-  </div>
+<div class="page-intro">
+  <img class="pi-logo" src="https://sunprosys.co.jp/cont/wp-content/themes/sunpro_theme/img/common/h_logo.png" alt="サンプロシステム">
+  <div class="pi-bar"></div>
 </div>
 
-<!-- MOBILE NAV -->
-<div class="mnav" id="mnav">
-  <button class="mnav-close" onclick="document.getElementById('mnav').classList.remove('open')">✕</button>
-  <a href="#philosophy">企業理念</a>
-  <a href="#business">事業内容</a>
-  <a href="#robot">ロボット教室</a>
-  <a href="#about">会社情報</a>
-  <a href="#recruit">採用情報</a>
-  <a href="#news">ニュース</a>
-  <a href="#contact">お問い合わせ</a>
+<div class="mnav">
+  <button class="mnav-close" aria-label="close">×</button>
+  <a href="index.html">トップ</a>
+  <a href="business.html">事業内容</a>
+  <a href="robot.html">ロボット教室</a>
+  <a href="about.html">私たちの想い</a>
+  <a href="company.html">会社情報</a>
+  <a href="recruit.html">採用情報</a>
+  <a href="news.html">お知らせ</a>
+  <a href="contact.html">お問い合わせ</a>
 </div>
 
-<!-- HEADER -->
-<header id="hdr">
-  <a href="#" class="h-logo">
+<header>
+  <a href="index.html" class="h-logo">
     <img src="https://sunprosys.co.jp/cont/wp-content/themes/sunpro_theme/img/common/h_logo.png" alt="株式会社サンプロシステム">
   </a>
   <nav class="h-nav">
-    <a href="#philosophy">企業理念</a>
-    <a href="#business">事業内容</a>
-    <a href="#robot">ロボット教室</a>
-    <a href="#about">会社情報</a>
-    <a href="#recruit">採用情報</a>
-    <a href="#news">ニュース</a>
-    <a href="https://sunprosys.co.jp/blog" target="_blank">ブログ</a>
+    <a href="business.html">事業内容</a>
+    <a href="robot.html">ロボット教室</a>
+    <a href="about.html">私たちの想い</a>
+    <a href="company.html">会社情報</a>
+    <a href="recruit.html">採用情報</a>
+    <a href="news.html">お知らせ</a>
   </nav>
   <div class="h-contact">
     <div class="h-tel">
       <span class="h-tel-num">082-507-1067</span>
-      <span class="h-tel-label">TEL / 受付時間 9:00-17:00</span>
+      <span class="h-tel-label">TEL / 9:00-17:00</span>
     </div>
-    <a href="#contact" class="h-cta">お問い合わせ</a>
+    <a href="contact.html" class="h-cta">お問い合わせ</a>
   </div>
-  <div class="burger" onclick="document.getElementById('mnav').classList.add('open')">
-    <span></span><span></span><span></span>
-  </div>
+  <div class="burger"><span></span><span></span><span></span></div>
 </header>
 
-<!-- ══════ HERO ══════ -->
+<!-- HERO -->
 <section id="hero">
-  <div class="hero-slides" id="slides">
+  <div class="hero-slides">
     <div class="hero-slide active" style="background-image:url('https://sunprosys.co.jp/cont/wp-content/themes/sunpro_theme/img/top/main_image01.jpg')"></div>
     <div class="hero-slide" style="background-image:url('https://sunprosys.co.jp/cont/wp-content/themes/sunpro_theme/img/top/main_image02.jpg')"></div>
     <div class="hero-slide" style="background-image:url('https://sunprosys.co.jp/cont/wp-content/themes/sunpro_theme/img/top/main_image03.jpg')"></div>
     <div class="hero-slide" style="background-image:url('https://sunprosys.co.jp/cont/wp-content/themes/sunpro_theme/img/top/main_image04.jpg')"></div>
   </div>
   <div class="hero-overlay"></div>
-  <div class="hero-grain"></div>
+  <div class="hero-grid-pattern"></div>
   <canvas id="hero-canvas"></canvas>
 
+  <div class="hero-shape s1"><svg width="80" height="80" viewBox="0 0 80 80"><circle cx="40" cy="40" r="36" fill="none" stroke="#2bb8d9" stroke-width="1.5" opacity=".5"/><circle cx="40" cy="40" r="20" fill="#2bb8d9" opacity=".15"/></svg></div>
+  <div class="hero-shape s2"><svg width="50" height="50" viewBox="0 0 50 50"><rect x="5" y="5" width="40" height="40" fill="none" stroke="#4cd8e8" stroke-width="1.5" opacity=".6" transform="rotate(15 25 25)"/></svg></div>
+  <div class="hero-shape s3"><svg width="60" height="60" viewBox="0 0 60 60"><polygon points="30,5 55,50 5,50" fill="none" stroke="#7ee4f0" stroke-width="1.5" opacity=".6"/></svg></div>
+
   <div class="hero-content">
-    <div class="hero-eyebrow">SUNPRO SYSTEM — Since 2000 / 広島</div>
+    <div class="hero-badge">SUNPRO SYSTEM — Since 2000</div>
     <h1 class="hero-h1">
-      <div class="line"><span>"確かな技術" と</span></div>
-      <div class="line"><span>"<span class="accent">こだわりのモノづくり</span>"</span></div>
+      <div class="line"><span>"確かな技術"と</span></div>
+      <div class="line"><span>"<span class="em">こだわりのモノづくり</span>"</span></div>
     </h1>
     <p class="hero-sub">
       機械設計・制御設計・開発設備生産。<br>
@@ -921,23 +504,23 @@ footer{
       少数精鋭のエンジニアリングカンパニー。
     </p>
     <div class="hero-ctas">
-      <a href="#business" class="btn-primary">事業内容を見る <span class="arrow"></span></a>
-      <a href="#contact" class="btn-outline">お問い合わせ <span class="arrow"></span></a>
+      <a href="business.html" class="btn btn-primary magnetic">事業を見る<span class="arrow"></span></a>
+      <a href="contact.html" class="btn btn-outline magnetic">お問い合わせ<span class="arrow"></span></a>
     </div>
   </div>
 
-  <div class="hero-slide-info">
-    <div class="hero-pager" id="pager">
-      <div class="hero-pager-dot active" data-idx="0"></div>
-      <div class="hero-pager-dot" data-idx="1"></div>
-      <div class="hero-pager-dot" data-idx="2"></div>
-      <div class="hero-pager-dot" data-idx="3"></div>
+  <div class="hero-meta">
+    <div class="hero-pager">
+      <div class="hero-pager-dot active"></div>
+      <div class="hero-pager-dot"></div>
+      <div class="hero-pager-dot"></div>
+      <div class="hero-pager-dot"></div>
     </div>
     <div class="hero-pager-num"><strong id="cidx">01</strong> / 04</div>
   </div>
 
   <div class="scroll-ind">
-    <div class="scroll-line"></div>
+    <div class="scroll-mouse"></div>
     <span>scroll</span>
   </div>
 </section>
@@ -945,172 +528,160 @@ footer{
 <!-- MARQUEE -->
 <div class="marquee-section">
   <div class="marquee-track">
-    <span>機械設計・製作</span><span class="m-gold">／</span>
-    <span>制御設計・製作</span><span class="m-gold">／</span>
-    <span>開発設備生産</span><span class="m-gold">／</span>
-    <span>ワンストップ対応</span><span class="m-gold">／</span>
-    <span>ISO 9001 : 2015</span><span class="m-gold">／</span>
-    <span>3Dプリンタ モデリング製作</span><span class="m-gold">／</span>
-    <span>電磁誘導加熱応用機器</span><span class="m-gold">／</span>
-    <span>ロボット教室</span><span class="m-gold">／</span>
-    <span>広島ドラゴンフライズ ゴールドパートナー</span><span class="m-gold">／</span>
-    <span>機械設計・製作</span><span class="m-gold">／</span>
-    <span>制御設計・製作</span><span class="m-gold">／</span>
-    <span>開発設備生産</span><span class="m-gold">／</span>
-    <span>ワンストップ対応</span><span class="m-gold">／</span>
-    <span>ISO 9001 : 2015</span><span class="m-gold">／</span>
-    <span>3Dプリンタ モデリング製作</span><span class="m-gold">／</span>
-    <span>電磁誘導加熱応用機器</span><span class="m-gold">／</span>
-    <span>ロボット教室</span><span class="m-gold">／</span>
-    <span>広島ドラゴンフライズ ゴールドパートナー</span><span class="m-gold">／</span>
+    <span>機械設計・製作</span><span class="dot">●</span>
+    <span>制御設計・製作</span><span class="dot">●</span>
+    <span>開発設備生産</span><span class="dot">●</span>
+    <span>ワンストップ対応</span><span class="dot">●</span>
+    <span>ISO 9001:2015</span><span class="dot">●</span>
+    <span>少数精鋭</span><span class="dot">●</span>
+    <span>ロボット教室</span><span class="dot">●</span>
+    <span>広島ドラゴンフライズ ゴールドパートナー</span><span class="dot">●</span>
+    <span>機械設計・製作</span><span class="dot">●</span>
+    <span>制御設計・製作</span><span class="dot">●</span>
+    <span>開発設備生産</span><span class="dot">●</span>
+    <span>ワンストップ対応</span><span class="dot">●</span>
+    <span>ISO 9001:2015</span><span class="dot">●</span>
+    <span>少数精鋭</span><span class="dot">●</span>
+    <span>ロボット教室</span><span class="dot">●</span>
+    <span>広島ドラゴンフライズ ゴールドパートナー</span><span class="dot">●</span>
   </div>
 </div>
 
-<!-- ══════ PHILOSOPHY ══════ -->
+<!-- PHILOSOPHY -->
 <section id="philosophy">
-  <div class="philo-inner">
-    <div class="philo-text">
-      <p class="s-label r">Philosophy</p>
-      <div class="s-en r">VISION</div>
-      <div class="philo-quote r d1">
-        広島から、<br>
-        日本のものづくりを<br>
-        <span>支える。</span>
-      </div>
-      <p class="philo-desc r d2">
-        2000年の創業以来、私たちは「確かな技術」と「こだわりのモノづくり」を信条に、
-        お客様一人ひとりの課題に真摯に向き合ってきました。
-        機械・制御・開発設備の領域で培った技術と少数精鋭の柔軟性で、
-        これからも広島のものづくりを支え続けます。
-      </p>
-      <div class="r d3" style="margin-top:2rem">
-        <a href="#about" class="btn-outline">企業について <span class="arrow"></span></a>
-      </div>
-    </div>
-
-    <div class="philo-visual">
-      <div class="philo-img philo-img-1 r-r clip-reveal">
-        <div class="philo-tag">Mechanical</div>
-        <img src="https://sunprosys.co.jp/cont/wp-content/themes/sunpro_theme/img/top/top04_about.jpg" alt="サンプロシステム 工場">
-        <div class="philo-num-badge">
-          <div class="n">2000</div>
-          <div class="t">創業年<br>EST.</div>
+  <div class="float-bg"><div class="float-shape s1"></div><div class="float-shape s2"></div></div>
+  <div class="container">
+    <div class="philo-inner">
+      <div>
+        <p class="s-label r">Philosophy</p>
+        <div class="s-en r">VISION</div>
+        <h2 class="s-h2 r d1">広島から、<br>日本のものづくりを<br><span class="em">支える。</span></h2>
+        <p class="philo-desc r d2">
+          2000年の創業以来、私たちは「確かな技術」と「こだわりのモノづくり」を信条に、
+          お客様一人ひとりの課題に真摯に向き合ってきました。
+          機械・制御・開発設備の領域で培った技術と少数精鋭の柔軟性で、
+          これからも広島のものづくりを支え続けます。
+        </p>
+        <div class="r d3" style="margin-top:2rem">
+          <a href="about.html" class="btn btn-ghost">私たちの想いを見る<span class="arrow"></span></a>
         </div>
       </div>
-      <div class="philo-img philo-img-2 r-r d2 clip-reveal">
-        <img src="https://sunprosys.co.jp/cont/wp-content/themes/sunpro_theme/img/top/main_image02.jpg" alt="サンプロシステム 技術">
+      <div class="philo-visual">
+        <div class="philo-img philo-img-1 r-r clip-reveal">
+          <img src="https://sunprosys.co.jp/cont/wp-content/themes/sunpro_theme/img/top/top04_about.jpg" alt="サンプロシステム 社屋">
+        </div>
+        <div class="philo-img philo-img-2 r-r d2 clip-reveal">
+          <img src="https://sunprosys.co.jp/cont/wp-content/themes/sunpro_theme/img/top/main_image02.jpg" alt="サンプロシステム 技術">
+        </div>
+        <div class="philo-badge philo-badge-1 r d3">
+          <div class="n">2000</div><div class="t">創業<br>EST.</div>
+        </div>
+        <div class="philo-badge philo-badge-2 r d4">
+          <div class="n">ISO</div><div class="t">9001:2015<br>認証取得</div>
+        </div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ══════ BUSINESS ══════ -->
-<section id="business">
-  <div class="biz-head">
-    <p class="s-label r">Business</p>
-    <div class="s-en r">SERVICES</div>
+<!-- BUSINESS PREVIEW -->
+<section id="business-preview">
+  <div class="float-bg"><div class="float-shape s3"></div></div>
+  <div class="container">
     <div class="biz-head-row">
-      <h2 class="s-h2 r d1">3つの軸で、<br>製造現場を革新する。</h2>
-      <p class="desc r d2">
-        部品組立設備・検査設備・自動組立設備の設計制作から、
+      <div>
+        <p class="s-label r">Business</p>
+        <div class="s-en r">SERVICES</div>
+        <h2 class="s-h2 r d1">3つの軸で、<br>製造現場を<span class="em">革新する。</span></h2>
+      </div>
+      <p class="s-desc r d2" style="max-width:380px">
+        部品組立設備、検査設備、自動組立設備の設計制作から、
         マイコン・パソコンシステム、3Dプリンタモデリング、
         電磁誘導加熱機器まで。幅広い領域でお客様をサポートします。
       </p>
     </div>
-  </div>
-  <div class="biz-list">
-
-    <div class="biz-item r">
-      <div class="biz-img">
-        <img src="https://sunprosys.co.jp/cont/wp-content/themes/sunpro_theme/img/top/top02_image01.jpg" alt="機械設計・製作">
-      </div>
-      <div class="biz-overlay"></div>
-      <div class="biz-num">01 / 03</div>
-      <div class="biz-content">
-        <div class="biz-cat">Service 01</div>
-        <h3 class="biz-h3">機械設計・<br>製作</h3>
-        <p class="biz-p">部品組立設備、検査設備、自動部品組立設備など、お客様のニーズに合わせた機械の設計・製作。3Dプリンタによるモデリングや部品洗浄乾燥器など、幅広い分野に対応します。</p>
-        <div class="biz-arrow">View More <span class="arrow"></span></div>
-      </div>
+    <div class="biz-grid">
+      <a href="business.html" class="biz-card tilt r">
+        <div class="biz-card-img">
+          <img src="https://sunprosys.co.jp/cont/wp-content/themes/sunpro_theme/img/top/top02_image01.jpg" alt="機械設計・製作">
+        </div>
+        <div class="biz-card-num">01 / 03</div>
+        <div class="biz-card-body">
+          <div class="biz-card-cat">Service 01</div>
+          <h3>機械設計・製作</h3>
+          <p>自動車部品組立装置・検査機の設計が強み。3D CAD（SOLIDWORKS）で構想から詳細設計、ロボット軌跡解析まで対応。</p>
+          <div class="biz-card-arrow">VIEW DETAIL <span class="arrow"></span></div>
+        </div>
+      </a>
+      <a href="business.html" class="biz-card tilt r d2">
+        <div class="biz-card-img">
+          <img src="https://sunprosys.co.jp/cont/wp-content/themes/sunpro_theme/img/top/top02_image02.jpg" alt="制御設計・製作">
+        </div>
+        <div class="biz-card-num">02 / 03</div>
+        <div class="biz-card-body">
+          <div class="biz-card-cat">Service 02</div>
+          <h3>制御設計・製作</h3>
+          <p>機械の性能を限界まで引き出す制御回路設計とソフト開発。PLC・マイコン基板開発、C/C#/VB対応。</p>
+          <div class="biz-card-arrow">VIEW DETAIL <span class="arrow"></span></div>
+        </div>
+      </a>
+      <a href="business.html" class="biz-card tilt r d3">
+        <div class="biz-card-img">
+          <img src="https://sunprosys.co.jp/cont/wp-content/themes/sunpro_theme/img/top/top02_image03.jpg" alt="開発設備生産">
+        </div>
+        <div class="biz-card-num">03 / 03</div>
+        <div class="biz-card-body">
+          <div class="biz-card-cat">Service 03</div>
+          <h3>開発設備生産</h3>
+          <p>特殊仕様対応の専用基板開発。電磁誘導ウェルダ、レーザー印字機、気密検査機など多数の実績。</p>
+          <div class="biz-card-arrow">VIEW DETAIL <span class="arrow"></span></div>
+        </div>
+      </a>
     </div>
-
-    <div class="biz-item r d2">
-      <div class="biz-img">
-        <img src="https://sunprosys.co.jp/cont/wp-content/themes/sunpro_theme/img/top/top02_image02.jpg" alt="制御設計・製作">
-      </div>
-      <div class="biz-overlay"></div>
-      <div class="biz-num">02 / 03</div>
-      <div class="biz-content">
-        <div class="biz-cat">Service 02</div>
-        <h3 class="biz-h3">制御設計・<br>製作</h3>
-        <p class="biz-p">マイコン・パソコンシステムの設計・製作。PLC・HMI・モーション制御までトータルで対応。お客様の生産現場に最適な制御ソリューションを提供します。</p>
-        <div class="biz-arrow">View More <span class="arrow"></span></div>
-      </div>
-    </div>
-
-    <div class="biz-item r d3">
-      <div class="biz-img">
-        <img src="https://sunprosys.co.jp/cont/wp-content/themes/sunpro_theme/img/top/top02_image03.jpg" alt="開発設備生産">
-      </div>
-      <div class="biz-overlay"></div>
-      <div class="biz-num">03 / 03</div>
-      <div class="biz-content">
-        <div class="biz-cat">Service 03</div>
-        <h3 class="biz-h3">開発設備<br>生産</h3>
-        <p class="biz-p">電磁誘導加熱による応用機器など、独自技術を活かした開発設備の生産。試作から量産ラインまで、お客様の開発・生産プロセスを強力にサポートします。</p>
-        <div class="biz-arrow">View More <span class="arrow"></span></div>
-      </div>
-    </div>
-
   </div>
 </section>
 
-<!-- ══════ INFOGRAPHICS ══════ -->
+<!-- INFOGRAPHICS -->
 <section id="info">
-  <div class="info-head r">
-    <p class="s-label">Infographics</p>
-    <h2 class="s-h2">数字で見る<br>サンプロシステム</h2>
-    <p>創業から20年以上、確かな技術と実績で日本のものづくりを支えています。</p>
-  </div>
-  <div class="info-grid">
-    <div class="info-cell r" data-target="2000">
-      <div class="info-icon">📅</div>
-      <div class="info-num"><span class="count">0</span></div>
-      <div class="info-divider"></div>
-      <div class="info-label">創業年<br>EST. 2000</div>
+  <div class="container">
+    <div class="info-head">
+      <p class="s-label r">Infographics</p>
+      <h2 class="s-h2 r d1">数字で見る<br><span class="em">サンプロシステム</span></h2>
+      <p class="s-desc r d2" style="margin-top:1.2rem">創業から20年以上、確かな技術と実績で日本のものづくりを支えています。</p>
     </div>
-    <div class="info-cell r d1" data-target="17">
-      <div class="info-icon">👥</div>
-      <div class="info-num"><span class="count">0</span><span class="info-unit">名</span></div>
-      <div class="info-divider"></div>
-      <div class="info-label">従業員数<br>少数精鋭チーム</div>
-    </div>
-    <div class="info-cell r d2" data-target="2000">
-      <div class="info-icon">💴</div>
-      <div class="info-num"><span class="count">0</span><span class="info-unit">万円</span></div>
-      <div class="info-divider"></div>
-      <div class="info-label">資本金<br>Capital Stock</div>
-    </div>
-    <div class="info-cell r d3">
-      <div class="info-icon">🏆</div>
-      <div class="info-num">ISO</div>
-      <div class="info-divider"></div>
-      <div class="info-label">9001:2015<br>認証取得</div>
+    <div class="info-grid">
+      <div class="info-cell r">
+        <div class="info-icon">📅</div>
+        <div class="info-num" data-count="2000">0</div>
+        <div class="info-label">創業年<br>Est. 2000</div>
+      </div>
+      <div class="info-cell r d1">
+        <div class="info-icon">👥</div>
+        <div class="info-num" data-count="17" data-suffix="名">0</div>
+        <div class="info-label">従業員<br>少数精鋭</div>
+      </div>
+      <div class="info-cell r d2">
+        <div class="info-icon">💴</div>
+        <div class="info-num" data-count="2000" data-suffix="万">0</div>
+        <div class="info-label">資本金<br>Capital</div>
+      </div>
+      <div class="info-cell r d3">
+        <div class="info-icon">🏆</div>
+        <div class="info-num">ISO<span class="info-unit"> 9001</span></div>
+        <div class="info-label">2015認証<br>取得済み</div>
+      </div>
     </div>
   </div>
 </section>
 
-<!-- ══════ PARALLAX 1 ══════ -->
+<!-- PARALLAX -->
 <div class="par-section">
-  <div class="par-bg" id="pbg1" style="background-image:url('https://sunprosys.co.jp/cont/wp-content/themes/sunpro_theme/img/top/main_image03.jpg')"></div>
+  <div class="par-bg" data-parallax="0.25" style="background-image:url('https://sunprosys.co.jp/cont/wp-content/themes/sunpro_theme/img/top/main_image03.jpg')"></div>
   <div class="par-overlay"></div>
-  <div class="par-content r">
-    <p class="s-label">Strength</p>
-    <div class="par-quote">
-      少数精鋭だから、
-      <span>できることがある。</span>
-    </div>
-    <p class="par-p">
+  <div class="par-content">
+    <p class="s-label r">Strength</p>
+    <h2 class="par-quote r d1">少数精鋭だから、<br><span class="em">できることがある。</span></h2>
+    <p class="r d2">
       大企業では難しい柔軟かつ迅速な対応。
       お客様の課題に対し、一つひとつ全力で向き合うプロフェッショナルチーム。
       自動車・半導体・住宅機器など、幅広い業界の信頼に応えています。
@@ -1118,483 +689,236 @@ footer{
   </div>
 </div>
 
-<!-- ══════ ROBOT EDUCATION ══════ -->
+<!-- ROBOT -->
 <section id="robot">
-  <div class="robot-inner">
-    <div class="robot-visual">
-      <div class="robot-img-main r-l clip-reveal">
-        <div class="robot-tag">Education</div>
-        <img src="https://sunprosys.co.jp/cont/wp-content/themes/sunpro_theme/img/top/top03_hdg.jpg" alt="ロボット教室">
-      </div>
-      <div class="robot-img-sub r-l d2">
-        <div class="robot-glow"></div>
-        <div class="robot-emoji">🤖</div>
-      </div>
-    </div>
-
-    <div class="robot-text">
-      <p class="s-label r">Education</p>
-      <div class="s-en r">ROBOT</div>
-      <h2 class="s-h2 r d1">未来をつくる、<br>子どもたちと共に。</h2>
-      <div class="robot-motto r d2">"好きは才能！"</div>
-      <p class="robot-desc r d3">
-        社会貢献の一環として、社内でロボット教室を開催。
-        遊びながら、考える力・観察する力・創造する力を育みます。
-        年齢・レベルに合わせた3つのコースをご用意しています。
-      </p>
-
-      <div class="robot-courses">
-        <div class="r-course r d3">
-          <div class="r-course-n">01</div>
-          <div class="r-course-info">
-            <h4>ロボット教室</h4>
-            <p>幼稚園〜対象。遊びを通してロボットの仕組みを楽しく学びます。</p>
-          </div>
+  <div class="float-bg"><div class="float-shape s1"></div></div>
+  <div class="container">
+    <div class="robot-inner">
+      <div class="robot-visual">
+        <div class="robot-img-main r-l clip-reveal">
+          <img src="https://sunprosys.co.jp/cont/wp-content/themes/sunpro_theme/img/top/top03_hdg.jpg" alt="ロボット教室">
         </div>
-        <div class="r-course r d4">
-          <div class="r-course-n">02</div>
-          <div class="r-course-info">
-            <h4>プログラミング教室</h4>
-            <p>小学1年生〜対象。論理的思考力を育む入門コース。</p>
-          </div>
-        </div>
-        <div class="r-course r d5">
-          <div class="r-course-n">03</div>
-          <div class="r-course-info">
-            <h4>ロボプロフェッサー</h4>
-            <p>小学6年生〜対象。本格的なロボット制作・プログラミングに挑戦。</p>
-          </div>
+        <div class="robot-img-sub r-l d2">
+          <div class="robot-emoji">🤖</div>
         </div>
       </div>
-
-      <div class="r d5" style="margin-top:2.5rem">
-        <a href="#contact" class="btn-primary">教室について問い合わせる <span class="arrow"></span></a>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ══════ ABOUT ══════ -->
-<section id="about">
-  <div class="about-inner">
-    <div class="about-img r-l clip-reveal">
-      <img src="https://sunprosys.co.jp/cont/wp-content/themes/sunpro_theme/img/top/top04_about.jpg" alt="サンプロシステム 社屋">
-    </div>
-    <div class="about-text">
-      <p class="s-label r">About Us</p>
-      <div class="s-en r">COMPANY</div>
-      <h2 class="about-big r d1">
-        確かな技術と、<br>
-        <span class="g">こだわりの精神。</span>
-      </h2>
-      <p class="about-desc r d2">
-        2000年の設立から、私たちは広島の地で機械・制御・開発設備を専門に
-        モノづくりに携わってきました。お客様との対話を大切にし、
-        一品一様の最適解を追求。これからも"確かな技術"を提供し続けます。
-      </p>
-      <div class="about-features">
-        <div class="af-item r d2">
-          <div class="af-num">01</div>
-          <h4>ワンストップ対応</h4>
-          <p>開発・設計・製作・設置まで一社で完結。窓口がシンプル。</p>
+      <div>
+        <p class="s-label r">Education</p>
+        <div class="s-en r">ROBOT</div>
+        <h2 class="s-h2 r d1">未来をつくる、<br>子どもたちと共に。</h2>
+        <div class="robot-motto r d2">"好きは才能！"</div>
+        <p class="robot-desc r d3">
+          社会貢献の一環として、社内でロボット教室を開催。
+          遊びながら、考える力・観察する力・創造する力を育みます。
+          年齢・レベルに合わせた3つのコースをご用意。
+        </p>
+        <div class="robot-courses">
+          <div class="r-course r d3"><div class="r-course-n">01</div><div><h4>ロボット教室</h4><p>幼稚園〜対象。ブロックでイメージをカタチに。想像力と感性を育みます。</p></div></div>
+          <div class="r-course r d4"><div class="r-course-n">02</div><div><h4>こどもプログラミング教室</h4><p>小学1年生〜対象。考える力・論理的思考を段階的に学ぶ。</p></div></div>
+          <div class="r-course r d5"><div class="r-course-n">03</div><div><h4>ロボティクスプロフェッサー教室</h4><p>小学6年生〜対象。C言語でロボット制御に挑戦。</p></div></div>
         </div>
-        <div class="af-item r d3">
-          <div class="af-num">02</div>
-          <h4>ISO9001:2015</h4>
-          <p>国際品質マネジメントシステム認証取得。</p>
-        </div>
-        <div class="af-item r d4">
-          <div class="af-num">03</div>
-          <h4>少数精鋭</h4>
-          <p>17名のプロフェッショナルがフレキシブルに対応。</p>
-        </div>
-        <div class="af-item r d5">
-          <div class="af-num">04</div>
-          <h4>幅広い実績</h4>
-          <p>自動車・半導体・住宅機器など多分野で実績多数。</p>
+        <div class="r d6" style="margin-top:2.5rem">
+          <a href="robot.html" class="btn btn-primary magnetic">教室の詳細を見る<span class="arrow"></span></a>
         </div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ══════ COMPANY DETAIL ══════ -->
-<section id="company-detail">
-  <div class="cd-inner">
-    <p class="s-label r">Company Profile</p>
-    <h2 class="s-h2 r">会社概要</h2>
-    <dl class="cd-table">
-      <div class="cd-row r"><dt>Company</dt><dd><strong>株式会社サンプロシステム</strong></dd></div>
-      <div class="cd-row r"><dt>Representative</dt><dd>代表取締役 <strong>奥野 真市</strong></dd></div>
-      <div class="cd-row r"><dt>Founded</dt><dd>2000年</dd></div>
-      <div class="cd-row r"><dt>Capital</dt><dd>2,000万円</dd></div>
-      <div class="cd-row r"><dt>Employees</dt><dd>17名（男性15名 / 女性2名）</dd></div>
-      <div class="cd-row r"><dt>Address</dt><dd>〒733-0822<br>広島県広島市西区庚午中3丁目13-6</dd></div>
-      <div class="cd-row r"><dt>Contact</dt><dd>TEL: <strong>082-507-1067</strong> ／ FAX: 082-507-1065</dd></div>
-      <div class="cd-row r"><dt>Business</dt><dd>
-        ・部品組立設備・検査設備・自動部品組立設備の設計制作<br>
-        ・マイコン・パソコンシステムの設計・製作<br>
-        ・3Dプリンタによるモデリング製作<br>
-        ・部品洗浄乾燥器の製造<br>
-        ・電磁誘導加熱による応用機器
-      </dd></div>
-      <div class="cd-row r"><dt>Clients</dt><dd>国内外の自動車関連メーカー工場、半導体関連メーカー、住宅機器メーカー 他</dd></div>
-      <div class="cd-row r"><dt>Certification</dt><dd><strong>ISO9001:2015</strong> 認証取得</dd></div>
-      <div class="cd-row r"><dt>History</dt><dd>
-        <ul class="cd-history">
-          <li><span>2000</span>株式会社サンプロシステム 設立</li>
-          <li><span>2015</span>新社屋完成</li>
-          <li><span>2017</span>タイトウ工業株式会社と技術提携</li>
-          <li><span>現在</span>ロボット教室を社内で開催</li>
-        </ul>
-      </dd></div>
-    </dl>
-  </div>
-</section>
-
-<!-- ══════ GROUP / PARTNERS ══════ -->
+<!-- PARTNERS -->
 <section id="partners">
-  <div class="partners-inner">
-    <div class="partners-head">
+  <div class="container">
+    <div class="part-head">
       <p class="s-label r">Group & Partners</p>
-      <h2 class="s-h2 r">グループ企業・<br>パートナー</h2>
+      <h2 class="s-h2 r d1">信頼の<span class="em">ネットワーク</span></h2>
     </div>
-
-    <div class="partners-grid">
-      <div class="partner-card r">
-        <div class="partner-logo">
-          <img src="https://sunprosys.co.jp/cont/wp-content/themes/sunpro_theme/img/common/f-logo01.png" alt="タイトウ工業">
-        </div>
-        <div class="partner-info">
-          <div class="pc-tag">Group Company</div>
+    <div class="part-grid">
+      <div class="part-card r tilt">
+        <div class="part-logo"><img src="https://sunprosys.co.jp/cont/wp-content/themes/sunpro_theme/img/common/f-logo01.png" alt="タイトウ工業"></div>
+        <div class="part-info">
+          <div class="tag">Group Company</div>
           <h4>タイトウ工業株式会社</h4>
-          <p>海苔加工機の製造メーカー。長年にわたる食品機械製造の専門ノウハウを保有。</p>
-          <a href="http://www.taitou.jp/" target="_blank">taitou.jp →</a>
+          <p>海苔加工機の製造メーカー。食品機械製造の専門ノウハウを保有。</p>
+          <a href="http://www.taitou.jp/" target="_blank" rel="noopener">taitou.jp →</a>
         </div>
       </div>
-      <div class="partner-card r d1">
-        <div class="partner-logo">
-          <img src="https://sunprosys.co.jp/cont/wp-content/themes/sunpro_theme/img/common/f-logo02.png" alt="アイエスティ">
-        </div>
-        <div class="partner-info">
-          <div class="pc-tag">Group Company</div>
+      <div class="part-card r d1 tilt">
+        <div class="part-logo"><img src="https://sunprosys.co.jp/cont/wp-content/themes/sunpro_theme/img/common/f-logo02.png" alt="アイエスティ"></div>
+        <div class="part-info">
+          <div class="tag">Group Company</div>
           <h4>株式会社アイエスティ</h4>
-          <p>グループ企業として連携し、お客様により幅広い技術サービスを提供します。</p>
-          <a href="https://istsys.co.jp/" target="_blank">istsys.co.jp →</a>
+          <p>グループ企業として連携し、幅広い技術サービスを提供。</p>
+          <a href="https://istsys.co.jp/" target="_blank" rel="noopener">istsys.co.jp →</a>
         </div>
       </div>
     </div>
-
-    <div class="sponsor-banner r">
+    <div class="sponsor-banner r d2">
       <img src="https://sunprosys.co.jp/cont/wp-content/themes/sunpro_theme/img/top/bnr_dragonfly_pc.png" alt="広島ドラゴンフライズ">
-      <div class="sb-text">
-        <div class="sb-tag">Gold Partner</div>
+      <div>
+        <div class="tag">Gold Partner</div>
         <strong>広島ドラゴンフライズ</strong>
         <p>B.LEAGUE所属の広島男子バスケットボールチームのゴールドパートナーとして、地域スポーツを応援しています。</p>
-        <a href="https://hiroshimadragonflies.com/" target="_blank" style="color:var(--accent);font-size:.72rem;margin-top:.5rem;display:inline-block;letter-spacing:.1em">hiroshimadragonflies.com →</a>
       </div>
     </div>
-
-    <div class="iso-banner r">
+    <div class="iso-banner r d3">
       <div class="iso-label">ISO 9001</div>
       <div class="iso-text">
         <strong>品質マネジメントシステム ISO9001:2015 認証取得</strong>
-        <p>国際規格に準拠した品質管理体制を構築・維持。お客様への高品質なサービス提供を品質システムが支えます。</p>
+        <p>国際規格に準拠した品質管理体制を構築。お客様への高品質サービスを支えます。</p>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ══════ NEWS ══════ -->
+<!-- NEWS -->
 <section id="news">
-  <div class="news-inner">
+  <div class="container">
     <div class="news-head">
       <div>
         <p class="s-label r">News</p>
-        <h2 class="s-h2 r">お知らせ</h2>
+        <h2 class="s-h2 r d1">お知らせ</h2>
       </div>
-      <a href="https://sunprosys.co.jp/info" target="_blank" class="btn-outline r d1" style="font-size:.7rem;padding:.7rem 1.6rem">すべて見る <span class="arrow"></span></a>
+      <a href="news.html" class="btn btn-ghost r d2">すべて見る<span class="arrow"></span></a>
     </div>
-    <div class="news-list">
-      <div class="news-item r">
+    <div class="news-list r">
+      <div class="news-item">
         <span class="news-date">2024.03.15</span>
         <span class="news-cat">お知らせ</span>
-        <span class="news-title">ISO9001:2015 認証 更新審査に合格いたしました</span>
+        <span class="news-title">ISO9001:2015 認証 更新審査に合格しました</span>
         <span class="news-arrow">→</span>
       </div>
-      <div class="news-item r d1">
+      <div class="news-item">
         <span class="news-date">2024.02.20</span>
         <span class="news-cat">教育</span>
         <span class="news-title">2024年度 ロボット教室・プログラミング教室 新規受講生募集中</span>
         <span class="news-arrow">→</span>
       </div>
-      <div class="news-item r d2">
+      <div class="news-item">
         <span class="news-date">2024.01.10</span>
         <span class="news-cat">スポーツ</span>
         <span class="news-title">広島ドラゴンフライズ ゴールドパートナー契約継続のお知らせ</span>
         <span class="news-arrow">→</span>
       </div>
-      <div class="news-item r d3">
+      <div class="news-item">
         <span class="news-date">2023.11.01</span>
         <span class="news-cat">採用</span>
         <span class="news-title">2024年度 新卒採用エントリー受付を開始しました</span>
         <span class="news-arrow">→</span>
       </div>
-      <div class="news-item r d4">
-        <span class="news-date">2023.09.20</span>
-        <span class="news-cat">事業</span>
-        <span class="news-title">電磁誘導加熱機器の新製品リリースのお知らせ</span>
-        <span class="news-arrow">→</span>
+    </div>
+  </div>
+</section>
+
+<!-- RECRUIT CTA -->
+<section id="recruit-cta">
+  <div class="container">
+    <div class="recruit-inner">
+      <div>
+        <p class="s-label r">Recruit</p>
+        <h2 class="s-h2 r d1">ともに、<br>ものづくりを。</h2>
+        <p class="r d2">
+          少数精鋭のチームで、一人ひとりが大きな役割を担います。
+          技術への情熱と、新しいことに挑戦する仲間を募集しています。
+        </p>
+        <div class="r d3">
+          <a href="recruit.html" class="btn btn-primary magnetic" style="background:#fff;color:var(--primary)">採用情報を見る<span class="arrow"></span></a>
+        </div>
+      </div>
+      <div class="recruit-stats">
+        <div class="r-stat r d2"><div class="n" data-count="17" data-suffix="名">0</div><div class="l">少数精鋭チーム</div></div>
+        <div class="r-stat r d3"><div class="n">★★★</div><div class="l">学習支援充実</div></div>
+        <div class="r-stat r d4"><div class="n">●●●</div><div class="l">ワークライフ<br>バランス</div></div>
+        <div class="r-stat r d5"><div class="n">広島</div><div class="l">広々とした社屋</div></div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ══════ RECRUIT ══════ -->
-<section id="recruit">
-  <div class="recruit-bg" id="rbg" style="background-image:url('https://sunprosys.co.jp/cont/wp-content/themes/sunpro_theme/img/top/top04_recruit.jpg')"></div>
-  <div class="recruit-overlay"></div>
-  <div class="recruit-content">
-    <p class="s-label r">Recruit</p>
-    <div class="s-en r">JOIN US</div>
-    <h2 class="s-h2 r d1">ともに、<br>ものづくりを。</h2>
-    <p class="r d2">
-      少数精鋭のチームで、一人ひとりが大きな役割を担います。<br>
-      技術への情熱と、新しいことに挑戦する仲間を募集しています。
-    </p>
-    <div class="r d3">
-      <a href="https://sunprosys.co.jp/recruit" target="_blank" class="btn-primary">採用情報を見る <span class="arrow"></span></a>
-    </div>
-  </div>
-</section>
-
-<!-- ══════ CONTACT ══════ -->
-<section id="contact">
-  <div class="contact-inner">
-    <p class="s-label r">Contact</p>
-    <div class="s-en r">CONTACT</div>
-    <h2 class="s-h2 r d1">まずは、<br>ご相談ください。</h2>
-    <p class="desc r d2">
-      機械・制御・開発設備に関するご相談から、<br>
-      ロボット教室・採用・グループ会社へのお問い合わせまで、<br>
-      専門スタッフが丁寧にご対応します。
-    </p>
-    <div class="contact-btns r d3">
-      <a href="mailto:info@sunprosys.co.jp" class="btn-primary">メールで問い合わせる <span class="arrow"></span></a>
-      <a href="tel:0825071067" class="btn-outline">📞 082-507-1067</a>
-    </div>
-    <div class="contact-info">
-      <div class="ci-item r d2">
-        <div class="ci-label">Phone</div>
-        <div class="ci-val">082-507-1067</div>
-        <div class="ci-sub">受付時間 9:00 - 17:00</div>
+<!-- CONTACT CTA -->
+<section id="contact-cta">
+  <div class="container">
+    <div class="contact-cta-inner">
+      <p class="s-label r">Contact</p>
+      <h2 class="s-h2 r d1">まずは、<br><span class="em">ご相談ください。</span></h2>
+      <p class="r d2">
+        機械・制御・開発設備に関するご相談から、<br>
+        ロボット教室・採用・その他のお問い合わせまで、<br>
+        専門スタッフが丁寧にご対応します。
+      </p>
+      <div class="contact-cta-btns r d3">
+        <a href="contact.html" class="btn btn-primary magnetic">お問い合わせフォーム<span class="arrow"></span></a>
+        <a href="tel:0825071067" class="btn btn-outline magnetic">📞 082-507-1067</a>
       </div>
-      <div class="ci-item r d3">
-        <div class="ci-label">Fax</div>
-        <div class="ci-val">082-507-1065</div>
-        <div class="ci-sub">24時間受付</div>
-      </div>
-      <div class="ci-item r d4">
-        <div class="ci-label">Address</div>
-        <div class="ci-val" style="font-size:.86rem">広島県広島市西区<br>庚午中3丁目13-6</div>
-        <div class="ci-sub">〒733-0822</div>
+      <div class="contact-info">
+        <div class="ci-item r d2">
+          <div class="ci-icon">📞</div>
+          <div class="ci-label">Tel</div>
+          <div class="ci-val">082-507-1067</div>
+          <div class="ci-sub">受付 9:00 - 17:00</div>
+        </div>
+        <div class="ci-item r d3">
+          <div class="ci-icon">📠</div>
+          <div class="ci-label">Fax</div>
+          <div class="ci-val">082-507-1065</div>
+          <div class="ci-sub">24時間受付</div>
+        </div>
+        <div class="ci-item r d4">
+          <div class="ci-icon">📍</div>
+          <div class="ci-label">Address</div>
+          <div class="ci-val" style="font-size:.85rem">広島県広島市西区<br>庚午中3丁目13-6</div>
+          <div class="ci-sub">〒733-0822</div>
+        </div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ══════ FOOTER ══════ -->
+<!-- FOOTER -->
 <footer>
-  <div class="f-top">
-    <div class="f-brand">
-      <a href="#" class="h-logo">
+  <div class="container">
+    <div class="f-top">
+      <div class="f-brand">
         <img src="https://sunprosys.co.jp/cont/wp-content/themes/sunpro_theme/img/common/h_logo.png" alt="サンプロシステム">
-      </a>
-      <p>"確かな技術" と "こだわりのモノづくり"<br>広島から日本のものづくりを支えるエンジニアリングカンパニー。</p>
-      <div class="f-addr">〒733-0822 広島県広島市西区庚午中3丁目13-6</div>
-      <div class="f-tel">TEL: 082-507-1067</div>
+        <p>"確かな技術" と "こだわりのモノづくり"<br>広島から日本のものづくりを支える<br>エンジニアリングカンパニー。</p>
+        <div class="f-addr">〒733-0822 広島県広島市西区庚午中3丁目13-6</div>
+        <div class="f-tel">TEL: 082-507-1067</div>
+      </div>
+      <div class="f-col">
+        <h5>Business</h5>
+        <ul>
+          <li><a href="business.html">事業内容</a></li>
+          <li><a href="business.html">機械設計・製作</a></li>
+          <li><a href="business.html">制御設計・製作</a></li>
+          <li><a href="business.html">開発設備生産</a></li>
+          <li><a href="https://cannex.sunprosys.co.jp/" target="_blank" rel="noopener">CANNEX ↗</a></li>
+        </ul>
+      </div>
+      <div class="f-col">
+        <h5>Education</h5>
+        <ul>
+          <li><a href="robot.html">ロボット教室</a></li>
+          <li><a href="robot.html">プログラミング教室</a></li>
+          <li><a href="robot.html">ロボプロフェッサー</a></li>
+        </ul>
+      </div>
+      <div class="f-col">
+        <h5>Company</h5>
+        <ul>
+          <li><a href="about.html">私たちの想い</a></li>
+          <li><a href="company.html">会社情報</a></li>
+          <li><a href="recruit.html">採用情報</a></li>
+          <li><a href="news.html">お知らせ</a></li>
+          <li><a href="contact.html">お問い合わせ</a></li>
+        </ul>
+      </div>
     </div>
-    <div class="f-col">
-      <h5>Business</h5>
-      <ul>
-        <li><a href="https://sunprosys.co.jp/business" target="_blank">事業内容</a></li>
-        <li><a href="#business">機械設計・製作</a></li>
-        <li><a href="#business">制御設計・製作</a></li>
-        <li><a href="#business">開発設備生産</a></li>
-        <li><a href="https://cannex.sunprosys.co.jp/" target="_blank">CANNEX ↗</a></li>
-      </ul>
+    <div class="f-bottom">
+      <p>© 2024 株式会社サンプロシステム. All rights reserved.</p>
+      <p>〒733-0822 広島県広島市西区庚午中3丁目13-6 ｜ TEL: 082-507-1067</p>
     </div>
-    <div class="f-col">
-      <h5>Education</h5>
-      <ul>
-        <li><a href="https://sunprosys.co.jp/robot" target="_blank">ロボット教室</a></li>
-        <li><a href="#robot">プログラミング教室</a></li>
-        <li><a href="#robot">ロボプロフェッサー</a></li>
-      </ul>
-    </div>
-    <div class="f-col">
-      <h5>Company</h5>
-      <ul>
-        <li><a href="https://sunprosys.co.jp/about" target="_blank">企業理念</a></li>
-        <li><a href="https://sunprosys.co.jp/company" target="_blank">会社情報</a></li>
-        <li><a href="https://sunprosys.co.jp/recruit" target="_blank">採用情報</a></li>
-        <li><a href="https://sunprosys.co.jp/info" target="_blank">ニュース</a></li>
-        <li><a href="https://sunprosys.co.jp/blog" target="_blank">ブログ</a></li>
-        <li><a href="https://sunprosys.co.jp/contact" target="_blank">お問い合わせ</a></li>
-      </ul>
-    </div>
-  </div>
-  <div class="f-bottom">
-    <p>© 2024 株式会社サンプロシステム. All rights reserved.</p>
-    <p>〒733-0822 広島県広島市西区庚午中3丁目13-6 ｜ TEL: 082-507-1067</p>
   </div>
 </footer>
 
-
-<!-- ════════════════════════════════
-   JAVASCRIPT
-════════════════════════════════ -->
-<script>
-/* Loader */
-(function(){
-  let n=0;
-  const el=document.getElementById('lnum');
-  const iv=setInterval(()=>{
-    n=Math.min(n+Math.random()*15|0,100);
-    el.textContent=n+'%';
-    if(n>=100){
-      clearInterval(iv);
-      setTimeout(()=>{
-        const ld=document.getElementById('loader');
-        ld.style.transition='opacity .8s';ld.style.opacity='0';
-        setTimeout(()=>{ld.style.display='none';},800);
-      },300);
-    }
-  },50);
-})();
-
-/* Custom cursor */
-if(window.matchMedia('(hover:hover)').matches){
-  const cur=document.getElementById('cursor');
-  const ring=document.getElementById('cursor-ring');
-  let mx=0,my=0,rx=0,ry=0;
-  document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;cur.style.left=mx+'px';cur.style.top=my+'px';});
-  (function ar(){rx+=(mx-rx)*.15;ry+=(my-ry)*.15;ring.style.left=rx+'px';ring.style.top=ry+'px';requestAnimationFrame(ar);})();
-  document.querySelectorAll('a,button,.biz-item,.r-course,.partner-card,.ci-item,.af-item,.hero-pager-dot,.news-item').forEach(el=>{
-    el.addEventListener('mouseenter',()=>{cur.style.transform='translate(-50%,-50%) scale(2.5)';ring.style.width='60px';ring.style.height='60px';});
-    el.addEventListener('mouseleave',()=>{cur.style.transform='translate(-50%,-50%) scale(1)';ring.style.width='40px';ring.style.height='40px';});
-  });
-}
-
-/* Progress line */
-const pline=document.getElementById('pline');
-window.addEventListener('scroll',()=>{
-  const s=document.documentElement.scrollTop;
-  const h=document.documentElement.scrollHeight-window.innerHeight;
-  pline.style.width=(s/h*100)+'%';
-});
-
-/* Header scroll */
-window.addEventListener('scroll',()=>{
-  document.getElementById('hdr').classList.toggle('scrolled',window.scrollY>60);
-});
-
-/* Reveal */
-const revObs=new IntersectionObserver(entries=>{
-  entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('v');});
-},{threshold:0.1});
-document.querySelectorAll('.r,.r-l,.r-r,.r-s,.clip-reveal,.robot-motto').forEach(el=>revObs.observe(el));
-
-/* Counter */
-const countObs=new IntersectionObserver(entries=>{
-  entries.forEach(e=>{
-    if(!e.isIntersecting)return;
-    const cell=e.target;
-    const tgt=parseInt(cell.dataset.target);
-    const ce=cell.querySelector('.count');
-    if(!ce||!tgt)return;
-    let start=null,dur=1800;
-    const step=ts=>{
-      if(!start)start=ts;
-      let p=Math.min((ts-start)/dur,1);
-      let ease=1-Math.pow(1-p,4);
-      ce.textContent=Math.floor(ease*tgt).toLocaleString();
-      if(p<1)requestAnimationFrame(step);
-      else ce.textContent=tgt.toLocaleString();
-    };
-    requestAnimationFrame(step);
-    countObs.unobserve(cell);
-  });
-},{threshold:0.5});
-document.querySelectorAll('[data-target]').forEach(el=>countObs.observe(el));
-
-/* Hero slider */
-(function(){
-  const slides=document.querySelectorAll('.hero-slide');
-  const dots=document.querySelectorAll('.hero-pager-dot');
-  const cidx=document.getElementById('cidx');
-  let cur=0;
-  function go(i){
-    slides[cur].classList.remove('active');
-    dots[cur].classList.remove('active');
-    cur=i;
-    slides[cur].classList.add('active');
-    dots[cur].classList.add('active');
-    cidx.textContent=String(cur+1).padStart(2,'0');
-  }
-  dots.forEach((d,i)=>d.addEventListener('click',()=>go(i)));
-  setInterval(()=>go((cur+1)%slides.length),5000);
-})();
-
-/* Hero canvas - particles */
-(function(){
-  const canvas=document.getElementById('hero-canvas');
-  const ctx=canvas.getContext('2d');
-  let W,H,pts=[],animId;
-  function resize(){W=canvas.width=canvas.offsetWidth;H=canvas.height=canvas.offsetHeight;}
-  class P{
-    constructor(){this.reset();}
-    reset(){this.x=Math.random()*W;this.y=Math.random()*H;this.vx=(Math.random()-.5)*.3;this.vy=(Math.random()-.5)*.3;this.r=Math.random()*1.2+.4;this.a=Math.random()*.5+.2;}
-    update(){this.x+=this.vx;this.y+=this.vy;if(this.x<0||this.x>W||this.y<0||this.y>H)this.reset();}
-    draw(){ctx.beginPath();ctx.arc(this.x,this.y,this.r,0,Math.PI*2);ctx.fillStyle=`rgba(200,164,110,${this.a})`;ctx.fill();}
-  }
-  function init(){
-    resize();pts=[];
-    const c=Math.min(Math.floor(W*H/9000),150);
-    for(let i=0;i<c;i++)pts.push(new P());
-  }
-  function draw(){
-    ctx.clearRect(0,0,W,H);
-    for(let i=0;i<pts.length;i++){
-      for(let j=i+1;j<pts.length;j++){
-        const dx=pts[i].x-pts[j].x,dy=pts[i].y-pts[j].y;
-        const d=Math.sqrt(dx*dx+dy*dy);
-        if(d<120){
-          ctx.beginPath();ctx.moveTo(pts[i].x,pts[i].y);ctx.lineTo(pts[j].x,pts[j].y);
-          ctx.strokeStyle=`rgba(200,164,110,${.12*(1-d/120)})`;ctx.lineWidth=.5;ctx.stroke();
-        }
-      }
-    }
-    pts.forEach(p=>{p.update();p.draw();});
-    animId=requestAnimationFrame(draw);
-  }
-  window.addEventListener('resize',()=>{cancelAnimationFrame(animId);init();draw();});
-  init();draw();
-})();
-
-/* Parallax */
-function par(){
-  const sy=window.scrollY;
-  document.querySelectorAll('.par-bg, .recruit-bg').forEach(bg=>{
-    const sec=bg.parentElement;
-    const r=sec.getBoundingClientRect();
-    if(r.bottom<0||r.top>window.innerHeight)return;
-    const offset=(r.top)*.3;
-    bg.style.transform=`translateY(${offset}px)`;
-  });
-}
-window.addEventListener('scroll',par,{passive:true});
-</script>
-
+<script src="assets/js/main.js"></script>
 </body>
 </html>

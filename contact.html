@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>お問い合わせ | 株式会社サンプロシステム</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700;900&family=Inter:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/style.css">
+<style>
+.contact{padding:clamp(4rem,8vh,7rem) 0;background:#fff;position:relative;overflow:hidden}
+
+.contact-methods{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;margin-bottom:5rem;max-width:980px;margin-left:auto;margin-right:auto}
+.method-card{
+  background:#fff;border-radius:20px;padding:2rem;text-align:center;
+  border:1px solid var(--border);position:relative;overflow:hidden;
+  transition:transform .4s var(--ease),box-shadow .4s,border-color .4s;
+}
+.method-card:hover{transform:translateY(-8px);box-shadow:var(--shadow-lg);border-color:var(--primary-soft)}
+.method-card::before{
+  content:'';position:absolute;top:-50%;left:50%;transform:translateX(-50%);
+  width:200px;height:200px;border-radius:50%;background:var(--grad);
+  opacity:0;filter:blur(40px);transition:opacity .5s;
+}
+.method-card:hover::before{opacity:.15}
+.method-icon{
+  width:60px;height:60px;margin:0 auto 1.2rem;border-radius:50%;
+  background:var(--grad);color:#fff;
+  display:flex;align-items:center;justify-content:center;font-size:1.6rem;
+  box-shadow:0 6px 20px rgba(43,184,217,.3);position:relative;z-index:1;
+  transition:transform .5s var(--ease);
+}
+.method-card:hover .method-icon{transform:scale(1.1) rotate(10deg)}
+.method-label{font-size:.62rem;letter-spacing:.2em;color:var(--primary);text-transform:uppercase;font-weight:700;margin-bottom:.4rem;position:relative;z-index:1}
+.method-val{font-size:1.1rem;font-weight:900;color:var(--text);font-family:'Inter',sans-serif;margin-bottom:.4rem;position:relative;z-index:1}
+.method-sub{font-size:.74rem;color:var(--text-soft);position:relative;z-index:1}
+
+/* Form */
+.form-section{padding:clamp(2rem,4vh,4rem) 0 clamp(4rem,8vh,7rem);background:var(--bg)}
+.form-wrap{max-width:760px;margin:0 auto;background:#fff;border-radius:24px;padding:clamp(2rem,5vw,4rem);box-shadow:var(--shadow);position:relative}
+.form-wrap::before{
+  content:'';position:absolute;top:-1px;left:50%;transform:translateX(-50%);
+  width:80px;height:4px;background:var(--grad);border-radius:0 0 4px 4px;
+}
+.form-head{text-align:center;margin-bottom:3rem}
+.form-head .s-label{margin:0 auto 1rem}
+
+.form-group{margin-bottom:1.5rem;position:relative}
+.form-group label{
+  display:block;font-size:.8rem;font-weight:700;color:var(--text);
+  margin-bottom:.6rem;letter-spacing:.05em;
+}
+.form-group label .req{
+  display:inline-block;font-size:.62rem;padding:.15rem .5rem;
+  background:var(--accent);color:#fff;border-radius:4px;margin-left:.5rem;
+  font-weight:700;letter-spacing:.05em;
+}
+.form-group input,.form-group textarea,.form-group select{
+  width:100%;padding:.95rem 1.2rem;border-radius:12px;
+  border:1.5px solid var(--border);background:#fff;
+  font-family:inherit;font-size:.92rem;color:var(--text);
+  transition:border-color .3s,box-shadow .3s,transform .3s;
+}
+.form-group input:focus,.form-group textarea:focus,.form-group select:focus{
+  outline:none;border-color:var(--primary);
+  box-shadow:0 0 0 4px rgba(43,184,217,.12);
+}
+.form-group textarea{resize:vertical;min-height:140px;line-height:1.7}
+.form-group select{cursor:pointer}
+
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:1.2rem}
+@media(max-width:560px){.form-row{grid-template-columns:1fr}}
+
+.form-checkbox{display:flex;align-items:flex-start;gap:.8rem;margin:1.5rem 0 2rem;cursor:pointer;font-size:.84rem;color:var(--text-soft);line-height:1.6}
+.form-checkbox input{margin-top:.25rem;flex-shrink:0;cursor:pointer;width:18px;height:18px;accent-color:var(--primary)}
+.form-checkbox a{color:var(--primary);text-decoration:underline}
+
+.form-submit{
+  display:block;width:100%;padding:1.2rem;border-radius:100px;
+  background:var(--grad);color:#fff;font-size:.9rem;font-weight:700;
+  letter-spacing:.15em;text-transform:uppercase;
+  box-shadow:0 8px 24px rgba(43,184,217,.3);
+  transition:transform .3s var(--ease-bounce),box-shadow .3s;cursor:pointer;
+}
+.form-submit:hover{transform:translateY(-4px);box-shadow:0 14px 32px rgba(43,184,217,.45)}
+.form-submit:active{transform:translateY(-1px)}
+
+/* Map */
+.access{padding:clamp(4rem,8vh,7rem) 0;background:#fff;position:relative;overflow:hidden}
+.access-inner{display:grid;grid-template-columns:1fr 1fr;gap:3rem;align-items:center;max-width:1280px;margin:0 auto;padding:0 clamp(1.5rem,5vw,4rem)}
+.access-map{height:480px;border-radius:24px;overflow:hidden;box-shadow:var(--shadow-lg);background:#e8f4fb}
+.access-map iframe{width:100%;height:100%;border:0}
+.access-info h2{font-size:clamp(1.6rem,3vw,2.4rem);font-weight:900;line-height:1.3;margin-bottom:1.2rem}
+.access-info h2 .em{background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.access-rows{margin-top:2rem;display:flex;flex-direction:column;gap:1rem}
+.access-row{display:grid;grid-template-columns:32px 1fr;gap:1rem;padding:1.2rem;background:var(--bg);border-radius:12px;align-items:start;transition:transform .3s,background .3s}
+.access-row:hover{transform:translateX(6px);background:var(--primary-soft)}
+.access-row-icon{font-size:1.2rem;color:var(--primary)}
+.access-row strong{display:block;font-size:.72rem;color:var(--primary);letter-spacing:.15em;text-transform:uppercase;margin-bottom:.3rem;font-weight:700}
+.access-row span{font-size:.92rem;color:var(--text);font-weight:500;line-height:1.6}
+
+@media(max-width:980px){
+  .contact-methods{grid-template-columns:1fr}
+  .access-inner{grid-template-columns:1fr;gap:3rem}
+}
+</style>
+</head>
+<body>
+
+<div class="page-intro"><img class="pi-logo" src="https://sunprosys.co.jp/cont/wp-content/themes/sunpro_theme/img/common/h_logo.png" alt=""><div class="pi-bar"></div></div>
+
+<div class="mnav">
+  <button class="mnav-close" aria-label="close">×</button>
+  <a href="index.html">トップ</a><a href="business.html">事業内容</a><a href="robot.html">ロボット教室</a><a href="about.html">私たちの想い</a><a href="company.html">会社情報</a><a href="recruit.html">採用情報</a><a href="news.html">お知らせ</a><a href="contact.html">お問い合わせ</a>
+</div>
+
+<header>
+  <a href="index.html" class="h-logo"><img src="https://sunprosys.co.jp/cont/wp-content/themes/sunpro_theme/img/common/h_logo.png" alt="サンプロシステム"></a>
+  <nav class="h-nav"><a href="business.html">事業内容</a><a href="robot.html">ロボット教室</a><a href="about.html">私たちの想い</a><a href="company.html">会社情報</a><a href="recruit.html">採用情報</a><a href="news.html">お知らせ</a></nav>
+  <div class="h-contact">
+    <div class="h-tel"><span class="h-tel-num">082-507-1067</span><span class="h-tel-label">TEL / 9:00-17:00</span></div>
+    <a href="contact.html" class="h-cta">お問い合わせ</a>
+  </div>
+  <div class="burger"><span></span><span></span><span></span></div>
+</header>
+
+<section class="page-head">
+  <div class="container">
+    <div class="breadcrumb"><a href="index.html">Home</a> <span class="sep">/</span> Contact</div>
+    <div class="page-head-eyebrow">Contact</div>
+    <h1>CONTACT<span class="ja">お問い合わせ</span></h1>
+  </div>
+  <div class="deco-dots"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div>
+</section>
+
+<!-- METHODS -->
+<section class="contact">
+  <div class="container">
+    <div class="contact-methods">
+      <a href="tel:0825071067" class="method-card r"><div class="method-icon">📞</div><div class="method-label">Tel</div><div class="method-val">082-507-1067</div><div class="method-sub">受付 9:00 - 17:00</div></a>
+      <div class="method-card r d1"><div class="method-icon">📠</div><div class="method-label">Fax</div><div class="method-val">082-507-1065</div><div class="method-sub">24時間受付</div></div>
+      <a href="mailto:info@sunprosys.co.jp" class="method-card r d2"><div class="method-icon">✉️</div><div class="method-label">Email</div><div class="method-val" style="font-size:.95rem">info@sunprosys.co.jp</div><div class="method-sub">24時間受付</div></a>
+    </div>
+  </div>
+</section>
+
+<!-- FORM -->
+<section class="form-section">
+  <div class="container">
+    <div class="form-wrap r">
+      <div class="form-head">
+        <p class="s-label" style="justify-content:center">Inquiry Form</p>
+        <h2 class="s-h2">お問い合わせ<span class="em">フォーム</span></h2>
+        <p style="color:var(--text-soft);font-size:.9rem;margin-top:1rem;line-height:1.85">必要事項をご入力の上、送信してください。<br>2〜3営業日以内にご返信いたします。</p>
+      </div>
+      <form onsubmit="event.preventDefault();this.querySelector('.form-submit').textContent='送信完了！ ありがとうございました';this.querySelector('.form-submit').style.background='#5fc9a8'">
+        <div class="form-group">
+          <label>お問い合わせ種別 <span class="req">必須</span></label>
+          <select required>
+            <option value="">選択してください</option>
+            <option>事業（機械設計・製作）について</option>
+            <option>事業（制御設計・製作）について</option>
+            <option>事業（開発設備生産）について</option>
+            <option>ロボット教室について</option>
+            <option>採用について</option>
+            <option>その他</option>
+          </select>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label>お名前 <span class="req">必須</span></label>
+            <input type="text" required placeholder="山田 太郎">
+          </div>
+          <div class="form-group">
+            <label>会社名</label>
+            <input type="text" placeholder="株式会社○○">
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label>メールアドレス <span class="req">必須</span></label>
+            <input type="email" required placeholder="example@email.com">
+          </div>
+          <div class="form-group">
+            <label>電話番号</label>
+            <input type="tel" placeholder="082-XXX-XXXX">
+          </div>
+        </div>
+        <div class="form-group">
+          <label>お問い合わせ内容 <span class="req">必須</span></label>
+          <textarea required placeholder="お問い合わせ内容をご記入ください"></textarea>
+        </div>
+        <label class="form-checkbox">
+          <input type="checkbox" required>
+          <span><a href="#">プライバシーポリシー</a>に同意して、お問い合わせ内容を送信します。</span>
+        </label>
+        <button type="submit" class="form-submit magnetic">送信する</button>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- ACCESS -->
+<section class="access">
+  <div class="access-inner">
+    <div class="r-l">
+      <p class="s-label">Access</p>
+      <h2 class="r">広島から、<br><span class="em">日本のものづくりへ。</span></h2>
+      <div class="access-rows">
+        <div class="access-row"><div class="access-row-icon">📍</div><div><strong>Address</strong><span>〒733-0822<br>広島県広島市西区庚午中3丁目13-6</span></div></div>
+        <div class="access-row"><div class="access-row-icon">📞</div><div><strong>Tel</strong><span>082-507-1067</span></div></div>
+        <div class="access-row"><div class="access-row-icon">📠</div><div><strong>Fax</strong><span>082-507-1065</span></div></div>
+        <div class="access-row"><div class="access-row-icon">🕐</div><div><strong>Business Hours</strong><span>9:00 - 17:00 / 土日祝休</span></div></div>
+      </div>
+    </div>
+    <div class="access-map r-r clip-reveal">
+      <iframe src="https://maps.google.com/maps?q=広島県広島市西区庚午中3丁目13-6&output=embed" loading="lazy" allowfullscreen></iframe>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="container">
+    <div class="f-top">
+      <div class="f-brand">
+        <img src="https://sunprosys.co.jp/cont/wp-content/themes/sunpro_theme/img/common/h_logo.png" alt="サンプロシステム">
+        <p>"確かな技術" と "こだわりのモノづくり"<br>広島から日本のものづくりを支える<br>エンジニアリングカンパニー。</p>
+        <div class="f-addr">〒733-0822 広島県広島市西区庚午中3丁目13-6</div>
+        <div class="f-tel">TEL: 082-507-1067</div>
+      </div>
+      <div class="f-col"><h5>Business</h5><ul><li><a href="business.html">事業内容</a></li><li><a href="business.html#b01">機械設計・製作</a></li><li><a href="business.html#b02">制御設計・製作</a></li><li><a href="business.html#b03">開発設備生産</a></li></ul></div>
+      <div class="f-col"><h5>Education</h5><ul><li><a href="robot.html">ロボット教室</a></li><li><a href="robot.html">プログラミング教室</a></li><li><a href="robot.html">ロボプロフェッサー</a></li></ul></div>
+      <div class="f-col"><h5>Company</h5><ul><li><a href="about.html">私たちの想い</a></li><li><a href="company.html">会社情報</a></li><li><a href="recruit.html">採用情報</a></li><li><a href="news.html">お知らせ</a></li><li><a href="contact.html">お問い合わせ</a></li></ul></div>
+    </div>
+    <div class="f-bottom"><p>© 2024 株式会社サンプロシステム. All rights reserved.</p><p>〒733-0822 広島県広島市西区庚午中3丁目13-6 ｜ TEL: 082-507-1067</p></div>
+  </div>
+</footer>
+
+<script src="assets/js/main.js"></script>
+</body>
+</html>
