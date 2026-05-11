@@ -8,85 +8,103 @@
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700;900&family=Inter:wght@300;400;500;700;900&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="assets/css/style.css">
 <style>
-.message{padding:clamp(4rem,8vh,7rem) 0;background:#fff;position:relative;overflow:hidden}
-.message-inner{display:grid;grid-template-columns:1fr 1.1fr;gap:5rem;align-items:center;max-width:1280px;margin:0 auto;padding:0 clamp(1.5rem,5vw,4rem)}
-.message-img{position:relative;height:520px;border-radius:24px;overflow:hidden;box-shadow:var(--shadow-lg)}
-.message-img img{width:100%;height:100%;object-fit:cover;transition:transform 1.2s var(--ease)}
-.message-img:hover img{transform:scale(1.08)}
-.message-quote{
-  font-size:clamp(1.6rem,3vw,2.4rem);font-weight:900;line-height:1.55;
-  margin:1.2rem 0 1.8rem;
+/* Hero */
+.about-hero{
+  position:relative;height:55vh;min-height:420px;overflow:hidden;background:#0a1525;
 }
-.message-quote .em{background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
-.message-desc{color:var(--text-soft);line-height:2;font-size:.95rem;margin-bottom:1.2rem}
+.about-hero-bg{
+  position:absolute;inset:0;
+  background-image:url('https://sunprosys.co.jp/cont/wp-content/themes/sunpro_theme/img/top/top04_about.jpg');
+  background-size:cover;background-position:center;opacity:.55;
+  animation:heroZoom 8s ease-out forwards;
+}
+@keyframes heroZoom{from{transform:scale(1.15)}to{transform:scale(1)}}
+.about-hero-overlay{position:absolute;inset:0;background:linear-gradient(135deg, rgba(43,184,217,.5), rgba(10,21,37,.7))}
+.about-hero-content{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;flex-direction:column;color:#fff;text-align:center;padding:0 1.5rem}
+.about-hero-en{font-size:clamp(.7rem,1vw,.85rem);letter-spacing:.4em;text-transform:uppercase;color:rgba(255,255,255,.85);font-weight:400;margin-bottom:1rem}
+.about-hero h1{font-size:clamp(2.5rem,7vw,5.5rem);font-weight:900;line-height:1.1;letter-spacing:-.02em}
+.about-hero h1 .em{background:linear-gradient(90deg,#fff,#7ee4f0);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.about-hero .ja{display:block;font-size:clamp(1rem,2vw,1.4rem);font-weight:500;margin-top:1rem;color:rgba(255,255,255,.9);letter-spacing:.05em}
 
-/* Values */
-.values{padding:clamp(4rem,8vh,7rem) 0;background:var(--bg);position:relative;overflow:hidden}
-.values-head{text-align:center;margin-bottom:4rem}
-.values-head .s-label{margin:0 auto 1rem}
-.values-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1.5rem}
-.value-card{
-  background:#fff;border-radius:20px;padding:2rem 1.5rem;text-align:center;
-  transition:transform .4s var(--ease),box-shadow .4s;
-  border:1px solid var(--border);
-}
-.value-card:hover{transform:translateY(-10px);box-shadow:var(--shadow-lg);border-color:var(--primary-soft)}
-.value-icon{
-  width:64px;height:64px;margin:0 auto 1.2rem;border-radius:50%;background:var(--grad);
-  color:#fff;display:flex;align-items:center;justify-content:center;font-size:1.6rem;
-  box-shadow:0 6px 20px rgba(43,184,217,.3);
-  transition:transform .5s var(--ease);
-}
-.value-card:hover .value-icon{transform:rotate(360deg) scale(1.1)}
-.value-card h3{font-size:1rem;font-weight:700;margin-bottom:.6rem}
-.value-card p{font-size:.8rem;color:var(--text-soft);line-height:1.7}
+/* INTRO MESSAGE */
+.intro{padding:clamp(5rem,10vh,9rem) 0;background:#fff;text-align:center;position:relative;overflow:hidden}
+.intro::before{content:'';position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:700px;height:700px;border-radius:50%;background:radial-gradient(circle, var(--primary-soft), transparent 65%);opacity:.5}
+.intro-en{font-size:.78rem;letter-spacing:.3em;color:var(--primary);font-weight:700;text-transform:uppercase;margin-bottom:1.2rem;position:relative}
+.intro h2{font-size:clamp(2rem,4vw,3.4rem);font-weight:900;line-height:1.45;position:relative;letter-spacing:-.01em}
+.intro h2 .em{background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.intro p{font-size:1rem;color:var(--text-soft);line-height:2.2;margin-top:2rem;max-width:760px;margin-left:auto;margin-right:auto;font-weight:300;position:relative}
 
-/* Voices */
-.voices{padding:clamp(4rem,8vh,7rem) 0;background:#fff}
-.voices-head{text-align:center;margin-bottom:4rem;max-width:680px;margin-left:auto;margin-right:auto}
-.voices-head .s-label{margin:0 auto 1rem}
-.voices-head p{color:var(--text-soft);line-height:1.95;font-size:.92rem;margin-top:1rem}
-.voices-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1.5rem}
-.voice-card{
-  background:var(--bg);border-radius:20px;padding:2.2rem;position:relative;overflow:hidden;
-  transition:transform .4s var(--ease),box-shadow .4s,background .4s;
-  border:1px solid transparent;
-}
-.voice-card:hover{transform:translateY(-6px);box-shadow:var(--shadow);background:#fff;border-color:var(--primary-soft)}
-.voice-quote-mark{
-  position:absolute;top:-15px;right:1.5rem;font-size:7rem;color:var(--primary-soft);
-  font-family:Georgia,serif;line-height:1;pointer-events:none;
-  transition:color .4s;
-}
-.voice-card:hover .voice-quote-mark{color:var(--primary);opacity:.3}
-.voice-position{
-  display:inline-block;padding:.35rem .9rem;background:var(--primary-soft);color:var(--primary);
-  border-radius:100px;font-size:.7rem;font-weight:700;letter-spacing:.05em;margin-bottom:1.2rem;
-}
-.voice-card h4{font-size:1.05rem;font-weight:700;margin-bottom:.5rem;line-height:1.5;position:relative}
-.voice-card p{font-size:.85rem;color:var(--text-soft);line-height:1.95;position:relative}
-.voice-meta{margin-top:1.2rem;padding-top:1.2rem;border-top:1px solid var(--border);
-  font-size:.72rem;color:var(--text-mute);letter-spacing:.05em}
+/* VOICE INTRO */
+.voice-intro{padding:clamp(4rem,8vh,7rem) 0;background:var(--bg);text-align:center}
+.voice-intro .s-label{margin:0 auto 1rem}
+.voice-intro h2{font-size:clamp(1.8rem,3.5vw,2.8rem);font-weight:900;line-height:1.3;margin-bottom:1.2rem}
+.voice-intro h2 .em{background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.voice-intro p{color:var(--text-soft);font-size:.94rem;line-height:1.95;max-width:680px;margin:0 auto}
 
-/* Parallax */
-.par-section{position:relative;height:50vh;min-height:340px;overflow:hidden;display:flex;align-items:center;background:#1a2940}
-.par-bg{position:absolute;inset:-15%;z-index:0;background-size:cover;background-position:center;opacity:.5}
-.par-overlay{position:absolute;inset:0;z-index:1;background:linear-gradient(135deg, rgba(43,184,217,.55), rgba(26,41,64,.7))}
-.par-content{position:relative;z-index:2;color:#fff;padding:0 clamp(2rem,6vw,6rem);max-width:900px;text-align:center;margin:0 auto}
-.par-quote{font-size:clamp(1.6rem,3.5vw,2.8rem);font-weight:900;line-height:1.45;color:#fff}
+/* VOICES - alternating layout (mimic original sunprosys) */
+.voice{padding:clamp(4rem,8vh,7rem) 0;background:#fff;position:relative;overflow:hidden}
+.voice:nth-of-type(even){background:var(--bg)}
+.voice-inner{display:grid;grid-template-columns:1fr 1.1fr;gap:5rem;align-items:center;max-width:1280px;margin:0 auto;padding:0 clamp(1.5rem,5vw,4rem)}
+.voice.rev .voice-inner{direction:rtl}
+.voice.rev .voice-inner > *{direction:ltr}
+.voice-img{position:relative;overflow:hidden;aspect-ratio:4/5;background:var(--grad)}
+.voice-img img{width:100%;height:100%;object-fit:cover;transition:transform 1.2s var(--ease);filter:grayscale(.2) brightness(.95)}
+.voice-img:hover img{transform:scale(1.06);filter:none}
+.voice-img-emoji{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:8rem;color:rgba(255,255,255,.9)}
+.voice-img-bg1{background:linear-gradient(135deg,#2bb8d9,#4cd8e8)}
+.voice-img-bg2{background:linear-gradient(135deg,#4cd8e8,#7ee4f0)}
+.voice-img-bg3{background:linear-gradient(135deg,#1d8eb0,#2bb8d9)}
+.voice-img-bg4{background:linear-gradient(135deg,#5fc9a8,#7ee4f0)}
+.voice-img-bg5{background:linear-gradient(135deg,#1a2940,#2bb8d9)}
+.voice-img-tag{
+  position:absolute;top:1.5rem;left:1.5rem;background:rgba(255,255,255,.95);backdrop-filter:blur(10px);
+  padding:.5rem 1.1rem;font-size:.65rem;letter-spacing:.15em;color:var(--primary);font-weight:700;text-transform:uppercase;
+}
+.voice-img-year{
+  position:absolute;bottom:1.5rem;right:1.5rem;color:#fff;
+  font-family:'Inter',sans-serif;font-weight:900;font-size:2.2rem;letter-spacing:-.02em;line-height:1;
+}
+.voice-img-year small{display:block;font-size:.6rem;letter-spacing:.2em;font-weight:400;margin-top:.3rem;opacity:.85;text-transform:uppercase}
 
-.cta-section{padding:clamp(4rem,8vh,7rem) 0;background:linear-gradient(135deg,#1a2940 0%,#2bb8d9 100%);color:#fff;text-align:center;position:relative;overflow:hidden}
-.cta-section h2{font-size:clamp(1.6rem,3vw,2.6rem);font-weight:900;line-height:1.3;color:#fff;position:relative}
-.cta-section p{margin:1.2rem auto 2rem;max-width:520px;color:rgba(255,255,255,.9);position:relative;line-height:1.95}
+.voice-content{}
+.voice-num-row{display:flex;align-items:center;gap:1rem;margin-bottom:1.5rem}
+.voice-num{
+  font-size:.7rem;letter-spacing:.3em;color:var(--primary);font-weight:700;font-family:'Inter',sans-serif;
+}
+.voice-num::before{content:'';display:inline-block;width:30px;height:1px;background:var(--primary);margin-right:.8rem;vertical-align:middle}
+.voice-position-tag{
+  display:inline-block;padding:.35rem 1rem;background:var(--primary-soft);color:var(--primary);
+  border-radius:100px;font-size:.72rem;font-weight:700;letter-spacing:.05em;
+}
+.voice-title{font-size:clamp(1.4rem,2.6vw,2rem);font-weight:900;line-height:1.5;margin-bottom:1.2rem}
+.voice-title .em{background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.voice-body{font-size:.92rem;color:var(--text-soft);line-height:2.1}
+.voice-body p+p{margin-top:1rem}
+.voice-meta{margin-top:1.8rem;display:flex;align-items:center;gap:1rem;font-size:.75rem;color:var(--text-mute);letter-spacing:.05em}
+.voice-meta strong{color:var(--text);font-weight:700;font-size:.85rem}
+
+/* PARALLAX BANNER */
+.par-banner{
+  position:relative;height:50vh;min-height:360px;overflow:hidden;
+  display:flex;align-items:center;background:#0a1525;
+}
+.par-bg{position:absolute;inset:-15%;background-size:cover;background-position:center;opacity:.5}
+.par-overlay{position:absolute;inset:0;background:linear-gradient(135deg, rgba(43,184,217,.5), rgba(10,21,37,.75))}
+.par-content{position:relative;z-index:1;text-align:center;width:100%;color:#fff;padding:0 1.5rem}
+.par-en{font-size:.7rem;letter-spacing:.3em;color:rgba(255,255,255,.85);font-weight:700;text-transform:uppercase;margin-bottom:1rem}
+.par-quote{font-size:clamp(1.6rem,3.5vw,2.8rem);font-weight:900;line-height:1.45;color:#fff;max-width:780px;margin:0 auto;letter-spacing:-.01em}
+
+/* CTA */
+.cta-section{padding:clamp(4rem,8vh,7rem) 0;background:#fff;text-align:center;position:relative;overflow:hidden}
+.cta-en{font-size:.7rem;letter-spacing:.3em;color:var(--primary);font-weight:700;text-transform:uppercase;margin-bottom:1rem}
+.cta-section h2{font-size:clamp(1.6rem,3vw,2.6rem);font-weight:900;line-height:1.3}
+.cta-section h2 .em{background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.cta-section p{margin:1.2rem auto 2rem;max-width:560px;color:var(--text-soft);line-height:1.95}
 
 @media(max-width:980px){
-  .message-inner{grid-template-columns:1fr;gap:3rem}
-  .message-img{height:380px}
-  .values-grid{grid-template-columns:1fr 1fr}
-  .voices-grid{grid-template-columns:1fr}
-}
-@media(max-width:560px){
-  .values-grid{grid-template-columns:1fr}
+  .voice-inner{grid-template-columns:1fr;gap:3rem}
+  .voice.rev .voice-inner{direction:ltr}
+  .voice-img{aspect-ratio:4/3;max-height:480px}
 }
 </style>
 </head>
@@ -109,117 +127,147 @@
   <div class="burger"><span></span><span></span><span></span></div>
 </header>
 
-<section class="page-head">
-  <div class="container">
-    <div class="breadcrumb"><a href="index.html">Home</a> <span class="sep">/</span> About Us</div>
-    <div class="page-head-eyebrow">About Us</div>
-    <h1>OUR THOUGHT<span class="ja">私たちの想い</span></h1>
-  </div>
-  <div class="deco-dots"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div>
-</section>
-
-<!-- MESSAGE -->
-<section class="message">
-  <div class="message-inner">
-    <div class="message-img r-l clip-reveal">
-      <img src="https://sunprosys.co.jp/cont/wp-content/themes/sunpro_theme/img/top/top04_about.jpg" alt="サンプロシステム">
-    </div>
-    <div>
-      <p class="s-label r">Philosophy</p>
-      <h2 class="message-quote r d1">確かな技術と<br><span class="em">こだわりの精神。</span></h2>
-      <p class="message-desc r d2">
-        2000年の創業以来、私たちは「確かな技術」と「こだわりのモノづくり」を信条に、
-        お客様一人ひとりの課題に真摯に向き合ってきました。
-      </p>
-      <p class="message-desc r d3">
-        機械・制御・開発設備の領域で培った技術と、少数精鋭ならではの柔軟性と機動力で、
-        お客様にとって"頼れるパートナー"であり続けたい。それが私たちの想いです。
-      </p>
-      <p class="message-desc r d4">
-        広島という地に根ざし、日本のものづくりを支える存在として、
-        これからも誠実に、確かなモノづくりを続けていきます。
-      </p>
-    </div>
+<!-- HERO -->
+<section class="about-hero">
+  <div class="about-hero-bg"></div>
+  <div class="about-hero-overlay"></div>
+  <div class="about-hero-content">
+    <div class="about-hero-en">— OUR THOUGHT —</div>
+    <h1>私たちの<span class="em">想い</span></h1>
+    <span class="ja">サンプロシステムで働く、ひとりひとりの声</span>
   </div>
 </section>
 
-<!-- VALUES -->
-<section class="values">
+<!-- INTRO -->
+<section class="intro">
   <div class="container">
-    <div class="values-head">
-      <p class="s-label r">Our Values</p>
-      <h2 class="s-h2 r d1">大切にしている<br><span class="em">4つの価値観</span></h2>
+    <div class="intro-en r">MESSAGE</div>
+    <h2 class="r d1">"確かな技術"と<br>"こだわりの<span class="em">モノづくり</span>"</h2>
+    <p class="r d2">
+      2000年の創業以来、私たちは「確かな技術」と「こだわりのモノづくり」を信条に、
+      お客様一人ひとりの課題に真摯に向き合ってきました。<br>
+      ここでは、サンプロシステムで働くメンバー一人ひとりの"想い"と
+      職場の空気感をお伝えします。
+    </p>
+  </div>
+</section>
+
+<!-- VOICE INTRO -->
+<section class="voice-intro">
+  <div class="container">
+    <p class="s-label r">Voices</p>
+    <h2 class="r d1">社員の<span class="em">声</span></h2>
+    <p class="r d2">それぞれが、自分の役割と仕事に誇りを持って働いています。<br>
+    リアルな声を、ぜひお読みください。</p>
+  </div>
+</section>
+
+<!-- VOICE 01 -->
+<section class="voice">
+  <div class="voice-inner">
+    <div class="voice-img voice-img-bg1 r-l clip-reveal">
+      <div class="voice-img-tag">SALES</div>
+      <div class="voice-img-emoji">💼</div>
+      <div class="voice-img-year">2014<small>JOINED</small></div>
     </div>
-    <div class="values-grid">
-      <div class="value-card r tilt"><div class="value-icon">🎯</div><h3>裁量権</h3><p>一つの仕事を一人が責任を持って担当。大きな裁量とやりがい。</p></div>
-      <div class="value-card r d1 tilt"><div class="value-icon">📚</div><h3>学習機会</h3><p>新しい技術への挑戦を歓迎。学習支援環境を整えています。</p></div>
-      <div class="value-card r d2 tilt"><div class="value-icon">⚖️</div><h3>ワークライフ<br>バランス</h3><p>男女問わず、ライフステージに応じて働ける環境を整備。</p></div>
-      <div class="value-card r d3 tilt"><div class="value-icon">🤝</div><h3>チームサポート</h3><p>分からないことは何度でも聞ける、相談しやすい社風。</p></div>
+    <div class="voice-content">
+      <div class="voice-num-row r"><div class="voice-num">VOICE 01</div><div class="voice-position-tag">営業</div></div>
+      <h2 class="voice-title r d1">営業の役目は１つの仕事の<br><span class="em">『器』を作ること</span></h2>
+      <div class="voice-body r d2">
+        <p>お客様のニーズをしっかり把握し、技術者へバトンタッチする。仕事の"器"を作る役割にやりがいを感じています。</p>
+        <p>お客様と現場をつなぐ橋渡しが、ものづくりの起点になります。お客様の本当に困っていることに気付ける営業でありたいと、日々思っています。</p>
+      </div>
+      <div class="voice-meta r d3"><strong>営業職</strong>／2014年入社</div>
+    </div>
+  </div>
+</section>
+
+<!-- VOICE 02 -->
+<section class="voice rev">
+  <div class="voice-inner">
+    <div class="voice-img voice-img-bg2 r-r clip-reveal">
+      <div class="voice-img-tag">MECHANICAL</div>
+      <div class="voice-img-emoji">⚙️</div>
+      <div class="voice-img-year">2018<small>JOINED</small></div>
+    </div>
+    <div class="voice-content">
+      <div class="voice-num-row r"><div class="voice-num">VOICE 02</div><div class="voice-position-tag">機械製作</div></div>
+      <h2 class="voice-title r d1">男女に関わらず<br><span class="em">ワーク・ライフ・バランス</span></h2>
+      <div class="voice-body r d2">
+        <p>男女問わずワーク・ライフ・バランスを保ちながら働ける環境がここにはあります。</p>
+        <p>育児中でも自分のペースで仕事に取り組めるのは、本当にありがたいです。会社全体で支え合う雰囲気があって、安心して長く続けられます。</p>
+      </div>
+      <div class="voice-meta r d3"><strong>機械製作</strong>／2018年入社／育児中</div>
+    </div>
+  </div>
+</section>
+
+<!-- VOICE 03 -->
+<section class="voice">
+  <div class="voice-inner">
+    <div class="voice-img voice-img-bg3 r-l clip-reveal">
+      <div class="voice-img-tag">MECHANICAL</div>
+      <div class="voice-img-emoji">🔧</div>
+      <div class="voice-img-year">2019<small>JOINED</small></div>
+    </div>
+    <div class="voice-content">
+      <div class="voice-num-row r"><div class="voice-num">VOICE 03</div><div class="voice-position-tag">機械製作</div></div>
+      <h2 class="voice-title r d1">最初から最後まで<br><span class="em">自分の力量で任せられる</span></h2>
+      <div class="voice-body r d2">
+        <p>一つの仕事を最初から最後まで自分の力量で任せてもらえる。だからこそ責任は大きいけれど、成長を実感できる職場です。</p>
+        <p>完成したときの達成感は大きいですし、自分が手掛けた機械がお客様の現場で動いていると思うと、嬉しさもひとしおです。</p>
+      </div>
+      <div class="voice-meta r d3"><strong>機械製作</strong>／2019年入社</div>
     </div>
   </div>
 </section>
 
 <!-- PARALLAX -->
-<div class="par-section">
+<div class="par-banner">
   <div class="par-bg" data-parallax="0.25" style="background-image:url('https://sunprosys.co.jp/cont/wp-content/themes/sunpro_theme/img/top/main_image02.jpg')"></div>
   <div class="par-overlay"></div>
   <div class="par-content">
-    <p class="s-label r" style="justify-content:center">Voice</p>
-    <h2 class="par-quote r d1">社員一人ひとりの<br>"想い"を、聞いてください。</h2>
+    <div class="par-en r">CULTURE</div>
+    <h2 class="par-quote r d1">少数精鋭だから、<br>一人ひとりが主役。</h2>
   </div>
 </div>
 
-<!-- VOICES -->
-<section class="voices">
-  <div class="container">
-    <div class="voices-head">
-      <p class="s-label r" style="justify-content:center">Voices</p>
-      <h2 class="s-h2 r d1">社員の<span class="em">声</span></h2>
-      <p class="r d2">サンプロシステムで働く社員たちのリアルな声をご紹介します。</p>
+<!-- VOICE 04 -->
+<section class="voice">
+  <div class="voice-inner">
+    <div class="voice-img voice-img-bg4 r-l clip-reveal">
+      <div class="voice-img-tag">CONTROL / SOFTWARE</div>
+      <div class="voice-img-emoji">💻</div>
+      <div class="voice-img-year">2019<small>JOINED</small></div>
     </div>
-    <div class="voices-grid">
-      <div class="voice-card r">
-        <div class="voice-quote-mark">"</div>
-        <div class="voice-position">営業</div>
-        <h4>営業の役目は１つの仕事の『器』を作ること</h4>
-        <p>お客様のニーズをしっかり把握し、技術者へバトンタッチする。仕事の"器"を作る役割にやりがいを感じています。お客様と現場をつなぐ橋渡しが、ものづくりの起点になります。</p>
-        <div class="voice-meta">2014年入社</div>
+    <div class="voice-content">
+      <div class="voice-num-row r"><div class="voice-num">VOICE 04</div><div class="voice-position-tag">制御・ソフト設計</div></div>
+      <h2 class="voice-title r d1">わからないままにせず、<br><span class="em">何度でも聞ける社風</span></h2>
+      <div class="voice-body r d2">
+        <p>分からないことをそのままにせず、何度でも聞ける環境です。先輩方は皆親身に答えてくれるので、安心して挑戦できます。</p>
+        <p>聞きやすい雰囲気だからこそ、技術力が自然と身についていきますし、新しいことにもどんどんチャレンジできます。</p>
       </div>
-      <div class="voice-card r d1">
-        <div class="voice-quote-mark">"</div>
-        <div class="voice-position">機械製作</div>
-        <h4>男女に関わらずワーク・ライフ・バランス</h4>
-        <p>男女問わずワーク・ライフ・バランスを保ちながら働ける環境がここにはあります。育児中でも自分のペースで仕事に取り組めるのは、本当にありがたいです。</p>
-        <div class="voice-meta">2018年入社 / 育児中</div>
+      <div class="voice-meta r d3"><strong>制御・ソフト設計</strong>／2019年入社</div>
+    </div>
+  </div>
+</section>
+
+<!-- VOICE 05 -->
+<section class="voice rev">
+  <div class="voice-inner">
+    <div class="voice-img voice-img-bg5 r-r clip-reveal">
+      <div class="voice-img-tag">CONTROL / SOFTWARE</div>
+      <div class="voice-img-emoji">🚀</div>
+      <div class="voice-img-year">2017<small>JOINED</small></div>
+    </div>
+    <div class="voice-content">
+      <div class="voice-num-row r"><div class="voice-num">VOICE 05</div><div class="voice-position-tag">制御・ソフト設計</div></div>
+      <h2 class="voice-title r d1">オーダーメイドだから、<br><span class="em">刺激と達成感がある</span></h2>
+      <div class="voice-body r d2">
+        <p>毎回違うオーダーメイド製品を扱うので、常に新鮮な刺激があります。</p>
+        <p>完成して動いた瞬間の達成感は、何度経験しても忘れられないですね。お客様の課題を技術で解決する楽しさは、この仕事ならではだと感じています。</p>
       </div>
-      <div class="voice-card r d2">
-        <div class="voice-quote-mark">"</div>
-        <div class="voice-position">機械製作</div>
-        <h4>最初から最後まで自分の力量で仕事を任せられる</h4>
-        <p>一つの仕事を最初から最後まで自分の力量で任せてもらえる。だからこそ責任は大きいけれど、成長を実感できる職場です。完成したときの達成感は大きいです。</p>
-        <div class="voice-meta">2019年入社</div>
-      </div>
-      <div class="voice-card r d3">
-        <div class="voice-quote-mark">"</div>
-        <div class="voice-position">制御・ソフト設計</div>
-        <h4>わからないままにせず、何度でも聞ける社風</h4>
-        <p>分からないことをそのままにせず、何度でも聞ける環境です。先輩方は皆親身に答えてくれるので、安心して挑戦できます。技術力が自然と身につきます。</p>
-        <div class="voice-meta">2019年入社</div>
-      </div>
-      <div class="voice-card r d4">
-        <div class="voice-quote-mark">"</div>
-        <div class="voice-position">制御・ソフト設計</div>
-        <h4>オーダーメイドだから、刺激と達成感がある</h4>
-        <p>毎回違うオーダーメイド製品を扱うので、常に新鮮な刺激があります。完成して動いた瞬間の達成感は、何度経験しても忘れられないですね。</p>
-        <div class="voice-meta">2017年入社</div>
-      </div>
-      <div class="voice-card r d5">
-        <div class="voice-quote-mark">"</div>
-        <div class="voice-position">代表メッセージ</div>
-        <h4>確かな技術を、明日へつなぐ</h4>
-        <p>確かな技術とこだわりのモノづくりで、お客様に喜んでいただける。それが私たちの誇りです。これからも誠実なモノづくりを続けてまいります。</p>
-        <div class="voice-meta">代表取締役 奥野真市</div>
-      </div>
+      <div class="voice-meta r d3"><strong>制御・ソフト設計</strong>／2017年入社</div>
     </div>
   </div>
 </section>
@@ -227,11 +275,12 @@
 <!-- CTA -->
 <section class="cta-section">
   <div class="container">
-    <h2 class="r">一緒に、<br>ものづくりをしませんか？</h2>
-    <p class="r d1">採用情報・会社情報もぜひご覧ください。</p>
-    <div class="r d2" style="display:flex;gap:1rem;justify-content:center;flex-wrap:wrap">
-      <a href="recruit.html" class="btn btn-primary magnetic" style="background:#fff;color:var(--primary)">採用情報<span class="arrow"></span></a>
-      <a href="company.html" class="btn btn-outline magnetic" style="border-color:#fff;color:#fff">会社情報<span class="arrow"></span></a>
+    <div class="cta-en r">CONTACT</div>
+    <h2 class="r d1">一緒に、<br><span class="em">ものづくりをしませんか？</span></h2>
+    <p class="r d2">採用情報・会社情報もぜひご覧ください。</p>
+    <div class="r d3" style="display:flex;gap:1rem;justify-content:center;flex-wrap:wrap">
+      <a href="recruit.html" class="btn btn-primary magnetic">採用情報<span class="arrow"></span></a>
+      <a href="company.html" class="btn btn-outline magnetic">会社情報<span class="arrow"></span></a>
     </div>
   </div>
 </section>
