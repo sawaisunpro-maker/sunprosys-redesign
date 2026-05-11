@@ -1,5 +1,6 @@
 /* ════════════════════════════════════════════════════════
    SUNPROSYS REDESIGN - MAIN JS
+   Gear cursor, machine-parts scroll effects
 ════════════════════════════════════════════════════════ */
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -7,10 +8,15 @@ document.addEventListener('DOMContentLoaded', () => {
   /* ─── Page loaded ─── */
   setTimeout(() => document.body.classList.add('loaded'), 1300);
 
-  /* ─── Custom cursor ─── */
+  /* ─── Custom gear cursor ─── */
   if (window.matchMedia('(hover:hover)').matches) {
     const cur = document.createElement('div'); cur.id = 'cursor';
     const ring = document.createElement('div'); ring.id = 'cursor-ring';
+    // SVG gear cursor ring
+    ring.innerHTML = `<svg viewBox="0 0 48 48" fill="none">
+      <path d="M24 14a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm0 16a6 6 0 1 1 0-12 6 6 0 0 1 0 12z" stroke="#2d8e3d" stroke-width="1.5"/>
+      <path d="M24 4l1.5 4M24 44l1.5-4M44 24l-4-1.5M8 24l-4-1.5M38.5 9.5L36 12M12 36l-2.5 2.5M38.5 38.5L36 36M12 12l-2.5-2.5" stroke="#2d8e3d" stroke-width="1.5" stroke-linecap="round"/>
+    </svg>`;
     document.body.appendChild(cur); document.body.appendChild(ring);
     let mx=0,my=0,rx=0,ry=0;
     document.addEventListener('mousemove', e => {
@@ -18,18 +24,20 @@ document.addEventListener('DOMContentLoaded', () => {
       cur.style.left=mx+'px'; cur.style.top=my+'px';
     });
     (function loop(){
-      rx += (mx-rx)*.18; ry += (my-ry)*.18;
+      rx += (mx-rx)*.16; ry += (my-ry)*.16;
       ring.style.left=rx+'px'; ring.style.top=ry+'px';
       requestAnimationFrame(loop);
     })();
-    document.querySelectorAll('a,button,.card,.tilt,.biz-item,.r-course,.news-item,input,textarea').forEach(el=>{
+    document.querySelectorAll('a,button,.card,.tilt,.biz-item,.r-course,.news-item,input,textarea,select,.feature-card,.voice,.skill-card,.gear-hover').forEach(el=>{
       el.addEventListener('mouseenter',()=>{
         cur.style.transform='translate(-50%,-50%) scale(2.5)';
-        ring.style.width='60px'; ring.style.height='60px';
+        cur.style.background='#f4a800';
+        ring.style.width='70px'; ring.style.height='70px';
       });
       el.addEventListener('mouseleave',()=>{
         cur.style.transform='translate(-50%,-50%) scale(1)';
-        ring.style.width='38px'; ring.style.height='38px';
+        cur.style.background='#2d8e3d';
+        ring.style.width='42px'; ring.style.height='42px';
       });
     });
   }
@@ -55,7 +63,7 @@ document.addEventListener('DOMContentLoaded', () => {
   /* ─── Back to top ─── */
   const totop = document.createElement('button');
   totop.className = 'totop';
-  totop.innerHTML = '↑';
+  totop.innerHTML = '<svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M10 4l-7 7M10 4l7 7M10 4v12" stroke="white" stroke-width="2" stroke-linecap="round"/></svg>';
   totop.setAttribute('aria-label','ページ上部へ');
   totop.onclick = () => window.scrollTo({top:0,behavior:'smooth'});
   document.body.appendChild(totop);
@@ -96,38 +104,24 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     });
   }, { threshold: 0.12 });
-  document.querySelectorAll('.r,.r-l,.r-r,.r-s,.clip-reveal,.clip-up,.text-split').forEach(el => revObs.observe(el));
+  document.querySelectorAll('.r,.r-l,.r-r,.r-s,.clip-reveal,.clip-up,.plate-reveal,.text-split').forEach(el => revObs.observe(el));
 
-  /* ─── Split text into chars ─── */
-  document.querySelectorAll('.text-split').forEach(el => {
-    const txt = el.textContent;
-    el.textContent = '';
-    [...txt].forEach((c,i) => {
-      const s = document.createElement('span');
-      s.className = 'ch';
-      s.textContent = c === ' ' ? ' ' : c;
-      s.style.transitionDelay = (i*0.04)+'s';
-      el.appendChild(s);
-    });
-  });
-
-  /* ─── Counter animation ─── */
+  /* ─── Counter ─── */
   const countObs = new IntersectionObserver(entries => {
     entries.forEach(e => {
       if (!e.isIntersecting) return;
       const el = e.target;
       const target = parseFloat(el.dataset.count);
       const suffix = el.dataset.suffix || '';
-      const decimals = (el.dataset.count.split('.')[1] || '').length;
-      let start = null, dur = 1600;
+      let start = null, dur = 1800;
       const step = ts => {
         if (!start) start = ts;
         let p = Math.min((ts-start)/dur, 1);
         let eased = 1 - Math.pow(1-p, 4);
-        let val = (eased * target).toFixed(decimals);
-        el.textContent = (decimals ? val : Math.floor(val).toLocaleString()) + suffix;
+        let val = Math.floor(eased * target);
+        el.textContent = val.toLocaleString() + suffix;
         if (p < 1) requestAnimationFrame(step);
-        else el.textContent = (decimals ? target.toFixed(decimals) : target.toLocaleString()) + suffix;
+        else el.textContent = target.toLocaleString() + suffix;
       };
       requestAnimationFrame(step);
       countObs.unobserve(el);
@@ -171,68 +165,15 @@ document.addEventListener('DOMContentLoaded', () => {
   window.addEventListener('scroll', par, { passive: true });
   par();
 
-  /* ─── Hero canvas particles (only if exists) ─── */
-  const heroCanvas = document.getElementById('hero-canvas');
-  if (heroCanvas) {
-    const ctx = heroCanvas.getContext('2d');
-    let W, H, pts = [], animId;
-    function resize(){W=heroCanvas.width=heroCanvas.offsetWidth;H=heroCanvas.height=heroCanvas.offsetHeight;}
-    class P {
-      constructor(){this.reset();}
-      reset(){
-        this.x = Math.random()*W; this.y = Math.random()*H;
-        this.vx = (Math.random()-.5)*.4; this.vy = (Math.random()-.5)*.4;
-        this.r = Math.random()*2 + .8; this.a = Math.random()*.4 + .3;
-      }
-      update(){
-        this.x += this.vx; this.y += this.vy;
-        if (this.x<0||this.x>W||this.y<0||this.y>H) this.reset();
-      }
-      draw(){
-        ctx.beginPath();
-        ctx.arc(this.x,this.y,this.r,0,Math.PI*2);
-        ctx.fillStyle = `rgba(43,184,217,${this.a})`;
-        ctx.fill();
-      }
-    }
-    function init(){resize();pts=[];const c=Math.min(Math.floor(W*H/9000),150);for(let i=0;i<c;i++)pts.push(new P());}
-    function draw(){
-      ctx.clearRect(0,0,W,H);
-      for(let i=0;i<pts.length;i++){
-        for(let j=i+1;j<pts.length;j++){
-          const dx=pts[i].x-pts[j].x, dy=pts[i].y-pts[j].y;
-          const d=Math.sqrt(dx*dx+dy*dy);
-          if(d<130){
-            ctx.beginPath();
-            ctx.moveTo(pts[i].x,pts[i].y);
-            ctx.lineTo(pts[j].x,pts[j].y);
-            ctx.strokeStyle = `rgba(43,184,217,${.18*(1-d/130)})`;
-            ctx.lineWidth=.6; ctx.stroke();
-          }
-        }
-      }
-      pts.forEach(p=>{p.update();p.draw();});
-      animId=requestAnimationFrame(draw);
-    }
-    window.addEventListener('resize',()=>{cancelAnimationFrame(animId);init();draw();});
-    init(); draw();
-  }
-
-  /* ─── Page transition on link click ─── */
-  const transitionEl = document.createElement('div');
-  transitionEl.className = 'page-transition';
-  transitionEl.innerHTML = '<div class="slab"></div><div class="slab"></div><div class="slab"></div><div class="slab"></div><div class="slab"></div>';
-  document.body.appendChild(transitionEl);
-  // Trigger on internal links
-  document.querySelectorAll('a').forEach(a => {
-    const href = a.getAttribute('href');
-    if (!href || href.startsWith('#') || href.startsWith('http') || href.startsWith('tel:') || href.startsWith('mailto:') || a.target === '_blank') return;
-    a.addEventListener('click', e => {
-      e.preventDefault();
-      transitionEl.classList.add('in');
-      setTimeout(() => { window.location.href = href; }, 700);
+  /* ─── Scroll-driven gear rotation ─── */
+  function rotateGears() {
+    const sy = window.scrollY;
+    document.querySelectorAll('[data-spin]').forEach(el => {
+      const speed = parseFloat(el.dataset.spin) || 0.3;
+      el.style.transform = `rotate(${sy * speed}deg)`;
     });
-  });
+  }
+  window.addEventListener('scroll', rotateGears, { passive: true });
 
   /* ─── Hero slider (if present) ─── */
   const slides = document.querySelectorAll('.hero-slide');
@@ -252,6 +193,21 @@ document.addEventListener('DOMContentLoaded', () => {
     setInterval(() => go((cur+1) % slides.length), 5500);
   }
 
+  /* ─── Page transition on link click ─── */
+  const transitionEl = document.createElement('div');
+  transitionEl.className = 'page-transition';
+  transitionEl.innerHTML = '<div class="slab"></div><div class="slab"></div><div class="slab"></div><div class="slab"></div><div class="slab"></div>';
+  document.body.appendChild(transitionEl);
+  document.querySelectorAll('a').forEach(a => {
+    const href = a.getAttribute('href');
+    if (!href || href.startsWith('#') || href.startsWith('http') || href.startsWith('tel:') || href.startsWith('mailto:') || a.target === '_blank') return;
+    a.addEventListener('click', e => {
+      e.preventDefault();
+      transitionEl.classList.add('in');
+      setTimeout(() => { window.location.href = href; }, 700);
+    });
+  });
+
   /* ─── Active nav link ─── */
   const path = location.pathname.split('/').pop() || 'index.html';
   document.querySelectorAll('header nav.h-nav a, .mnav a').forEach(a => {
@@ -261,4 +217,39 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 
+  /* ─── Insert decorative gears into section corners ─── */
+  document.querySelectorAll('[data-gear-corner]').forEach(sec => {
+    const positions = sec.dataset.gearCorner.split(',');
+    positions.forEach(p => {
+      const div = document.createElement('div');
+      div.className = 'gear-deco ' + (Math.random() > .5 ? 'reverse' : '');
+      const size = 80 + Math.random() * 140;
+      div.innerHTML = gearSVG(size);
+      const [pos, ...mods] = p.trim().split(' ');
+      Object.assign(div.style, {
+        position:'absolute',
+        ...gearPosition(pos),
+      });
+      if (mods.includes('y')) div.classList.add('yellow');
+      sec.appendChild(div);
+    });
+  });
+
+  function gearPosition(pos) {
+    switch(pos) {
+      case 'tl': return {top:'-40px',left:'-40px'};
+      case 'tr': return {top:'-40px',right:'-40px'};
+      case 'bl': return {bottom:'-40px',left:'-40px'};
+      case 'br': return {bottom:'-40px',right:'-40px'};
+      case 'c-l': return {top:'40%',left:'2%'};
+      case 'c-r': return {top:'40%',right:'2%'};
+      default: return {};
+    }
+  }
+  function gearSVG(size){
+    return `<svg width="${size}" height="${size}" viewBox="0 0 100 100" fill="currentColor">
+      <path d="M50 28a22 22 0 1 0 0 44 22 22 0 0 0 0-44zm0 36a14 14 0 1 1 0-28 14 14 0 0 1 0 28z"/>
+      <path d="M50 4l3 11h-6l3-11zm0 92l3-11h-6l3 11zm46-46l-11 3v-6l11 3zm-92 0l11-3v6l-11-3zm78.5-32.5l-7 8.5-4.2-4.2 11.2-4.3zM21 79l-7 8.5L18.2 91l4.3-11.2zM82.5 79L91 87.5 79.8 91l4.3-11.2zM21 21l-7-8.5L18.2 9l4.3 11.2z"/>
+    </svg>`;
+  }
 });
