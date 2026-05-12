@@ -36,15 +36,71 @@ body{background:#fff}
 .voice-block:nth-of-type(even){background:var(--bg-soft)}
 .voice-inner{max-width:1100px;margin:0 auto;padding:0 clamp(1.5rem,4vw,3rem)}
 
-/* Voice header image (big) */
+/* Voice header image (big) - now a stage for cutout person animation */
 .v-header-img{
   position:relative;width:100%;aspect-ratio:21/9;overflow:hidden;
   border-radius:8px;box-shadow:0 12px 30px rgba(0,0,0,.12);
   margin-bottom:2.5rem;
+  background:linear-gradient(135deg, var(--green-soft) 0%, #fff 50%, var(--yellow-soft) 100%);
 }
-.v-header-img img{width:100%;height:100%;object-fit:cover;transition:transform 1s var(--ease)}
-.v-header-img:hover img{transform:scale(1.04)}
-.v-header-img::after{content:'';position:absolute;inset:0;background:linear-gradient(to top, rgba(0,0,0,.5) 0%, transparent 50%);pointer-events:none}
+.v-header-bg{
+  position:absolute;inset:0;background-size:cover;background-position:center;
+  filter:blur(8px) saturate(.5) brightness(1.1);opacity:.35;transform:scale(1.1);
+  transition:transform 1.4s var(--ease),filter 1.4s var(--ease),opacity 1s;
+}
+.v-header-img:hover .v-header-bg{transform:scale(1.15);filter:blur(4px) saturate(.9) brightness(1)}
+/* Decorative dots/grid */
+.v-header-img::before{
+  content:'';position:absolute;inset:0;pointer-events:none;
+  background-image:radial-gradient(circle, rgba(45,142,61,.18) 1.5px, transparent 1.5px);
+  background-size:24px 24px;opacity:.45;mask-image:radial-gradient(ellipse 70% 50% at 30% 50%, black 30%, transparent 80%);
+}
+.v-header-img::after{content:'';position:absolute;inset:0;pointer-events:none;background:linear-gradient(to right, rgba(255,255,255,.4) 0%, transparent 40%, transparent 70%, rgba(244,168,0,.15) 100%)}
+/* Cutout person — the animated character */
+.v-cutout{
+  position:absolute;bottom:-3%;left:50%;transform:translateX(-50%);
+  height:120%;width:auto;max-width:none;z-index:3;pointer-events:none;
+  filter:drop-shadow(0 18px 30px rgba(0,0,0,.25));
+  animation:cutoutFloat 5s ease-in-out infinite alternate;
+  transition:transform .4s var(--ease);
+}
+.v-cutout.right{left:auto;right:5%;transform:none;animation:cutoutFloatR 5s ease-in-out infinite alternate}
+.v-cutout.left{left:5%;transform:none;animation:cutoutFloatL 6s ease-in-out infinite alternate}
+@keyframes cutoutFloat{
+  0%{transform:translateX(-50%) translateY(0) rotate(0deg)}
+  50%{transform:translateX(-50%) translateY(-12px) rotate(.3deg)}
+  100%{transform:translateX(-50%) translateY(-6px) rotate(-.3deg)}
+}
+@keyframes cutoutFloatR{
+  0%{transform:translateY(0) rotate(0deg)}
+  50%{transform:translateY(-14px) rotate(.5deg)}
+  100%{transform:translateY(-4px) rotate(-.3deg)}
+}
+@keyframes cutoutFloatL{
+  0%{transform:translateY(0) rotate(0deg)}
+  50%{transform:translateY(-10px) rotate(-.4deg)}
+  100%{transform:translateY(-16px) rotate(.3deg)}
+}
+.v-header-img:hover .v-cutout{animation-duration:2.5s;filter:drop-shadow(0 24px 40px rgba(45,142,61,.4))}
+/* Speech bubble that pops on hover */
+.v-bubble{
+  position:absolute;top:18%;right:8%;z-index:4;
+  background:#fff;color:var(--green-dark);padding:.7rem 1.1rem;border-radius:14px;
+  font-size:.78rem;font-weight:700;line-height:1.5;
+  box-shadow:0 8px 20px rgba(0,0,0,.15);
+  opacity:0;transform:translateY(-10px) scale(.9);transition:opacity .4s,transform .4s var(--ease-bounce);
+  max-width:240px;pointer-events:none;
+}
+.v-bubble::after{
+  content:'';position:absolute;bottom:-10px;left:30px;width:0;height:0;
+  border:10px solid transparent;border-top-color:#fff;border-bottom:0;
+}
+.v-bubble.left-side{left:8%;right:auto}
+.v-bubble.left-side::after{left:auto;right:30px}
+.v-header-img:hover .v-bubble{opacity:1;transform:translateY(0) scale(1);transition-delay:.2s}
+.v-bubble strong{color:var(--yellow-dark)}
+
+/* Year badge on header */
 .v-header-label{
   position:absolute;top:1.5rem;left:1.5rem;z-index:2;
   display:inline-flex;align-items:center;gap:.8rem;
@@ -160,7 +216,9 @@ body{background:#fff}
 <section class="voice-block">
   <div class="voice-inner">
     <div class="v-header-img">
-      <img src="https://sunprosys.co.jp/cont/wp-content/themes/sunpro_theme/img/about/about01_image01_01.jpg" alt="営業職">
+      <div class="v-header-bg" style="background-image:url('https://sunprosys.co.jp/cont/wp-content/themes/sunpro_theme/img/about/about01_image01_01.jpg')"></div>
+      <img class="v-cutout right" src="assets/img/people/about01_image01_01.png" alt="営業職">
+      <div class="v-bubble left-side">お客様と技術者を<br><strong>つなぐ"器"</strong>を作るのが<br>営業の役目です。</div>
       <div class="v-header-label"><span class="vn">VOICE 01</span><span class="vp">営業</span></div>
       <div class="v-header-year">2014<small>JOINED</small></div>
     </div>
@@ -197,7 +255,9 @@ body{background:#fff}
 <section class="voice-block">
   <div class="voice-inner">
     <div class="v-header-img">
-      <img src="https://sunprosys.co.jp/cont/wp-content/themes/sunpro_theme/img/about/about01_image02_01.jpg" alt="機械製作">
+      <div class="v-header-bg" style="background-image:url('https://sunprosys.co.jp/cont/wp-content/themes/sunpro_theme/img/about/about01_image02_01.jpg')"></div>
+      <img class="v-cutout left" src="assets/img/people/about01_image02_01.png" alt="機械製作">
+      <div class="v-bubble">男女問わず<br><strong>ワークライフバランス</strong>を<br>大切にできる会社です。</div>
       <div class="v-header-label"><span class="vn">VOICE 02</span><span class="vp">機械製作</span></div>
       <div class="v-header-year">2018<small>JOINED</small></div>
     </div>
@@ -235,7 +295,9 @@ body{background:#fff}
 <section class="voice-block">
   <div class="voice-inner">
     <div class="v-header-img">
-      <img src="https://sunprosys.co.jp/cont/wp-content/themes/sunpro_theme/img/about/about01_image03_01.jpg" alt="機械製作">
+      <div class="v-header-bg" style="background-image:url('https://sunprosys.co.jp/cont/wp-content/themes/sunpro_theme/img/about/about01_image03_01.jpg')"></div>
+      <img class="v-cutout right" src="assets/img/people/about01_image03_01.png" alt="機械製作">
+      <div class="v-bubble left-side">自分の力量で<br><strong>最初から最後まで</strong><br>任せてもらえる環境です。</div>
       <div class="v-header-label"><span class="vn">VOICE 03</span><span class="vp">機械製作</span></div>
       <div class="v-header-year">2019<small>JOINED</small></div>
     </div>
@@ -272,7 +334,9 @@ body{background:#fff}
 <section class="voice-block">
   <div class="voice-inner">
     <div class="v-header-img">
-      <img src="https://sunprosys.co.jp/cont/wp-content/themes/sunpro_theme/img/about/about01_image04_01.jpg" alt="制御・ソフト設計">
+      <div class="v-header-bg" style="background-image:url('https://sunprosys.co.jp/cont/wp-content/themes/sunpro_theme/img/about/about01_image04_01.jpg')"></div>
+      <img class="v-cutout left" src="assets/img/people/about01_image04_01.png" alt="制御・ソフト設計">
+      <div class="v-bubble">目標となる先輩たちに<br>囲まれた<strong>恵まれた職場</strong>。<br>未経験から成長できます。</div>
       <div class="v-header-label"><span class="vn">VOICE 04</span><span class="vp">制御・ソフト設計</span></div>
       <div class="v-header-year">2019<small>JOINED</small></div>
     </div>
@@ -309,7 +373,9 @@ body{background:#fff}
 <section class="voice-block">
   <div class="voice-inner">
     <div class="v-header-img">
-      <img src="https://sunprosys.co.jp/cont/wp-content/themes/sunpro_theme/img/about/about01_image05_01.jpg" alt="制御・ソフト設計">
+      <div class="v-header-bg" style="background-image:url('https://sunprosys.co.jp/cont/wp-content/themes/sunpro_theme/img/about/about01_image05_01.jpg')"></div>
+      <img class="v-cutout right" src="assets/img/people/about01_image05_01.png" alt="制御・ソフト設計">
+      <div class="v-bubble left-side">オーダーメイドの仕事には<br><strong>刺激と達成感</strong>が<br>あふれています。</div>
       <div class="v-header-label"><span class="vn">VOICE 05</span><span class="vp">制御・ソフト設計</span></div>
       <div class="v-header-year">2017<small>JOINED</small></div>
     </div>
