@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="48" height="48">
+  <g fill="#3f3f3f" transform="rotate(-30 32 32)">
+    <!-- Closed ring with hole at LEFT END -->
+    <path fill-rule="evenodd" d="M 18 32 A 9 9 0 1 0 0 32 A 9 9 0 1 0 18 32 Z M 13 32 A 4 4 0 1 1 5 32 A 4 4 0 1 1 13 32 Z"/>
+    <!-- Handle + open-jaw head as one continuous silhouette -->
+    <path d="M 12 26 L 40 26 L 40 16 L 60 16 L 60 24 L 48 32 L 60 40 L 60 48 L 40 48 L 40 38 L 12 38 Z"/>
+  </g>
+</svg>

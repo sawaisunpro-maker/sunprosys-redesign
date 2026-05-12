@@ -56,27 +56,12 @@ a{color:inherit;text-decoration:none}
 button{font:inherit;cursor:pointer;border:none;background:none}
 
 /* ═══════════════════════════════════
-   CURSOR - Gear themed
+   CURSOR - Native SVG wrench (CSS url)
 ═══════════════════════════════════ */
 @media(hover:hover){
-  body{cursor:none}
-  #cursor{
-    position:fixed;width:8px;height:8px;background:var(--green);
-    border-radius:50%;pointer-events:none;z-index:9999;
-    transform:translate(-50%,-50%);
-    transition:transform .25s,background .25s;
-  }
-  #cursor-ring{
-    position:fixed;width:42px;height:42px;
-    pointer-events:none;z-index:9998;
-    transform:translate(-50%,-50%);
-    transition:transform .15s var(--ease),width .3s,height .3s;
-  }
-  #cursor-ring svg{width:100%;height:100%;animation:wrenchSwing 2.6s ease-in-out infinite}
-  @keyframes wrenchSwing{
-    0%,100%{transform:rotate(-4deg)}
-    50%{transform:rotate(10deg)}
-  }
+  body{cursor:url('../img/cursor-wrench.svg') 6 6, auto}
+  /* JS-injected custom cursor elements are hidden — native cursor takes over */
+  #cursor,#cursor-ring{display:none!important}
 }
 @media(hover:none){#cursor,#cursor-ring{display:none}}
 
