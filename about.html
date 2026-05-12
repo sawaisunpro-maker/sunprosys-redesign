@@ -116,6 +116,56 @@ body{background:#fff}
 /* Halo disabled — SVG filter now provides white paper-cutout edge */
 .v-halo{display:none}
 
+/* ───── Large hover-animated pictogram (opposite side of cutout) ───── */
+.v-pictogram{
+  position:absolute;top:50%;width:clamp(160px,18vw,240px);height:clamp(160px,18vw,240px);
+  z-index:2;color:#3a8a2d;opacity:.35;pointer-events:none;
+  transition:opacity .5s var(--ease),color .5s,transform .8s var(--ease);
+}
+.v-pictogram.left{left:3%;transform:translateY(-50%) rotate(-8deg)}
+.v-pictogram.right{right:3%;transform:translateY(-50%) rotate(8deg)}
+.v-pictogram svg{width:100%;height:100%;display:block;overflow:visible}
+.v-header-img:hover .v-pictogram{opacity:.65;color:#1e6b29}
+.v-header-img:hover .v-pictogram.left{transform:translateY(-50%) rotate(0deg) scale(1.1)}
+.v-header-img:hover .v-pictogram.right{transform:translateY(-50%) rotate(0deg) scale(1.1)}
+
+/* Animated parts inside pictograms (paused by default, run on hover) */
+.v-pictogram .p-spin{transform-origin:center;animation:gearSpin 8s linear infinite;animation-play-state:paused}
+.v-header-img:hover .v-pictogram .p-spin{animation-play-state:running;animation-duration:2.5s}
+.v-pictogram .p-spin-rev{transform-origin:center;animation:gearSpin 8s linear infinite reverse;animation-play-state:paused}
+.v-header-img:hover .v-pictogram .p-spin-rev{animation-play-state:running;animation-duration:3s}
+
+/* Joint rotation (robot arm) */
+.v-pictogram .j1{transform-origin:32px 50px;transition:transform 1s var(--ease)}
+.v-pictogram .j2{transform-origin:24px 32px;transition:transform 1s var(--ease) .15s}
+.v-pictogram .j3{transform-origin:46px 22px;transition:transform 1s var(--ease) .3s}
+.v-header-img:hover .v-pictogram .j1{transform:rotate(-15deg)}
+.v-header-img:hover .v-pictogram .j2{transform:rotate(22deg)}
+.v-header-img:hover .v-pictogram .j3{transform:rotate(-28deg)}
+
+/* Sway for cobot */
+.v-pictogram .sway{transform-origin:32px 56px;transition:transform 1.2s var(--ease)}
+.v-header-img:hover .v-pictogram .sway{transform:rotate(8deg)}
+
+/* LED blink */
+.v-pictogram .led{opacity:.4;transition:opacity .3s}
+.v-header-img:hover .v-pictogram .led{animation:ledBlink 1s steps(2,end) infinite}
+@keyframes ledBlink{0%,49%{opacity:1;fill:#f4a800}50%,100%{opacity:.5;fill:#3a8a2d}}
+
+/* Trace pulse for PCB */
+.v-pictogram .trace{stroke-dasharray:6 6;stroke-dashoffset:0;transition:stroke-dashoffset 0s}
+.v-header-img:hover .v-pictogram .trace{animation:traceFlow 1.2s linear infinite}
+@keyframes traceFlow{from{stroke-dashoffset:0}to{stroke-dashoffset:-24}}
+
+/* Conveyor box flow */
+.v-pictogram .box{transition:transform .8s var(--ease)}
+.v-header-img:hover .v-pictogram .box1{transform:translateX(10px)}
+.v-header-img:hover .v-pictogram .box2{transform:translateX(10px)}
+.v-header-img:hover .v-pictogram .box3{transform:translateX(10px)}
+
+/* Hide on small screens to keep layout clean */
+@media(max-width:768px){.v-pictogram{display:none}}
+
 /* Ground shadow disc (anchors the person to the panel) */
 .v-ground{
   position:absolute;bottom:1.5%;width:32%;height:12px;z-index:3;pointer-events:none;
@@ -359,6 +409,18 @@ body{background:#fff}
       <div class="v-sier-deco gear-corner bl"><svg viewBox="0 0 100 100" fill="currentColor"><path d="M50 28a22 22 0 1 0 0 44 22 22 0 0 0 0-44zm0 36a14 14 0 1 1 0-28 14 14 0 0 1 0 28z"/><path d="M50 4l3 11h-6l3-11zm0 92l3-11h-6l3 11zm46-46l-11 3v-6l11 3zm-92 0l11-3v6l-11-3zm78.5-32.5l-7 8.5-4.2-4.2 11.2-4.3zM21 79l-7 8.5L18.2 91l4.3-11.2zM82.5 79L91 87.5 79.8 91l4.3-11.2zM21 21l-7-8.5L18.2 9l4.3 11.2z"/></svg></div>
       <div class="v-sier-deco arm-r"><svg viewBox="0 0 200 200" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="50" y="170" width="100" height="20" fill="currentColor" opacity=".25"/><circle cx="100" cy="170" r="14"/><line x1="100" y1="170" x2="75" y2="100" stroke-width="16" opacity=".5"/><circle cx="75" cy="100" r="12"/><line x1="75" y1="100" x2="150" y2="60" stroke-width="14" opacity=".5"/><circle cx="150" cy="60" r="10"/><line x1="150" y1="60" x2="178" y2="32" stroke-width="6"/><rect x="168" y="22" width="22" height="18" stroke-width="2"/></svg></div>
       <div class="v-sier-deco circuit"><svg viewBox="0 0 140 80" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M0,40 L30,40 L40,30 L70,30 L80,40 L140,40"/><circle cx="30" cy="40" r="3.5" fill="currentColor"/><circle cx="70" cy="30" r="3.5" fill="currentColor"/><path d="M40,30 L40,10 L80,10"/><circle cx="80" cy="10" r="3" fill="currentColor"/><path d="M80,40 L80,65 L120,65"/><circle cx="120" cy="65" r="3" fill="currentColor"/></svg></div>
+      <!-- Pictogram: Conveyor (sales = coordinating flow between customer and engineer) -->
+      <div class="v-pictogram left">
+        <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="4" y="36" width="56" height="10" rx="5"/>
+          <g class="p-spin" style="transform-origin:14px 41px"><circle cx="14" cy="41" r="3" fill="currentColor" opacity=".6"/><line x1="14" y1="38" x2="14" y2="44"/><line x1="11" y1="41" x2="17" y2="41"/></g>
+          <g class="p-spin-rev" style="transform-origin:50px 41px"><circle cx="50" cy="41" r="3" fill="currentColor" opacity=".6"/><line x1="50" y1="38" x2="50" y2="44"/><line x1="47" y1="41" x2="53" y2="41"/></g>
+          <rect class="box box1" x="10" y="22" width="10" height="10" fill="currentColor" opacity=".7"/>
+          <rect class="box box2" x="27" y="22" width="10" height="10" fill="currentColor" opacity=".5"/>
+          <rect class="box box3" x="44" y="22" width="10" height="10" fill="currentColor" opacity=".35"/>
+          <line x1="6" y1="52" x2="58" y2="52" stroke-dasharray="2 3" opacity=".5"/>
+        </svg>
+      </div>
       <img loading="lazy" decoding="async" class="v-cutout right" src="assets/img/people/about01_image01_01.png" alt="営業職">
       <div class="v-callout tl">JOB_TITLE<span class="num">SALES</span></div>
       <div class="v-callout tr">JOINED<span class="num">2014</span></div>
@@ -408,6 +470,25 @@ body{background:#fff}
       <div class="v-sier-deco gear-corner bl"><svg viewBox="0 0 100 100" fill="currentColor"><path d="M50 28a22 22 0 1 0 0 44 22 22 0 0 0 0-44zm0 36a14 14 0 1 1 0-28 14 14 0 0 1 0 28z"/><path d="M50 4l3 11h-6l3-11zm0 92l3-11h-6l3 11zm46-46l-11 3v-6l11 3zm-92 0l11-3v6l-11-3zm78.5-32.5l-7 8.5-4.2-4.2 11.2-4.3zM21 79l-7 8.5L18.2 91l4.3-11.2zM82.5 79L91 87.5 79.8 91l4.3-11.2zM21 21l-7-8.5L18.2 9l4.3 11.2z"/></svg></div>
       <div class="v-sier-deco arm-l"><svg viewBox="0 0 200 200" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="50" y="170" width="100" height="20" fill="currentColor" opacity=".25"/><circle cx="100" cy="170" r="14"/><line x1="100" y1="170" x2="75" y2="100" stroke-width="16" opacity=".5"/><circle cx="75" cy="100" r="12"/><line x1="75" y1="100" x2="150" y2="60" stroke-width="14" opacity=".5"/><circle cx="150" cy="60" r="10"/><line x1="150" y1="60" x2="178" y2="32" stroke-width="6"/><rect x="168" y="22" width="22" height="18" stroke-width="2"/></svg></div>
       <div class="v-sier-deco circuit-r"><svg viewBox="0 0 140 80" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M0,40 L60,40 L70,50 L120,50 L140,40"/><circle cx="60" cy="40" r="3.5" fill="currentColor"/><circle cx="120" cy="50" r="3.5" fill="currentColor"/><path d="M70,50 L70,70"/><circle cx="70" cy="70" r="3" fill="currentColor"/><path d="M120,50 L120,20 L80,20"/><circle cx="80" cy="20" r="3" fill="currentColor"/></svg></div>
+      <!-- Pictogram: Robot arm (mechanical = robot system) -->
+      <div class="v-pictogram right">
+        <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="20" y="54" width="24" height="6" fill="currentColor" opacity=".3"/>
+          <circle cx="32" cy="50" r="4"/>
+          <g class="j1">
+            <line x1="32" y1="50" x2="24" y2="32" stroke-width="5"/>
+            <circle cx="24" cy="32" r="3.5"/>
+            <g class="j2">
+              <line x1="24" y1="32" x2="46" y2="22" stroke-width="4.5"/>
+              <circle cx="46" cy="22" r="3"/>
+              <g class="j3">
+                <line x1="46" y1="22" x2="54" y2="12" stroke-width="2.5"/>
+                <rect x="50" y="6" width="8" height="6"/>
+              </g>
+            </g>
+          </g>
+        </svg>
+      </div>
       <img loading="lazy" decoding="async" class="v-cutout left" src="assets/img/people/about01_image02_01.png" alt="機械製作">
       <div class="v-callout tr">JOB_TITLE<span class="num">MECHANICAL</span></div>
       <div class="v-callout br">JOINED<span class="num">2018</span></div>
@@ -458,6 +539,22 @@ body{background:#fff}
       <div class="v-sier-deco gear-corner bl"><svg viewBox="0 0 100 100" fill="currentColor"><path d="M50 28a22 22 0 1 0 0 44 22 22 0 0 0 0-44zm0 36a14 14 0 1 1 0-28 14 14 0 0 1 0 28z"/><path d="M50 4l3 11h-6l3-11zm0 92l3-11h-6l3 11zm46-46l-11 3v-6l11 3zm-92 0l11-3v6l-11-3zm78.5-32.5l-7 8.5-4.2-4.2 11.2-4.3zM21 79l-7 8.5L18.2 91l4.3-11.2zM82.5 79L91 87.5 79.8 91l4.3-11.2zM21 21l-7-8.5L18.2 9l4.3 11.2z"/></svg></div>
       <div class="v-sier-deco arm-r"><svg viewBox="0 0 200 200" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="50" y="170" width="100" height="20" fill="currentColor" opacity=".25"/><circle cx="100" cy="170" r="14"/><line x1="100" y1="170" x2="75" y2="100" stroke-width="16" opacity=".5"/><circle cx="75" cy="100" r="12"/><line x1="75" y1="100" x2="150" y2="60" stroke-width="14" opacity=".5"/><circle cx="150" cy="60" r="10"/><line x1="150" y1="60" x2="178" y2="32" stroke-width="6"/><rect x="168" y="22" width="22" height="18" stroke-width="2"/></svg></div>
       <div class="v-sier-deco circuit"><svg viewBox="0 0 140 80" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M0,40 L30,40 L40,30 L70,30 L80,40 L140,40"/><circle cx="30" cy="40" r="3.5" fill="currentColor"/><circle cx="70" cy="30" r="3.5" fill="currentColor"/><path d="M40,30 L40,10 L80,10"/><circle cx="80" cy="10" r="3" fill="currentColor"/><path d="M80,40 L80,65 L120,65"/><circle cx="120" cy="65" r="3" fill="currentColor"/></svg></div>
+      <!-- Pictogram: Cobot (collaborative robot — independent operator) -->
+      <div class="v-pictogram left">
+        <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <ellipse cx="32" cy="56" rx="14" ry="3" fill="currentColor" opacity=".3"/>
+          <g class="sway">
+            <line x1="32" y1="56" x2="32" y2="38" stroke-width="6"/>
+            <circle cx="32" cy="38" r="4"/>
+            <path d="M32 38 Q 22 30 20 18" stroke-width="4"/>
+            <circle cx="20" cy="18" r="3"/>
+            <path d="M20 18 Q 30 12 44 14" stroke-width="3"/>
+            <circle cx="44" cy="14" r="2.5"/>
+            <line x1="44" y1="14" x2="52" y2="8" stroke-width="2"/>
+            <rect x="48" y="4" width="6" height="6"/>
+          </g>
+        </svg>
+      </div>
       <img loading="lazy" decoding="async" class="v-cutout right" src="assets/img/people/about01_image03_01.png" alt="機械製作">
       <div class="v-callout tl">JOB_TITLE<span class="num">MECHANICAL</span></div>
       <div class="v-callout tr">JOINED<span class="num">2019</span></div>
@@ -507,6 +604,22 @@ body{background:#fff}
       <div class="v-sier-deco gear-corner bl"><svg viewBox="0 0 100 100" fill="currentColor"><path d="M50 28a22 22 0 1 0 0 44 22 22 0 0 0 0-44zm0 36a14 14 0 1 1 0-28 14 14 0 0 1 0 28z"/><path d="M50 4l3 11h-6l3-11zm0 92l3-11h-6l3 11zm46-46l-11 3v-6l11 3zm-92 0l11-3v6l-11-3zm78.5-32.5l-7 8.5-4.2-4.2 11.2-4.3zM21 79l-7 8.5L18.2 91l4.3-11.2zM82.5 79L91 87.5 79.8 91l4.3-11.2zM21 21l-7-8.5L18.2 9l4.3 11.2z"/></svg></div>
       <div class="v-sier-deco arm-l"><svg viewBox="0 0 200 200" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="50" y="170" width="100" height="20" fill="currentColor" opacity=".25"/><circle cx="100" cy="170" r="14"/><line x1="100" y1="170" x2="75" y2="100" stroke-width="16" opacity=".5"/><circle cx="75" cy="100" r="12"/><line x1="75" y1="100" x2="150" y2="60" stroke-width="14" opacity=".5"/><circle cx="150" cy="60" r="10"/><line x1="150" y1="60" x2="178" y2="32" stroke-width="6"/><rect x="168" y="22" width="22" height="18" stroke-width="2"/></svg></div>
       <div class="v-sier-deco circuit-r"><svg viewBox="0 0 140 80" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M0,40 L60,40 L70,50 L120,50 L140,40"/><circle cx="60" cy="40" r="3.5" fill="currentColor"/><circle cx="120" cy="50" r="3.5" fill="currentColor"/><path d="M70,50 L70,70"/><circle cx="70" cy="70" r="3" fill="currentColor"/><path d="M120,50 L120,20 L80,20"/><circle cx="80" cy="20" r="3" fill="currentColor"/></svg></div>
+      <!-- Pictogram: PLC control panel with blinking LEDs -->
+      <div class="v-pictogram right">
+        <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="10" y="8" width="44" height="48" rx="2"/>
+          <line x1="10" y1="20" x2="54" y2="20"/>
+          <circle class="led" cx="18" cy="14" r="1.8" fill="currentColor"/>
+          <circle class="led" cx="24" cy="14" r="1.8" fill="currentColor" style="animation-delay:.15s"/>
+          <circle class="led" cx="30" cy="14" r="1.8" fill="currentColor" style="animation-delay:.3s"/>
+          <rect x="16" y="26" width="32" height="8" rx="1"/>
+          <line x1="16" y1="42" x2="48" y2="42"/>
+          <line x1="16" y1="48" x2="48" y2="48"/>
+          <rect x="16" y="42" width="6" height="8" fill="currentColor" opacity=".5"/>
+          <circle class="led" cx="44" cy="46" r="1.5" fill="currentColor" style="animation-delay:.45s"/>
+          <circle class="led" cx="44" cy="52" r="1.5" fill="currentColor" style="animation-delay:.6s"/>
+        </svg>
+      </div>
       <img loading="lazy" decoding="async" class="v-cutout left" src="assets/img/people/about01_image04_01.png" alt="制御・ソフト設計">
       <div class="v-callout tr">JOB_TITLE<span class="num">CONTROL / SW</span></div>
       <div class="v-callout br">JOINED<span class="num">2019</span></div>
@@ -556,6 +669,27 @@ body{background:#fff}
       <div class="v-sier-deco gear-corner bl"><svg viewBox="0 0 100 100" fill="currentColor"><path d="M50 28a22 22 0 1 0 0 44 22 22 0 0 0 0-44zm0 36a14 14 0 1 1 0-28 14 14 0 0 1 0 28z"/><path d="M50 4l3 11h-6l3-11zm0 92l3-11h-6l3 11zm46-46l-11 3v-6l11 3zm-92 0l11-3v6l-11-3zm78.5-32.5l-7 8.5-4.2-4.2 11.2-4.3zM21 79l-7 8.5L18.2 91l4.3-11.2zM82.5 79L91 87.5 79.8 91l4.3-11.2zM21 21l-7-8.5L18.2 9l4.3 11.2z"/></svg></div>
       <div class="v-sier-deco arm-r"><svg viewBox="0 0 200 200" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="50" y="170" width="100" height="20" fill="currentColor" opacity=".25"/><circle cx="100" cy="170" r="14"/><line x1="100" y1="170" x2="75" y2="100" stroke-width="16" opacity=".5"/><circle cx="75" cy="100" r="12"/><line x1="75" y1="100" x2="150" y2="60" stroke-width="14" opacity=".5"/><circle cx="150" cy="60" r="10"/><line x1="150" y1="60" x2="178" y2="32" stroke-width="6"/><rect x="168" y="22" width="22" height="18" stroke-width="2"/></svg></div>
       <div class="v-sier-deco circuit"><svg viewBox="0 0 140 80" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M0,40 L30,40 L40,30 L70,30 L80,40 L140,40"/><circle cx="30" cy="40" r="3.5" fill="currentColor"/><circle cx="70" cy="30" r="3.5" fill="currentColor"/><path d="M40,30 L40,10 L80,10"/><circle cx="80" cy="10" r="3" fill="currentColor"/><path d="M80,40 L80,65 L120,65"/><circle cx="120" cy="65" r="3" fill="currentColor"/></svg></div>
+      <!-- Pictogram: PCB with traces flowing on hover -->
+      <div class="v-pictogram left">
+        <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="6" y="8" width="52" height="48" rx="2" fill="currentColor" opacity=".06"/>
+          <rect x="6" y="8" width="52" height="48" rx="2"/>
+          <rect x="22" y="22" width="20" height="14" rx="1"/>
+          <rect x="38" y="42" width="14" height="8" rx="1"/>
+          <path class="trace" d="M14 16 L 20 16 L 22 18 L 22 22"/>
+          <path class="trace" d="M50 16 L 44 16 L 44 18 L 42 22"/>
+          <path class="trace" d="M22 36 L 22 42 L 38 42"/>
+          <path class="trace" d="M42 36 L 42 40 L 52 40 L 52 46"/>
+          <path class="trace" d="M14 44 L 14 50 L 20 50"/>
+          <circle cx="14" cy="16" r="1.8" fill="currentColor"/>
+          <circle cx="50" cy="16" r="1.8" fill="currentColor"/>
+          <circle cx="14" cy="44" r="1.8" fill="currentColor"/>
+          <circle cx="52" cy="46" r="1.8" fill="currentColor"/>
+          <circle cx="20" cy="50" r="1.8" fill="currentColor"/>
+          <rect x="46" y="14" width="6" height="3" fill="currentColor" opacity=".6"/>
+          <rect x="12" y="38" width="3" height="6" fill="currentColor" opacity=".6"/>
+        </svg>
+      </div>
       <img loading="lazy" decoding="async" class="v-cutout right" src="assets/img/people/about01_image05_01.png" alt="制御・ソフト設計">
       <div class="v-callout tl">JOB_TITLE<span class="num">CONTROL / SW</span></div>
       <div class="v-callout tr">JOINED<span class="num">2017</span></div>
