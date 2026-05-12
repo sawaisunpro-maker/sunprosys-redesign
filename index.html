@@ -22,10 +22,17 @@
     linear-gradient(90deg, rgba(45,142,61,.4) 0%, transparent 60%);
 }
 
-/* Decorative gears on hero (toned down) */
-.hero-gear-deco{position:absolute;color:rgba(255,255,255,.04);z-index:1;pointer-events:none}
-.hero-gear-deco.g1{top:-80px;right:-80px}
-.hero-gear-deco svg{animation:gearSpin 60s linear infinite}
+/* Meshing gear pair in hero (replaces sun-like decoration) */
+.hero-gear-mesh{
+  position:absolute;top:-60px;right:-60px;z-index:1;pointer-events:none;
+  color:rgba(255,255,255,.06);
+}
+.hero-gear-mesh svg{display:block;width:440px;height:340px;overflow:visible}
+.hero-gear-mesh .g-a{transform-box:fill-box;transform-origin:130px 160px;animation:gearSpin 30s linear infinite}
+.hero-gear-mesh .g-b{transform-box:fill-box;transform-origin:248px 144px;animation:gearSpin 20s linear infinite reverse}
+.hero-gear-mesh .g-c{transform-box:fill-box;transform-origin:340px 220px;animation:gearSpin 14s linear infinite}
+@media(max-width:1100px){.hero-gear-mesh{opacity:.5}}
+@media(max-width:768px){.hero-gear-mesh{display:none}}
 
 /* Large robot arm — visual SIer statement */
 .hero-robot{
@@ -570,7 +577,70 @@
     </svg>
   </div>
   <!-- Smaller corner gears (kept subtle) -->
-  <div class="hero-gear-deco g1"><svg width="320" height="320" viewBox="0 0 100 100" fill="currentColor" data-spin="0.05" opacity=".5"><path d="M50 28a22 22 0 1 0 0 44 22 22 0 0 0 0-44zm0 36a14 14 0 1 1 0-28 14 14 0 0 1 0 28z"/><path d="M50 4l3 11h-6l3-11zm0 92l3-11h-6l3 11zm46-46l-11 3v-6l11 3zm-92 0l11-3v6l-11-3zm78.5-32.5l-7 8.5-4.2-4.2 11.2-4.3zM21 79l-7 8.5L18.2 91l4.3-11.2zM82.5 79L91 87.5 79.8 91l4.3-11.2zM21 21l-7-8.5L18.2 9l4.3 11.2z"/></svg></div>
+  <!-- Meshing gear train: 3 interlocking gears rotating in alternating directions -->
+  <div class="hero-gear-mesh">
+    <svg viewBox="0 0 440 340" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+      <!-- ── GEAR A : big, 12 teeth ── -->
+      <g class="g-a">
+        <g transform="translate(130 160)">
+          <circle r="52"/>
+          <g>
+            <rect x="-5" y="-66" width="10" height="14"/>
+            <rect x="-5" y="-66" width="10" height="14" transform="rotate(30)"/>
+            <rect x="-5" y="-66" width="10" height="14" transform="rotate(60)"/>
+            <rect x="-5" y="-66" width="10" height="14" transform="rotate(90)"/>
+            <rect x="-5" y="-66" width="10" height="14" transform="rotate(120)"/>
+            <rect x="-5" y="-66" width="10" height="14" transform="rotate(150)"/>
+            <rect x="-5" y="-66" width="10" height="14" transform="rotate(180)"/>
+            <rect x="-5" y="-66" width="10" height="14" transform="rotate(210)"/>
+            <rect x="-5" y="-66" width="10" height="14" transform="rotate(240)"/>
+            <rect x="-5" y="-66" width="10" height="14" transform="rotate(270)"/>
+            <rect x="-5" y="-66" width="10" height="14" transform="rotate(300)"/>
+            <rect x="-5" y="-66" width="10" height="14" transform="rotate(330)"/>
+          </g>
+          <!-- Hub + spokes (rendered slightly darker for depth) -->
+          <circle r="14" fill="#0a1418"/>
+          <circle r="5" fill="currentColor"/>
+        </g>
+      </g>
+
+      <!-- ── GEAR B : medium, 8 teeth ── -->
+      <g class="g-b">
+        <g transform="translate(248 144)">
+          <circle r="34"/>
+          <g>
+            <rect x="-4" y="-46" width="8" height="12"/>
+            <rect x="-4" y="-46" width="8" height="12" transform="rotate(45)"/>
+            <rect x="-4" y="-46" width="8" height="12" transform="rotate(90)"/>
+            <rect x="-4" y="-46" width="8" height="12" transform="rotate(135)"/>
+            <rect x="-4" y="-46" width="8" height="12" transform="rotate(180)"/>
+            <rect x="-4" y="-46" width="8" height="12" transform="rotate(225)"/>
+            <rect x="-4" y="-46" width="8" height="12" transform="rotate(270)"/>
+            <rect x="-4" y="-46" width="8" height="12" transform="rotate(315)"/>
+          </g>
+          <circle r="10" fill="#0a1418"/>
+          <circle r="3.5" fill="currentColor"/>
+        </g>
+      </g>
+
+      <!-- ── GEAR C : small, 6 teeth ── -->
+      <g class="g-c">
+        <g transform="translate(340 220)">
+          <circle r="22"/>
+          <g>
+            <rect x="-3.5" y="-32" width="7" height="10"/>
+            <rect x="-3.5" y="-32" width="7" height="10" transform="rotate(60)"/>
+            <rect x="-3.5" y="-32" width="7" height="10" transform="rotate(120)"/>
+            <rect x="-3.5" y="-32" width="7" height="10" transform="rotate(180)"/>
+            <rect x="-3.5" y="-32" width="7" height="10" transform="rotate(240)"/>
+            <rect x="-3.5" y="-32" width="7" height="10" transform="rotate(300)"/>
+          </g>
+          <circle r="7" fill="#0a1418"/>
+          <circle r="2.5" fill="currentColor"/>
+        </g>
+      </g>
+    </svg>
+  </div>
 
   <div class="hero-content">
     <div class="hero-en"><span class="hero-tag">ROBOT SYSTEM INTEGRATOR</span> · SINCE 2000 · HIROSHIMA</div>
