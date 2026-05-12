@@ -210,18 +210,49 @@ document.addEventListener('DOMContentLoaded', () => {
     setInterval(() => go((cur+1) % slides.length), 5500);
   }
 
-  /* ─── Page transition on link click ─── */
+  /* ─── Page transition on link click (2-color + pictograms) ─── */
+  const SLAB_ICONS = [
+    // Robot arm
+    '<svg class="slab-pic" viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><rect x="20" y="54" width="24" height="6" fill="currentColor" opacity=".35"/><circle cx="32" cy="50" r="4"/><line x1="32" y1="50" x2="24" y2="32" stroke-width="6"/><circle cx="24" cy="32" r="3.5"/><line x1="24" y1="32" x2="46" y2="22" stroke-width="5"/><circle cx="46" cy="22" r="3"/><line x1="46" y1="22" x2="54" y2="12" stroke-width="3"/><rect x="50" y="6" width="8" height="6"/></svg>',
+    // Gear
+    '<svg class="slab-pic" viewBox="0 0 64 64" fill="currentColor"><path d="M32 18a14 14 0 1 0 0 28 14 14 0 0 0 0-28zm0 22a8 8 0 1 1 0-16 8 8 0 0 1 0 16z"/><path d="M32 4l2 8h-4l2-8zm0 56l2-8h-4l2 8zm28-28l-8 2v-4l8 2zm-56 0l8-2v4l-8-2zm49-21l-5 6-3-3 8-3zm-42 42l-5 6-3-3 8-3zm45 0l6 5-3 3-3-8zm-42-42l6 5-3 3-3-8z"/></svg>',
+    // Cobot
+    '<svg class="slab-pic" viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="32" cy="56" rx="14" ry="3" fill="currentColor" opacity=".35"/><line x1="32" y1="54" x2="32" y2="36" stroke-width="6"/><circle cx="32" cy="36" r="4"/><path d="M32 36 Q 20 28 18 18" stroke-width="4"/><circle cx="18" cy="18" r="3"/><path d="M18 18 Q 28 12 42 14" stroke-width="3"/><circle cx="42" cy="14" r="2.5"/><line x1="42" y1="14" x2="48" y2="8" stroke-width="2"/></svg>',
+    // PLC control panel
+    '<svg class="slab-pic" viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><rect x="10" y="8" width="44" height="48" rx="2"/><line x1="10" y1="20" x2="54" y2="20"/><circle cx="18" cy="14" r="1.8" fill="currentColor"/><circle cx="24" cy="14" r="1.8" fill="currentColor"/><rect x="16" y="26" width="32" height="8" rx="1"/><line x1="16" y1="42" x2="48" y2="42"/><line x1="16" y1="48" x2="48" y2="48"/><rect x="16" y="42" width="6" height="8" fill="currentColor" opacity=".5"/></svg>',
+    // PCB
+    '<svg class="slab-pic" viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><rect x="6" y="10" width="52" height="44" rx="2"/><circle cx="14" cy="18" r="1.8" fill="currentColor"/><circle cx="50" cy="18" r="1.8" fill="currentColor"/><circle cx="14" cy="46" r="1.8" fill="currentColor"/><circle cx="50" cy="46" r="1.8" fill="currentColor"/><rect x="20" y="22" width="14" height="10" rx="1"/><rect x="38" y="34" width="14" height="10" rx="1"/><line x1="14" y1="18" x2="20" y2="22"/><line x1="34" y1="32" x2="38" y2="34"/></svg>',
+    // Conveyor
+    '<svg class="slab-pic" viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><rect x="6" y="32" width="52" height="10" rx="5"/><circle cx="14" cy="37" r="2" fill="currentColor"/><circle cx="50" cy="37" r="2" fill="currentColor"/><rect x="22" y="20" width="10" height="10" fill="currentColor" opacity=".55"/><rect x="36" y="20" width="10" height="10" fill="currentColor" opacity=".4"/></svg>',
+    // Gripper
+    '<svg class="slab-pic" viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><rect x="26" y="10" width="12" height="14" rx="2"/><line x1="32" y1="24" x2="32" y2="30"/><path d="M26 30 L20 50 L26 52" stroke-width="2.6"/><path d="M38 30 L44 50 L38 52" stroke-width="2.6"/><rect x="18" y="50" width="10" height="4" rx="1"/><rect x="36" y="50" width="10" height="4" rx="1"/></svg>',
+    // Sensor
+    '<svg class="slab-pic" viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><rect x="22" y="16" width="20" height="34" rx="2"/><circle cx="32" cy="26" r="5" fill="currentColor" opacity=".35"/><circle cx="32" cy="26" r="2.5" fill="currentColor"/><line x1="32" y1="50" x2="32" y2="58"/></svg>',
+    // Camera
+    '<svg class="slab-pic" viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><rect x="10" y="22" width="44" height="28" rx="3"/><circle cx="32" cy="36" r="9"/><circle cx="32" cy="36" r="5"/><rect x="20" y="14" width="12" height="8" rx="1"/><circle cx="46" cy="28" r="1.5" fill="currentColor"/></svg>',
+    // Laser
+    '<svg class="slab-pic" viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><rect x="20" y="8" width="24" height="14" rx="2"/><line x1="32" y1="22" x2="32" y2="40" stroke-width="3" stroke-dasharray="4 3"/><path d="M22 44 L 42 44 L 38 56 L 26 56 Z" fill="currentColor" opacity=".25"/></svg>',
+  ];
+
+  // Shuffle helper for variety on each session
+  function shuffled(arr){const a = arr.slice();for(let i=a.length-1;i>0;i--){const j=(Math.random()*(i+1))|0;[a[i],a[j]]=[a[j],a[i]]}return a}
+
   const transitionEl = document.createElement('div');
   transitionEl.className = 'page-transition';
-  transitionEl.innerHTML = '<div class="slab"></div><div class="slab"></div><div class="slab"></div><div class="slab"></div><div class="slab"></div>';
+  transitionEl.innerHTML = shuffled(SLAB_ICONS).slice(0, 5).map(svg => `<div class="slab">${svg}</div>`).join('');
   document.body.appendChild(transitionEl);
+
   document.querySelectorAll('a').forEach(a => {
     const href = a.getAttribute('href');
     if (!href || href.startsWith('#') || href.startsWith('http') || href.startsWith('tel:') || href.startsWith('mailto:') || a.target === '_blank') return;
     a.addEventListener('click', e => {
       e.preventDefault();
+      // Reshuffle pictograms for each transition (visual variety)
+      transitionEl.innerHTML = shuffled(SLAB_ICONS).slice(0, 5).map(svg => `<div class="slab">${svg}</div>`).join('');
+      // Force reflow before adding .in class so transition runs from initial state
+      void transitionEl.offsetWidth;
       transitionEl.classList.add('in');
-      setTimeout(() => { window.location.href = href; }, 700);
+      setTimeout(() => { window.location.href = href; }, 850);
     });
   });
 
