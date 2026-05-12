@@ -143,31 +143,134 @@
 .biz-arrow{display:inline-flex;align-items:center;gap:.6rem;font-size:.72rem;letter-spacing:.2em;text-transform:uppercase;color:var(--green);font-weight:700;transition:gap .3s,color .3s}
 .biz-arrow:hover{gap:1rem;color:var(--yellow-dark)}
 
-/* PRODUCT - Two-row opposite marquee */
-#product{padding:clamp(5rem,10vh,9rem) 0;background:var(--bg-soft);position:relative;overflow:hidden}
+/* PRODUCT - Two-row conveyor with packages on belt */
+#product{padding:clamp(5rem,10vh,9rem) 0;background:linear-gradient(180deg, var(--bg-soft) 0%, #e8f5ea 100%);position:relative;overflow:hidden}
+
+/* Conveyor stage wraps marquee + belt */
+.conveyor-stage{
+  position:relative;padding:1.5rem 0 6.5rem;
+}
+.conveyor-stage + .conveyor-stage{padding-top:3rem}
+
+/* Marquee containing the "packages" */
 .prod-marquee{
-  overflow:hidden;padding:1rem 0;position:relative;
-  margin-bottom:1.2rem;
+  overflow:hidden;padding:0;position:relative;z-index:2;
 }
 .prod-marquee::before,.prod-marquee::after{
-  content:'';position:absolute;top:0;bottom:0;width:120px;z-index:3;pointer-events:none;
+  content:'';position:absolute;top:0;bottom:0;width:140px;z-index:4;pointer-events:none;
 }
 .prod-marquee::before{left:0;background:linear-gradient(to right, var(--bg-soft), transparent)}
 .prod-marquee::after{right:0;background:linear-gradient(to left, var(--bg-soft), transparent)}
-.prod-track{display:flex;gap:1.2rem;width:max-content;will-change:transform}
+.conveyor-stage:nth-child(odd) .prod-marquee::before{background:linear-gradient(to right, #e8f5ea, transparent)}
+.conveyor-stage:nth-child(odd) .prod-marquee::after{background:linear-gradient(to left, #e8f5ea, transparent)}
+.prod-track{display:flex;gap:1.8rem;width:max-content;will-change:transform;padding:0 1rem}
 .track-l{animation:prodMarqueeL 50s linear infinite}
 .track-r{animation:prodMarqueeR 50s linear infinite}
 @keyframes prodMarqueeL{from{transform:translateX(0)}to{transform:translateX(-50%)}}
 @keyframes prodMarqueeR{from{transform:translateX(-50%)}to{transform:translateX(0)}}
-.prod-marquee:hover .prod-track{animation-play-state:paused}
+.conveyor-stage:hover .prod-track,.conveyor-stage:hover .belt-surface,.conveyor-stage:hover .belt-roller-inner{animation-play-state:paused}
+
+/* Conveyor belt visual */
+.conveyor-belt{
+  position:absolute;bottom:0;left:0;right:0;height:90px;z-index:1;
+  pointer-events:none;
+}
+/* Top surface of belt (the moving treads) */
+.belt-surface{
+  position:absolute;top:18px;left:-40px;right:-40px;height:32px;
+  background:
+    linear-gradient(180deg, rgba(0,0,0,.18) 0%, transparent 12%, transparent 88%, rgba(0,0,0,.25) 100%),
+    repeating-linear-gradient(90deg, #3a4a40 0px, #3a4a40 26px, #4f6256 26px, #4f6256 30px);
+  border-top:2px solid #1a2920;border-bottom:2px solid #1a2920;
+  animation:beltL 1.5s linear infinite;
+  background-size:auto, 30px auto;
+}
+.belt-surface.right{animation:beltR 1.5s linear infinite}
+@keyframes beltL{from{background-position:0 0, 0 0}to{background-position:0 0, -30px 0}}
+@keyframes beltR{from{background-position:0 0, -30px 0}to{background-position:0 0, 0 0}}
+.belt-surface::before{
+  /* shadow under packages */
+  content:'';position:absolute;top:-12px;left:0;right:0;height:8px;
+  background:linear-gradient(to bottom, rgba(0,0,0,.15), transparent);
+  filter:blur(4px);
+}
+
+/* Rollers (the round wheels) */
+.belt-roller{
+  position:absolute;top:14px;width:42px;height:42px;
+  z-index:2;
+}
+.belt-roller-inner{
+  width:100%;height:100%;border-radius:50%;
+  background:
+    radial-gradient(circle at 35% 35%, #6d7d72 0%, #3a4a40 60%, #1a2920 100%),
+    repeating-conic-gradient(from 0deg, #2d3a32 0deg 30deg, #4a5950 30deg 60deg);
+  background-blend-mode:overlay;
+  border:3px solid #1a2920;
+  box-shadow:0 6px 12px rgba(0,0,0,.25);
+  animation:rollerL 0.9s linear infinite;
+}
+.belt-roller-inner.right{animation:rollerR 0.9s linear infinite}
+.belt-roller-inner::before{
+  /* spokes */
+  content:'';position:absolute;inset:8px;border-radius:50%;
+  background:
+    conic-gradient(from 0deg, transparent 0deg 15deg, rgba(244,168,0,.35) 15deg 18deg, transparent 18deg 60deg, rgba(244,168,0,.35) 60deg 63deg, transparent 63deg 120deg, rgba(244,168,0,.35) 120deg 123deg, transparent 123deg 180deg, rgba(244,168,0,.35) 180deg 183deg, transparent 183deg 240deg, rgba(244,168,0,.35) 240deg 243deg, transparent 243deg 300deg, rgba(244,168,0,.35) 300deg 303deg, transparent 303deg 360deg);
+  border:2px solid #1a2920;
+}
+.belt-roller-inner::after{
+  /* center bolt */
+  content:'';position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);
+  width:8px;height:8px;border-radius:50%;
+  background:radial-gradient(circle at 30% 30%, #d8e0d8, #4a5950);
+  box-shadow:0 0 0 2px #1a2920;
+}
+@keyframes rollerL{from{transform:rotate(0deg)}to{transform:rotate(-360deg)}}
+@keyframes rollerR{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}
+
+/* Position rollers along the belt - we'll place several across */
+.belt-roller.r1{left:5%}.belt-roller.r2{left:18%}.belt-roller.r3{left:32%}
+.belt-roller.r4{left:46%}.belt-roller.r5{left:60%}.belt-roller.r6{left:74%}
+.belt-roller.r7{left:88%}
+
+/* Belt frame/legs */
+.belt-frame{
+  position:absolute;bottom:0;left:0;right:0;height:36px;z-index:0;
+  background:linear-gradient(180deg, #2d3a32 0%, #1a2920 100%);
+  border-top:2px solid #1a2920;
+}
+.belt-leg{
+  position:absolute;bottom:-20px;width:8px;height:20px;
+  background:linear-gradient(90deg, #2d3a32, #1a2920);
+  z-index:0;
+}
+.belt-leg.l1{left:8%}.belt-leg.l2{left:25%}.belt-leg.l3{left:42%}
+.belt-leg.l4{left:58%}.belt-leg.l5{left:75%}.belt-leg.l6{left:92%}
+
+/* Direction indicator arrows on belt */
+.belt-dir{
+  position:absolute;top:26px;font-size:.6rem;color:rgba(244,168,0,.6);
+  font-family:'Inter',sans-serif;font-weight:900;letter-spacing:.3em;
+  z-index:3;pointer-events:none;
+}
+.belt-dir.l{right:60px}.belt-dir.r{left:60px}
+
+/* Product card as "package on belt" */
 .prod-card-m{
   flex:0 0 280px;display:block;
-  background:#fff;border-radius:12px;overflow:hidden;
-  border:1px solid var(--border);
+  background:#fff;border-radius:8px;overflow:hidden;
+  border:2px solid #1a2920;
+  box-shadow:0 8px 0 #1a2920, 0 12px 16px rgba(0,0,0,.18);
   transition:transform .4s var(--ease),box-shadow .4s,border-color .4s;
-  text-decoration:none;
+  text-decoration:none;position:relative;
 }
-.prod-card-m:hover{transform:translateY(-8px);box-shadow:var(--shadow-lg);border-color:var(--green-light)}
+.prod-card-m::before,.prod-card-m::after{
+  content:'';position:absolute;width:18px;height:18px;
+  border:3px solid var(--yellow);z-index:3;pointer-events:none;
+}
+.prod-card-m::before{top:8px;left:8px;border-right:none;border-bottom:none}
+.prod-card-m::after{bottom:8px;right:8px;border-left:none;border-top:none}
+.prod-card-m:hover{transform:translateY(-12px);box-shadow:0 12px 0 #1a2920, 0 20px 28px rgba(0,0,0,.25);border-color:var(--yellow)}
 .pm-img{height:170px;overflow:hidden;position:relative;background:linear-gradient(135deg,var(--green-soft),#fff)}
 .pm-img img{width:100%;height:100%;object-fit:cover;transition:transform .8s var(--ease);filter:saturate(.9) brightness(.92)}
 .prod-card-m:hover .pm-img img{transform:scale(1.1);filter:saturate(1.1) brightness(1)}
@@ -736,6 +839,7 @@
   </div>
 
   <!-- Row 1: flows RIGHT → LEFT (製作事例 - 機械設計カテゴリ) -->
+  <div class="conveyor-stage">
   <div class="prod-marquee">
     <div class="prod-track track-l">
       <a href="business.html" class="prod-card-m"><div class="pm-img"><img src="https://sunprosys.co.jp/cont/wp-content/themes/sunpro_theme/img/business/business03_image01_01.jpg" alt=""><div class="pm-pic"><svg><use href="#pic-robot-arm"/></svg></div></div><div class="pm-body"><div class="cat">Mechanical</div><h4>自動ねじ締め装置</h4></div></a>
@@ -753,8 +857,25 @@
       <a href="business.html" class="prod-card-m"><div class="pm-img"><img src="https://sunprosys.co.jp/cont/wp-content/themes/sunpro_theme/img/business/business03_image01_01.jpg" alt=""><div class="pm-pic"><svg><use href="#pic-wrench"/></svg></div></div><div class="pm-body"><div class="cat">Machining</div><h4>加工機</h4></div></a>
     </div>
   </div>
+  <!-- Conveyor belt structure for Row 1 (flow direction: left) -->
+  <div class="conveyor-belt">
+    <div class="belt-frame"></div>
+    <div class="belt-leg l1"></div><div class="belt-leg l2"></div><div class="belt-leg l3"></div>
+    <div class="belt-leg l4"></div><div class="belt-leg l5"></div><div class="belt-leg l6"></div>
+    <div class="belt-surface"></div>
+    <div class="belt-dir l">◄ ◄ ◄</div>
+    <div class="belt-roller r1"><div class="belt-roller-inner"></div></div>
+    <div class="belt-roller r2"><div class="belt-roller-inner"></div></div>
+    <div class="belt-roller r3"><div class="belt-roller-inner"></div></div>
+    <div class="belt-roller r4"><div class="belt-roller-inner"></div></div>
+    <div class="belt-roller r5"><div class="belt-roller-inner"></div></div>
+    <div class="belt-roller r6"><div class="belt-roller-inner"></div></div>
+    <div class="belt-roller r7"><div class="belt-roller-inner"></div></div>
+  </div>
+  </div>
 
   <!-- Row 2: flows LEFT → RIGHT (開発事例 - 個別スライド画像 + 開発設備カテゴリ) -->
+  <div class="conveyor-stage">
   <div class="prod-marquee">
     <div class="prod-track track-r">
       <a href="business.html" class="prod-card-m"><div class="pm-img"><img src="https://sunprosys.co.jp/cont/wp-content/themes/sunpro_theme/img/business/business04_slide01_image01.jpg" alt=""><div class="pm-pic"><svg><use href="#pic-welding"/></svg></div></div><div class="pm-body"><div class="cat">Welding</div><h4>電磁誘導ウェルダ</h4></div></a>
@@ -775,6 +896,22 @@
       <a href="business.html" class="prod-card-m"><div class="pm-img"><img src="https://sunprosys.co.jp/cont/wp-content/themes/sunpro_theme/img/business/business03_image03_01.jpg" alt=""><div class="pm-pic"><svg><use href="#pic-laser"/></svg></div></div><div class="pm-body"><div class="cat">Laser</div><h4>自動車用ランプレーザー印字機</h4></div></a>
       <a href="business.html" class="prod-card-m"><div class="pm-img"><img src="https://sunprosys.co.jp/cont/wp-content/themes/sunpro_theme/img/business/business04_slide02_image01.jpg" alt=""><div class="pm-pic"><svg><use href="#pic-pcb"/></svg></div></div><div class="pm-body"><div class="cat">Circuit</div><h4>検査用I/F基板</h4></div></a>
     </div>
+  </div>
+  <!-- Conveyor belt structure for Row 2 (flow direction: right) -->
+  <div class="conveyor-belt">
+    <div class="belt-frame"></div>
+    <div class="belt-leg l1"></div><div class="belt-leg l2"></div><div class="belt-leg l3"></div>
+    <div class="belt-leg l4"></div><div class="belt-leg l5"></div><div class="belt-leg l6"></div>
+    <div class="belt-surface right"></div>
+    <div class="belt-dir r">► ► ►</div>
+    <div class="belt-roller r1"><div class="belt-roller-inner right"></div></div>
+    <div class="belt-roller r2"><div class="belt-roller-inner right"></div></div>
+    <div class="belt-roller r3"><div class="belt-roller-inner right"></div></div>
+    <div class="belt-roller r4"><div class="belt-roller-inner right"></div></div>
+    <div class="belt-roller r5"><div class="belt-roller-inner right"></div></div>
+    <div class="belt-roller r6"><div class="belt-roller-inner right"></div></div>
+    <div class="belt-roller r7"><div class="belt-roller-inner right"></div></div>
+  </div>
   </div>
 </section>
 
