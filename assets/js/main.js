@@ -12,25 +12,28 @@ document.addEventListener('DOMContentLoaded', () => {
   if (window.matchMedia('(hover:hover)').matches) {
     const cur = document.createElement('div'); cur.id = 'cursor';
     const ring = document.createElement('div'); ring.id = 'cursor-ring';
-    // SVG combination wrench — V-notch on RIGHT END of head (opens along handle axis)
+    // SVG combination wrench — large ring + deep notch, separated paths for clarity
     ring.innerHTML = `<svg viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
-      <g transform="rotate(-32 24 24)" fill="#3f3f3f">
+      <g transform="rotate(-30 24 24)" fill="#3f3f3f">
+        <!-- Closed ring (with hole) at LEFT END -->
         <path fill-rule="evenodd" d="
-          M 8 18
-          L 28 18
-          L 28 12
+          M 14 24 A 7 7 0 1 0 0 24 A 7 7 0 1 0 14 24 Z
+          M 10 24 A 3 3 0 1 1 4 24 A 3 3 0 1 1 10 24 Z
+        "/>
+        <!-- Handle + open-jaw head as a single filled polygon -->
+        <path d="
+          M 10 19
+          L 30 19
+          L 30 12
           L 44 12
-          L 44 19
-          L 36 23
-          L 44 27
+          L 44 18
+          L 36 24
+          L 44 30
           L 44 34
-          L 28 34
-          L 28 28
-          L 8 28
-          A 5 5 0 0 0 8 18 Z
-          M 10.5 23
-          A 2.5 2.5 0 1 0 5.5 23
-          A 2.5 2.5 0 1 0 10.5 23 Z
+          L 30 34
+          L 30 29
+          L 10 29
+          Z
         "/>
       </g>
     </svg>`;
