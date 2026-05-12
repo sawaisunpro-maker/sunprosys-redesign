@@ -72,10 +72,10 @@ button{font:inherit;cursor:pointer;border:none;background:none}
     transform:translate(-50%,-50%);
     transition:transform .15s var(--ease),width .3s,height .3s;
   }
-  #cursor-ring svg{width:100%;height:100%;animation:wrenchSwing 2.4s ease-in-out infinite}
+  #cursor-ring svg{width:100%;height:100%;animation:wrenchSwing 2.6s ease-in-out infinite}
   @keyframes wrenchSwing{
-    0%,100%{transform:rotate(-8deg)}
-    50%{transform:rotate(20deg)}
+    0%,100%{transform:rotate(-4deg)}
+    50%{transform:rotate(10deg)}
   }
 }
 @media(hover:none){#cursor,#cursor-ring{display:none}}
