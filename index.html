@@ -338,6 +338,23 @@
 .si-svg.pcb .trace{stroke-dasharray:200;stroke-dashoffset:0;transition:stroke-dashoffset 1.5s var(--ease)}
 .si-svg.pcb:hover .trace{stroke-dashoffset:-200}
 
+/* Proposal — components converge on central optimal solution */
+.si-svg.proposal .comp{transition:transform .8s var(--ease),opacity .5s;opacity:.65}
+.si-svg.proposal:hover .comp{opacity:1}
+.si-svg.proposal:hover .c1{transform:translate(3px,3px)}
+.si-svg.proposal:hover .c2{transform:translate(-3px,3px)}
+.si-svg.proposal:hover .c3{transform:translate(3px,-3px)}
+.si-svg.proposal:hover .c4{transform:translate(-3px,-3px)}
+.si-svg.proposal:hover .c5{transform:translate(0,3px)}
+.si-svg.proposal:hover .c6{transform:translate(0,-3px)}
+.si-svg.proposal .link{stroke-dasharray:4 4;stroke-dashoffset:0;transition:stroke-dashoffset 0s,opacity .4s;opacity:.5}
+.si-svg.proposal:hover .link{opacity:1;animation:linkFlow 1.2s linear infinite}
+@keyframes linkFlow{from{stroke-dashoffset:0}to{stroke-dashoffset:-16}}
+.si-svg.proposal .hub{transform-origin:center;transition:transform .6s var(--ease-bounce)}
+.si-svg.proposal:hover .hub{transform:scale(1.15)}
+.si-svg.proposal .check{opacity:0;transition:opacity .5s .3s}
+.si-svg.proposal:hover .check{opacity:1}
+
 .si-caption{
   flex:1;min-width:240px;color:var(--text);
 }
@@ -917,6 +934,54 @@
       <p>PLCで対応困難な特殊検査・高速処理には、専用のマイコン基板やアナログ基板を自社で開発。お客様の要求仕様に合わせた最適なハードウェアを設計します。</p>
       <div class="si-hint">Interactive — hover to energize</div>
     </div>
+  </div>
+</section>
+
+<!-- LARGE SI ILLUSTRATION 04 - Proposal (components converge to optimal hub) -->
+<section class="si-illust dark">
+  <div class="si-illust-content">
+    <div class="si-caption">
+      <div class="si-en">— Solution Proposal</div>
+      <h3>経験・知見を活かし、<br><span class="em">最適なシステムをご提案。</span></h3>
+      <p>機械・制御・開発設備での豊富な実績をベースに、お客様の生産現場・予算・要求仕様を多角的に分析。最適なロボット・制御方式・自動化レベルを統合的にご提案します。</p>
+      <div class="si-hint">Interactive — hover to converge</div>
+    </div>
+    <svg class="si-svg proposal" viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <!-- Connecting links (animate on hover) -->
+      <path class="link" d="M 11 13 L 28 28"/>
+      <path class="link" d="M 53 13 L 36 28"/>
+      <path class="link" d="M 11 51 L 28 36"/>
+      <path class="link" d="M 53 51 L 36 36"/>
+      <path class="link" d="M 32 12 L 32 24"/>
+      <path class="link" d="M 32 52 L 32 40"/>
+
+      <!-- Surrounding components (slight move on hover) -->
+      <rect class="comp c1" x="6" y="8" width="10" height="10" rx="1"/>
+      <rect class="comp c2" x="48" y="8" width="10" height="10" rx="1"/>
+      <rect class="comp c3" x="6" y="46" width="10" height="10" rx="1"/>
+      <rect class="comp c4" x="48" y="46" width="10" height="10" rx="1"/>
+      <rect class="comp c5" x="27" y="2" width="10" height="6" rx="1"/>
+      <rect class="comp c6" x="27" y="56" width="10" height="6" rx="1"/>
+
+      <!-- Tiny labels inside components -->
+      <circle cx="11" cy="13" r="1.5" fill="currentColor" opacity=".7"/>
+      <circle cx="53" cy="13" r="1.5" fill="currentColor" opacity=".7"/>
+      <circle cx="11" cy="51" r="1.5" fill="currentColor" opacity=".7"/>
+      <circle cx="53" cy="51" r="1.5" fill="currentColor" opacity=".7"/>
+      <circle cx="32" cy="5" r="1.2" fill="currentColor" opacity=".7"/>
+      <circle cx="32" cy="59" r="1.2" fill="currentColor" opacity=".7"/>
+
+      <!-- Central optimal hub -->
+      <g class="hub">
+        <circle cx="32" cy="32" r="10" fill="currentColor" opacity=".18"/>
+        <circle cx="32" cy="32" r="7"/>
+        <!-- Checkmark inside (shown on hover) -->
+        <path class="check" d="M 28 32 L 31 35 L 36 29" stroke-width="2.2"/>
+      </g>
+
+      <!-- "OPTIMAL" small label -->
+      <text x="32" y="48" text-anchor="middle" font-size="3" fill="currentColor" stroke="none" font-family="Inter" opacity=".7" letter-spacing=".3">OPTIMAL</text>
+    </svg>
   </div>
 </section>
 
