@@ -34,8 +34,9 @@
   display:flex;flex-direction:column;justify-content:flex-end;
   padding:0 clamp(2rem,6vw,7rem) clamp(5rem,10vh,8rem);color:#fff;
 }
-.hero-en{font-size:clamp(.8rem,1vw,.95rem);letter-spacing:.4em;text-transform:uppercase;color:var(--yellow-light);font-weight:400;font-family:'Inter',sans-serif;margin-bottom:1.8rem;opacity:0;animation:fadeIn .8s 1.8s var(--ease) forwards}
-.hero-en::before{content:'— ';color:var(--yellow)}
+.hero-en{font-size:clamp(.72rem,.95vw,.85rem);letter-spacing:.3em;text-transform:uppercase;color:rgba(255,255,255,.7);font-weight:400;font-family:'Inter',sans-serif;margin-bottom:1.8rem;opacity:0;animation:fadeIn .8s 1.8s var(--ease) forwards;display:flex;align-items:center;gap:1rem;flex-wrap:wrap}
+.hero-tag{display:inline-flex;align-items:center;gap:.5rem;padding:.4rem .9rem;background:rgba(244,168,0,.12);border:1px solid rgba(244,168,0,.4);color:var(--yellow-light);font-size:.7rem;letter-spacing:.2em;font-weight:700}
+.hero-tag::before{content:'';width:7px;height:7px;border-radius:50%;background:var(--yellow);box-shadow:0 0 0 3px rgba(244,168,0,.25)}
 .hero-h1{font-size:clamp(2.6rem,7.5vw,7rem);font-weight:900;line-height:1.05;letter-spacing:-.02em}
 .hero-h1 .line{display:block;overflow:hidden;padding:0 .05em}
 .hero-h1 .line span{display:inline-block;transform:translateY(110%);animation:slideUp 1.1s var(--ease) forwards}
@@ -247,30 +248,24 @@
 .belt-leg.l1{left:8%}.belt-leg.l2{left:25%}.belt-leg.l3{left:42%}
 .belt-leg.l4{left:58%}.belt-leg.l5{left:75%}.belt-leg.l6{left:92%}
 
-/* Direction indicator arrows on belt */
+/* Direction indicator (muted, monochrome) */
 .belt-dir{
-  position:absolute;top:26px;font-size:.6rem;color:rgba(244,168,0,.6);
-  font-family:'Inter',sans-serif;font-weight:900;letter-spacing:.3em;
-  z-index:3;pointer-events:none;
+  position:absolute;top:26px;font-size:.55rem;color:rgba(255,255,255,.35);
+  font-family:'Inter',sans-serif;font-weight:600;letter-spacing:.2em;
+  z-index:3;pointer-events:none;text-transform:uppercase;
 }
 .belt-dir.l{right:60px}.belt-dir.r{left:60px}
 
-/* Product card as "package on belt" */
+/* Refined product card — industrial catalog style */
 .prod-card-m{
   flex:0 0 280px;display:block;
-  background:#fff;border-radius:8px;overflow:hidden;
-  border:2px solid #1a2920;
-  box-shadow:0 8px 0 #1a2920, 0 12px 16px rgba(0,0,0,.18);
+  background:#fff;border-radius:4px;overflow:hidden;
+  border:1px solid var(--border);
+  box-shadow:0 4px 14px rgba(26,41,32,.08);
   transition:transform .4s var(--ease),box-shadow .4s,border-color .4s;
   text-decoration:none;position:relative;
 }
-.prod-card-m::before,.prod-card-m::after{
-  content:'';position:absolute;width:18px;height:18px;
-  border:3px solid var(--yellow);z-index:3;pointer-events:none;
-}
-.prod-card-m::before{top:8px;left:8px;border-right:none;border-bottom:none}
-.prod-card-m::after{bottom:8px;right:8px;border-left:none;border-top:none}
-.prod-card-m:hover{transform:translateY(-12px);box-shadow:0 12px 0 #1a2920, 0 20px 28px rgba(0,0,0,.25);border-color:var(--yellow)}
+.prod-card-m:hover{transform:translateY(-6px);box-shadow:0 10px 22px rgba(26,41,32,.15);border-color:var(--green-light)}
 .pm-img{height:170px;overflow:hidden;position:relative;background:linear-gradient(135deg,var(--green-soft),#fff)}
 .pm-img img{width:100%;height:100%;object-fit:cover;transition:transform .8s var(--ease);filter:saturate(.9) brightness(.92)}
 .prod-card-m:hover .pm-img img{transform:scale(1.1);filter:saturate(1.1) brightness(1)}
@@ -345,13 +340,14 @@
 .si-caption p{font-size:.9rem;color:var(--text-soft);line-height:1.95;max-width:480px}
 .si-illust.dark .si-caption p{color:rgba(255,255,255,.8)}
 .si-hint{
-  display:inline-flex;align-items:center;gap:.5rem;
-  font-size:.68rem;letter-spacing:.15em;text-transform:uppercase;
-  color:var(--yellow-dark);font-weight:700;margin-top:1rem;
-  padding:.4rem .8rem;background:rgba(244,168,0,.12);border-radius:100px;
+  display:inline-flex;align-items:center;gap:.6rem;
+  font-size:.62rem;letter-spacing:.22em;text-transform:uppercase;
+  color:var(--text-mute);font-weight:600;margin-top:1.2rem;
+  padding:.5rem 0;border-top:1px solid var(--border);
+  font-family:'Inter',sans-serif;
 }
-.si-illust.dark .si-hint{color:var(--yellow-light);background:rgba(244,168,0,.2)}
-.si-hint::before{content:'⟿';font-size:1rem}
+.si-illust.dark .si-hint{color:rgba(255,255,255,.55);border-top-color:rgba(255,255,255,.15)}
+.si-hint::before{content:'';width:24px;height:1px;background:currentColor}
 .prod-head{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:3rem;flex-wrap:wrap;gap:1.5rem}
 .prod-head-en{font-size:clamp(2.5rem,5vw,5rem);font-weight:900;line-height:1;color:var(--text);letter-spacing:-.02em;font-family:'Inter',sans-serif}
 .prod-head-en small{display:block;font-size:.78rem;letter-spacing:.3em;color:var(--green);font-weight:700;margin-bottom:1rem;text-transform:uppercase}
@@ -530,15 +526,15 @@
   <div class="hero-gear-deco g2"><svg width="350" height="350" viewBox="0 0 100 100" fill="currentColor" data-spin="-0.1"><path d="M50 28a22 22 0 1 0 0 44 22 22 0 0 0 0-44zm0 36a14 14 0 1 1 0-28 14 14 0 0 1 0 28z"/><path d="M50 4l3 11h-6l3-11zm0 92l3-11h-6l3 11zm46-46l-11 3v-6l11 3zm-92 0l11-3v6l-11-3zm78.5-32.5l-7 8.5-4.2-4.2 11.2-4.3zM21 79l-7 8.5L18.2 91l4.3-11.2zM82.5 79L91 87.5 79.8 91l4.3-11.2zM21 21l-7-8.5L18.2 9l4.3 11.2z"/></svg></div>
 
   <div class="hero-content">
-    <div class="hero-en">SUNPRO SYSTEM — SINCE 2000 / HIROSHIMA</div>
+    <div class="hero-en"><span class="hero-tag">ROBOT SYSTEM INTEGRATOR</span> · SINCE 2000 · HIROSHIMA</div>
     <h1 class="hero-h1">
-      <div class="line"><span>"確かな技術"と</span></div>
-      <div class="line"><span>"<span class="em">こだわりのモノづくり</span>"</span></div>
+      <div class="line"><span>確かな技術と</span></div>
+      <div class="line"><span>こだわりの<span class="em">モノづくり</span></span></div>
     </h1>
     <p class="hero-sub">
-      機械・制御・開発設備をワンストップで対応する、<br>
-      広島の少数精鋭エンジニアリングカンパニー。<br>
-      お客様一人ひとりの課題に、真摯に向き合います。
+      ロボット・機械・制御・開発設備をワンストップで対応する、<br>
+      広島のロボットシステムインテグレータ。<br>
+      自動車・半導体・住宅機器など幅広い業界の生産現場を支えています。
     </p>
     <div class="hero-ctas">
       <a href="business.html" class="btn btn-yellow magnetic">事業を見る<span class="arrow"></span></a>
@@ -745,7 +741,7 @@
       <div class="si-en">— Robot System Integration</div>
       <h3>機械を、<br><span class="em">最適に動かす。</span></h3>
       <p>ロボット選定から動作設計、軌跡解析、コントローラ連携まで。お客様の工程に合わせて、ロボットの能力を最大限に引き出す統合エンジニアリングを提供します。</p>
-      <div class="si-hint">HOVER で関節が動きます</div>
+      <div class="si-hint">Interactive — hover to actuate</div>
     </div>
   </div>
 </section>
@@ -863,7 +859,7 @@
     <div class="belt-leg l1"></div><div class="belt-leg l2"></div><div class="belt-leg l3"></div>
     <div class="belt-leg l4"></div><div class="belt-leg l5"></div><div class="belt-leg l6"></div>
     <div class="belt-surface"></div>
-    <div class="belt-dir l">◄ ◄ ◄</div>
+    <div class="belt-dir l">FLOW ←</div>
     <div class="belt-roller r1"><div class="belt-roller-inner"></div></div>
     <div class="belt-roller r2"><div class="belt-roller-inner"></div></div>
     <div class="belt-roller r3"><div class="belt-roller-inner"></div></div>
@@ -903,7 +899,7 @@
     <div class="belt-leg l1"></div><div class="belt-leg l2"></div><div class="belt-leg l3"></div>
     <div class="belt-leg l4"></div><div class="belt-leg l5"></div><div class="belt-leg l6"></div>
     <div class="belt-surface right"></div>
-    <div class="belt-dir r">► ► ►</div>
+    <div class="belt-dir r">→ FLOW</div>
     <div class="belt-roller r1"><div class="belt-roller-inner right"></div></div>
     <div class="belt-roller r2"><div class="belt-roller-inner right"></div></div>
     <div class="belt-roller r3"><div class="belt-roller-inner right"></div></div>
@@ -922,7 +918,7 @@
       <div class="si-en">— Production Line Engineering</div>
       <h3>生産ラインを、<br><span class="em">流す。組む。検査する。</span></h3>
       <p>搬送・組立・検査までを統合した自動化ラインの設計。マイコン制御・センサー連携・ビジョン検査を組み合わせ、生産性とトレーサビリティを両立させます。</p>
-      <div class="si-hint">HOVER で部品が流れます</div>
+      <div class="si-hint">Interactive — hover to operate</div>
     </div>
     <svg class="si-svg conveyor" viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
       <!-- Conveyor belt -->
@@ -1044,7 +1040,7 @@
       <div class="si-en">— Control Hardware Design</div>
       <h3>制御の心臓部を、<br><span class="em">自社で設計する。</span></h3>
       <p>PLCで対応困難な特殊検査・高速処理には、専用のマイコン基板やアナログ基板を自社で開発。お客様の要求仕様に合わせた最適なハードウェアを設計します。</p>
-      <div class="si-hint">HOVER で回路が点灯します</div>
+      <div class="si-hint">Interactive — hover to energize</div>
     </div>
   </div>
 </section>
