@@ -12,25 +12,25 @@ document.addEventListener('DOMContentLoaded', () => {
   if (window.matchMedia('(hover:hover)').matches) {
     const cur = document.createElement('div'); cur.id = 'cursor';
     const ring = document.createElement('div'); ring.id = 'cursor-ring';
-    // SVG combination wrench — filled silhouette, ring at lower-left, V-notch jaw at upper-right
+    // SVG combination wrench — dark-grey filled silhouette (matches attached image)
     ring.innerHTML = `<svg viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
-      <g transform="rotate(-32 24 24)" fill="#2d8e3d">
+      <g transform="rotate(-35 24 24)" fill="#3f3f3f">
         <path fill-rule="evenodd" d="
           M 8 18
           L 28 18
-          L 28 14
-          L 32 14
-          L 36 21
-          L 40 14
-          L 44 14
+          L 28 12
+          L 32 12
+          Q 36 12, 36 22
+          Q 36 12, 40 12
+          L 44 12
           L 44 34
           L 28 34
-          L 28 30
-          L 8 30
-          A 6 6 0 0 0 8 18 Z
-          M 10.5 24
-          A 2.5 2.5 0 1 0 5.5 24
-          A 2.5 2.5 0 1 0 10.5 24 Z
+          L 28 28
+          L 8 28
+          A 5 5 0 0 0 8 18 Z
+          M 10.5 23
+          A 2.5 2.5 0 1 0 5.5 23
+          A 2.5 2.5 0 1 0 10.5 23 Z
         "/>
       </g>
     </svg>`;
