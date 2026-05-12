@@ -338,7 +338,7 @@ body{background:#fff}
 <!-- Rough paper-cutout filter (white halo with irregular hand-cut edge) -->
 <svg width="0" height="0" style="position:absolute;pointer-events:none" aria-hidden="true">
   <defs>
-    <filter id="cutout-paper" x="-20%" y="-20%" width="140%" height="140%">
+    <filter id="cutout-paper" x="-25%" y="-15%" width="150%" height="170%">
       <!-- 1. Smooth low-frequency noise -->
       <feTurbulence type="fractalNoise" baseFrequency="0.012" numOctaves="1" seed="3" result="noise"/>
       <!-- 2. Dilate the silhouette to create a wide white area -->
@@ -356,16 +356,22 @@ body{background:#fff}
       <!-- 6. Fill rough mask with white -->
       <feFlood flood-color="#ffffff" result="white"/>
       <feComposite in="white" in2="roughMask" operator="in" result="whiteHalo"/>
-      <!-- 7. Hard offset shadow (no blur — keeps boundary crisp) -->
-      <feOffset in="outlineBase" dx="0" dy="6" result="shAlpha"/>
-      <feFlood flood-color="#000000" result="shCol"/>
-      <feComposite in="shCol" in2="shAlpha" operator="in" result="shadowFull"/>
-      <feComponentTransfer in="shadowFull" result="shadow">
-        <feFuncA type="linear" slope="0.18"/>
+      <!-- 7a. Soft drop shadow (深い影) — floating effect -->
+      <feGaussianBlur in="outlineBase" stdDeviation="10" result="dsBlur"/>
+      <feOffset in="dsBlur" dx="0" dy="20" result="dsOffset"/>
+      <feComponentTransfer in="dsOffset" result="dropShadow">
+        <feFuncA type="linear" slope="0.55"/>
       </feComponentTransfer>
-      <!-- 8. Stack: shadow → dark ring → white halo → person -->
+      <!-- 7b. Ambient shadow (柔らかい広がり) — adds depth -->
+      <feGaussianBlur in="outlineBase" stdDeviation="20" result="ambBlur"/>
+      <feOffset in="ambBlur" dx="0" dy="6" result="ambOffset"/>
+      <feComponentTransfer in="ambOffset" result="ambShadow">
+        <feFuncA type="linear" slope="0.3"/>
+      </feComponentTransfer>
+      <!-- 8. Stack: ambient → drop shadow → dark ring → white halo → person -->
       <feMerge>
-        <feMergeNode in="shadow"/>
+        <feMergeNode in="ambShadow"/>
+        <feMergeNode in="dropShadow"/>
         <feMergeNode in="darkRing"/>
         <feMergeNode in="whiteHalo"/>
         <feMergeNode in="SourceGraphic"/>
