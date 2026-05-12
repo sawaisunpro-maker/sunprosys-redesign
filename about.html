@@ -338,26 +338,23 @@ body{background:#fff}
 <!-- Rough paper-cutout filter (white halo with irregular hand-cut edge) -->
 <svg width="0" height="0" style="position:absolute;pointer-events:none" aria-hidden="true">
   <defs>
-    <filter id="cutout-paper" x="-25%" y="-15%" width="150%" height="170%">
-      <!-- 1. Smooth dilate → wide white halo mask (smooth shape, no jags) -->
-      <feMorphology in="SourceAlpha" operator="dilate" radius="18" result="haloMask"/>
-      <!-- 2. Sharpen alpha (steep linear ramp): removes soft anti-alias fringe
-              while keeping smooth curvature (no pixel-jag) -->
-      <feComponentTransfer in="haloMask" result="haloCrisp">
-        <feFuncA type="linear" slope="6" intercept="-2.5"/>
-      </feComponentTransfer>
-      <!-- 3. Bold dark ring (3px) for clear, visible boundary -->
-      <feMorphology in="haloCrisp" operator="dilate" radius="3" result="outlineBase"/>
-      <feFlood flood-color="#1a4f23" result="outlineCol"/>
-      <feComposite in="outlineCol" in2="outlineBase" operator="in" result="darkRing"/>
-      <!-- 4. Fill the crisp halo mask with white -->
+    <filter id="cutout-paper" x="-25%" y="-15%" width="150%" height="170%" color-interpolation-filters="sRGB">
+      <!-- 1. Soften the source alpha slightly to absorb any input jaggedness -->
+      <feGaussianBlur in="SourceAlpha" stdDeviation="1.2" result="alphaSoft"/>
+      <!-- 2. Smooth dilate → wide white halo mask, fully anti-aliased -->
+      <feMorphology in="alphaSoft" operator="dilate" radius="18" result="haloMask"/>
+      <!-- 3. Slightly bigger mask for the dark ring -->
+      <feMorphology in="haloMask" operator="dilate" radius="3" result="ringBase"/>
+      <feFlood flood-color="#1a4f23" result="ringCol"/>
+      <feComposite in="ringCol" in2="ringBase" operator="in" result="darkRing"/>
+      <!-- 4. Fill the smooth halo mask with white -->
       <feFlood flood-color="#ffffff" result="white"/>
-      <feComposite in="white" in2="haloCrisp" operator="in" result="whiteHalo"/>
-      <!-- 5. HARD offset shadow — no Gaussian blur, just a clean displaced silhouette -->
-      <feOffset in="outlineBase" dx="8" dy="12" result="shadowAlpha"/>
-      <feFlood flood-color="#1a2920" result="shadowCol"/>
-      <feComposite in="shadowCol" in2="shadowAlpha" operator="in" result="shadowFull"/>
-      <feComponentTransfer in="shadowFull" result="shadow">
+      <feComposite in="white" in2="haloMask" operator="in" result="whiteHalo"/>
+      <!-- 5. HARD offset shadow — no Gaussian blur on the offset step -->
+      <feOffset in="ringBase" dx="8" dy="12" result="shAlpha"/>
+      <feFlood flood-color="#1a2920" result="shCol"/>
+      <feComposite in="shCol" in2="shAlpha" operator="in" result="shFull"/>
+      <feComponentTransfer in="shFull" result="shadow">
         <feFuncA type="linear" slope="0.55"/>
       </feComponentTransfer>
       <!-- 6. Stack: hard shadow → dark ring → white halo → person -->
