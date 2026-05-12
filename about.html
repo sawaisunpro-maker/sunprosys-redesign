@@ -344,16 +344,15 @@ body{background:#fff}
               then a steep threshold re-extracts a CRISP edge at the
               smoothed curve position. Result = smooth curve + sharp edge
               (like a vector path traced by a precision curve cutter). -->
+      <!-- 1. Morphological smoothing: blur source alpha, then threshold sharply
+              → smooth-curve binary silhouette (no pixel jags, no soft fringe) -->
       <feGaussianBlur in="SourceAlpha" stdDeviation="2.5" result="alphaBlurred"/>
       <feComponentTransfer in="alphaBlurred" result="alphaVector">
         <feFuncA type="linear" slope="10" intercept="-4.5"/>
       </feComponentTransfer>
 
-      <!-- 1. Dilate to white halo region -->
-      <feMorphology in="alphaVector" operator="dilate" radius="18" result="dilatedClean"/>
-      <!-- 2. Rough hand-cut feel: low-frequency noise displaces the halo edge -->
-      <feTurbulence type="fractalNoise" baseFrequency="0.022" numOctaves="2" seed="5" result="noise"/>
-      <feDisplacementMap in="dilatedClean" in2="noise" scale="11" result="haloMask"/>
+      <!-- 2. Dilate to white halo region — pure smooth curve, no displacement -->
+      <feMorphology in="alphaVector" operator="dilate" radius="18" result="haloMask"/>
 
       <!-- 2. Bigger mask for dark ring -->
       <feMorphology in="haloMask" operator="dilate" radius="3" result="ringBase"/>
