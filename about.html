@@ -339,23 +339,15 @@ body{background:#fff}
 <svg width="0" height="0" style="position:absolute;pointer-events:none" aria-hidden="true">
   <defs>
     <filter id="cutout-paper" x="-25%" y="-15%" width="150%" height="170%">
-      <!-- 1. Smooth low-frequency noise -->
-      <feTurbulence type="fractalNoise" baseFrequency="0.012" numOctaves="1" seed="3" result="noise"/>
-      <!-- 2. Dilate the silhouette to create a wide white area -->
-      <feMorphology in="SourceAlpha" operator="dilate" radius="18" result="dilated"/>
-      <!-- 3. Slight noise displacement → near-linear edge -->
-      <feDisplacementMap in="dilated" in2="noise" scale="6" result="roughRaw"/>
-      <!-- 4. HARDEN the alpha → eliminate anti-aliased fade, crisp binary edge -->
-      <feComponentTransfer in="roughRaw" result="roughMask">
-        <feFuncA type="discrete" tableValues="0 0 0 0 0 1 1 1 1 1"/>
-      </feComponentTransfer>
-      <!-- 5. Build a thin dark outline ring just outside the white area -->
-      <feMorphology in="roughMask" operator="dilate" radius="1.5" result="outlineBase"/>
+      <!-- 1. Smooth dilate of the silhouette → wide white area, perfectly clean edge -->
+      <feMorphology in="SourceAlpha" operator="dilate" radius="18" result="haloMask"/>
+      <!-- 2. Thin dark ring just outside for clear boundary -->
+      <feMorphology in="haloMask" operator="dilate" radius="1.5" result="outlineBase"/>
       <feFlood flood-color="#1e6b29" result="outlineCol"/>
       <feComposite in="outlineCol" in2="outlineBase" operator="in" result="darkRing"/>
-      <!-- 6. Fill rough mask with white -->
+      <!-- 3. Fill the halo mask with white -->
       <feFlood flood-color="#ffffff" result="white"/>
-      <feComposite in="white" in2="roughMask" operator="in" result="whiteHalo"/>
+      <feComposite in="white" in2="haloMask" operator="in" result="whiteHalo"/>
       <!-- 7a. Soft drop shadow (深い影) — floating effect -->
       <feGaussianBlur in="outlineBase" stdDeviation="10" result="dsBlur"/>
       <feOffset in="dsBlur" dx="0" dy="20" result="dsOffset"/>
