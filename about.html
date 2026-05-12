@@ -144,8 +144,8 @@ body{background:#fff}
 .v-cutout{
   position:absolute;bottom:-2%;height:118%;width:auto;max-width:none;
   z-index:4;pointer-events:none;
-  /* Single GPU-accelerated filter pass for crisp outline + shadow + rim */
-  filter:url(#cutout-crisp);
+  /* Soft shadow only — person blends naturally with the bg */
+  filter:url(#cutout-blend);
   opacity:0;transform:translateY(60px);
   transition:opacity 1s var(--ease) .2s, transform 1.1s var(--ease) .2s;
 }
@@ -296,28 +296,18 @@ body{background:#fff}
 </head>
 <body>
 
-<!-- Crisp outline + shadow filter (single GPU pass) -->
+<!-- Soft shadow filter only (no outline — blends with bg) -->
 <svg width="0" height="0" style="position:absolute;pointer-events:none" aria-hidden="true">
   <defs>
-    <filter id="cutout-crisp" x="-15%" y="-15%" width="130%" height="135%">
-      <!-- Crisp dark-green outline via dilate -->
-      <feMorphology in="SourceAlpha" operator="dilate" radius="3" result="dil"/>
-      <feFlood flood-color="#1e6b29" result="col"/>
-      <feComposite in="col" in2="dil" operator="in" result="outline"/>
-      <!-- Soft ground shadow -->
-      <feGaussianBlur in="SourceAlpha" stdDeviation="10" result="sb"/>
-      <feOffset in="sb" dx="0" dy="18" result="so"/>
+    <filter id="cutout-blend" x="-15%" y="-15%" width="130%" height="135%">
+      <!-- Soft ground shadow only -->
+      <feGaussianBlur in="SourceAlpha" stdDeviation="12" result="sb"/>
+      <feOffset in="sb" dx="0" dy="20" result="so"/>
       <feComponentTransfer in="so" result="shadow">
-        <feFuncA type="linear" slope="0.55"/>
+        <feFuncA type="linear" slope="0.4"/>
       </feComponentTransfer>
-      <!-- Top highlight (subtle bright rim) -->
-      <feMorphology in="SourceAlpha" operator="dilate" radius="1" result="dil2"/>
-      <feFlood flood-color="#a3d055" result="col2"/>
-      <feComposite in="col2" in2="dil2" operator="in" result="rim"/>
       <feMerge>
         <feMergeNode in="shadow"/>
-        <feMergeNode in="outline"/>
-        <feMergeNode in="rim"/>
         <feMergeNode in="SourceGraphic"/>
       </feMerge>
     </filter>
