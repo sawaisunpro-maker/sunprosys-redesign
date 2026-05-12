@@ -382,22 +382,22 @@ nav.h-nav a.active{color:var(--green)}
   100%{transform:translateY(-6px) rotate(-2deg)}
 }
 
-/* Pictogram band — horizontal scrolling row of pictograms between sections */
+/* Pictogram band — refined corporate strip (dark slate, no bright accents) */
 .pic-band{
-  background:linear-gradient(135deg, #1a2920 0%, #2d8e3d 100%);
-  color:#fff;padding:1.4rem 0;overflow:hidden;position:relative;
-  border-top:3px solid var(--yellow);border-bottom:3px solid var(--yellow);
+  background:#0e1a17;color:#fff;padding:1.6rem 0;overflow:hidden;position:relative;
+  border-top:1px solid rgba(255,255,255,.08);
+  border-bottom:1px solid rgba(255,255,255,.08);
 }
 .pic-band::before,.pic-band::after{
-  content:'';position:absolute;top:0;bottom:0;width:80px;z-index:2;pointer-events:none;
+  content:'';position:absolute;top:0;bottom:0;width:120px;z-index:2;pointer-events:none;
 }
-.pic-band::before{left:0;background:linear-gradient(to right, rgba(26,41,32,.95), transparent)}
-.pic-band::after{right:0;background:linear-gradient(to left, rgba(45,142,61,.95), transparent)}
-.pic-band-track{display:flex;gap:3rem;white-space:nowrap;animation:picMarquee 40s linear infinite;align-items:center}
-.pic-band-track .item{display:inline-flex;align-items:center;gap:.8rem;color:#fff}
-.pic-band-track .item .pic{width:36px;height:36px;color:var(--yellow-light)}
-.pic-band-track .item span{font-size:.78rem;letter-spacing:.2em;text-transform:uppercase;font-weight:700;color:rgba(255,255,255,.85)}
-.pic-band-track .item .sep{color:rgba(255,255,255,.3);margin:0 .5rem}
+.pic-band::before{left:0;background:linear-gradient(to right, #0e1a17, transparent)}
+.pic-band::after{right:0;background:linear-gradient(to left, #0e1a17, transparent)}
+.pic-band-track{display:flex;gap:3.5rem;white-space:nowrap;animation:picMarquee 50s linear infinite;align-items:center}
+.pic-band-track .item{display:inline-flex;align-items:center;gap:.85rem;color:rgba(255,255,255,.85)}
+.pic-band-track .item .pic{width:32px;height:32px;color:#5fb86f;stroke-width:1.5}
+.pic-band-track .item span{font-size:.7rem;letter-spacing:.22em;text-transform:uppercase;font-weight:500;color:rgba(255,255,255,.7)}
+.pic-band-track .item .sep{color:rgba(255,255,255,.18);margin:0 .6rem;font-weight:300}
 @keyframes picMarquee{from{transform:translateX(0)}to{transform:translateX(-50%)}}
 
 /* Pictogram badge - inline with section labels */
