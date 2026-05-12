@@ -8,20 +8,21 @@ document.addEventListener('DOMContentLoaded', () => {
   /* ─── Page loaded ─── */
   setTimeout(() => document.body.classList.add('loaded'), 1300);
 
-  /* ─── Custom bolt cursor ─── */
+  /* ─── Custom spanner cursor ─── */
   if (window.matchMedia('(hover:hover)').matches) {
     const cur = document.createElement('div'); cur.id = 'cursor';
     const ring = document.createElement('div'); ring.id = 'cursor-ring';
-    // SVG hex-bolt cursor ring (rotates like a bolt being turned)
+    // SVG combination wrench / spanner (rocks back and forth like turning a bolt)
     ring.innerHTML = `<svg viewBox="0 0 48 48" fill="none" stroke="#2d8e3d" stroke-linejoin="round" stroke-linecap="round">
-      <!-- Outer hex head -->
-      <polygon points="24,5 41,14.5 41,33.5 24,43 7,33.5 7,14.5" stroke-width="2.4"/>
-      <!-- Bevel ring (inner hex) -->
-      <polygon points="24,11 35.5,18 35.5,30 24,37 12.5,30 12.5,18" stroke-width="1.2" opacity=".55"/>
-      <!-- Slotted/Phillips center -->
-      <circle cx="24" cy="24" r="5.5" stroke-width="1.5"/>
-      <line x1="24" y1="20" x2="24" y2="28" stroke-width="1.8"/>
-      <line x1="20" y1="24" x2="28" y2="24" stroke-width="1.8"/>
+      <g transform="rotate(-45 24 24)" stroke-width="2.4">
+        <!-- Closed ring (box end) -->
+        <circle cx="9" cy="24" r="6.5"/>
+        <circle cx="9" cy="24" r="3"/>
+        <!-- Handle -->
+        <line x1="15" y1="24" x2="31" y2="24" stroke-width="6"/>
+        <!-- Open jaw with U-shaped notch -->
+        <path d="M 31 17 L 44 17 L 44 21 L 38 21 L 38 27 L 44 27 L 44 31 L 31 31 Z"/>
+      </g>
     </svg>`;
     document.body.appendChild(cur); document.body.appendChild(ring);
     let mx=0,my=0,rx=0,ry=0;
