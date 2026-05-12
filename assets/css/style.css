@@ -59,7 +59,7 @@ button{font:inherit;cursor:pointer;border:none;background:none}
    CURSOR - Native SVG wrench (CSS url)
 ═══════════════════════════════════ */
 @media(hover:hover){
-  body{cursor:url('../img/cursor-wrench.svg') 6 6, auto}
+  body{cursor:url('../img/cursor-wrench.svg?v=8') 6 6, auto}
   /* JS-injected custom cursor elements are hidden — native cursor takes over */
   #cursor,#cursor-ring{display:none!important}
 }
