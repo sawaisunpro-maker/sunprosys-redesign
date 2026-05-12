@@ -76,14 +76,56 @@
 .form-checkbox a{color:var(--primary);text-decoration:underline}
 
 .form-submit{
-  display:block;width:100%;padding:1.2rem;border-radius:100px;
+  display:flex;align-items:center;justify-content:center;gap:.8rem;
+  width:100%;padding:1.2rem;border-radius:100px;
   background:var(--grad);color:#fff;font-size:.9rem;font-weight:700;
   letter-spacing:.15em;text-transform:uppercase;
   box-shadow:0 8px 24px rgba(43,184,217,.3);
-  transition:transform .3s var(--ease-bounce),box-shadow .3s;cursor:pointer;
+  transition:transform .3s var(--ease-bounce),box-shadow .3s,opacity .3s;cursor:pointer;
+  position:relative;border:0;
 }
 .form-submit:hover{transform:translateY(-4px);box-shadow:0 14px 32px rgba(43,184,217,.45)}
 .form-submit:active{transform:translateY(-1px)}
+.form-submit:disabled{opacity:.7;cursor:wait;transform:none!important}
+.form-submit.sent{background:#5fc9a8;box-shadow:0 8px 24px rgba(95,201,168,.35);pointer-events:none}
+.form-submit.error{background:#e25555;box-shadow:0 8px 24px rgba(226,85,85,.35)}
+
+/* Spinner shown while submitting */
+.btn-spinner{
+  display:none;width:18px;height:18px;border-radius:50%;
+  border:2px solid rgba(255,255,255,.35);border-top-color:#fff;
+  animation:spinForm .8s linear infinite;
+}
+.form-submit.sending .btn-spinner{display:inline-block}
+@keyframes spinForm{to{transform:rotate(360deg)}}
+
+/* Status panel (success / error message) */
+.form-status{
+  margin:1rem 0 1.4rem;padding:1.1rem 1.3rem;border-radius:12px;
+  font-size:.88rem;line-height:1.7;
+  display:flex;align-items:flex-start;gap:.8rem;
+  border:1px solid;
+  animation:statusIn .4s var(--ease) forwards;
+}
+@keyframes statusIn{from{opacity:0;transform:translateY(-6px)}to{opacity:1;transform:none}}
+.form-status.success{background:#e8f8f1;border-color:#a3dec5;color:#1f6b4a}
+.form-status.error{background:#fdebec;border-color:#e9a7a9;color:#a8302f}
+.form-status::before{
+  content:'';flex-shrink:0;width:20px;height:20px;border-radius:50%;
+  background:currentColor;
+  mask:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'><path d='M7.5 13l-3-3 1.4-1.4L7.5 10.2l5.1-5.1L14 6.5z' fill='black'/></svg>") center/contain no-repeat;
+  -webkit-mask:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'><path d='M7.5 13l-3-3 1.4-1.4L7.5 10.2l5.1-5.1L14 6.5z' fill='black'/></svg>") center/contain no-repeat;
+}
+.form-status.error::before{
+  mask:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'><path d='M10 2a8 8 0 110 16 8 8 0 010-16zm0 11a1 1 0 100 2 1 1 0 000-2zm0-9a1 1 0 00-1 1v5a1 1 0 102 0V5a1 1 0 00-1-1z' fill='black'/></svg>") center/contain no-repeat;
+  -webkit-mask:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'><path d='M10 2a8 8 0 110 16 8 8 0 010-16zm0 11a1 1 0 100 2 1 1 0 000-2zm0-9a1 1 0 00-1 1v5a1 1 0 102 0V5a1 1 0 00-1-1z' fill='black'/></svg>") center/contain no-repeat;
+}
+
+/* Inline field validation */
+.form-group input:invalid:not(:placeholder-shown),
+.form-group textarea:invalid:not(:placeholder-shown){border-color:#e9a7a9;background:#fef7f7}
+.form-group input:valid:not(:placeholder-shown),
+.form-group textarea:valid:not(:placeholder-shown){border-color:#a3dec5}
 
 /* Map */
 .access{padding:clamp(4rem,8vh,7rem) 0;background:#fff;position:relative;overflow:hidden}
@@ -153,10 +195,26 @@
         <h2 class="s-h2">お問い合わせ<span class="em">フォーム</span></h2>
         <p style="color:var(--text-soft);font-size:.9rem;margin-top:1rem;line-height:1.85">必要事項をご入力の上、送信してください。<br>2〜3営業日以内にご返信いたします。</p>
       </div>
-      <form onsubmit="event.preventDefault();this.querySelector('.form-submit').textContent='送信完了！ ありがとうございました';this.querySelector('.form-submit').style.background='#5fc9a8'">
+      <!--
+        ╔═══════════════════════════════════════════════════════════════╗
+        ║  実フォーム稼働手順:                                          ║
+        ║  1. https://formspree.io/ で無料アカウント作成                ║
+        ║  2. 新規フォーム作成、宛先メールに info@sunprosys.co.jp 指定  ║
+        ║  3. 発行されたエンドポイント (例 https://formspree.io/f/xxx)  ║
+        ║     を下記 action 属性の YOUR_FORMSPREE_ID と差し替え         ║
+        ║  以上で送信が機能します（無料枠: 月50件）。                   ║
+        ╚═══════════════════════════════════════════════════════════════╝
+      -->
+      <form id="contactForm" action="https://formspree.io/f/YOUR_FORMSPREE_ID" method="POST" novalidate>
+        <!-- Honeypot field for spam prevention (hidden from users) -->
+        <input type="text" name="_gotcha" tabindex="-1" autocomplete="off" style="position:absolute;left:-9999px;opacity:0" aria-hidden="true">
+        <!-- Reply-to email setting -->
+        <input type="hidden" name="_subject" value="【サイトお問い合わせ】サンプロシステム">
+        <input type="hidden" name="_language" value="ja">
+
         <div class="form-group">
-          <label>お問い合わせ種別 <span class="req">必須</span></label>
-          <select required>
+          <label for="f-type">お問い合わせ種別 <span class="req">必須</span></label>
+          <select id="f-type" name="お問い合わせ種別" required>
             <option value="">選択してください</option>
             <option>事業（機械設計・製作）について</option>
             <option>事業（制御設計・製作）について</option>
@@ -168,33 +226,40 @@
         </div>
         <div class="form-row">
           <div class="form-group">
-            <label>お名前 <span class="req">必須</span></label>
-            <input type="text" required placeholder="山田 太郎">
+            <label for="f-name">お名前 <span class="req">必須</span></label>
+            <input type="text" id="f-name" name="お名前" required autocomplete="name" placeholder="山田 太郎">
           </div>
           <div class="form-group">
-            <label>会社名</label>
-            <input type="text" placeholder="株式会社○○">
+            <label for="f-company">会社名</label>
+            <input type="text" id="f-company" name="会社名" autocomplete="organization" placeholder="株式会社○○">
           </div>
         </div>
         <div class="form-row">
           <div class="form-group">
-            <label>メールアドレス <span class="req">必須</span></label>
-            <input type="email" required placeholder="example@email.com">
+            <label for="f-email">メールアドレス <span class="req">必須</span></label>
+            <input type="email" id="f-email" name="email" required autocomplete="email" placeholder="example@email.com">
           </div>
           <div class="form-group">
-            <label>電話番号</label>
-            <input type="tel" placeholder="082-XXX-XXXX">
+            <label for="f-tel">電話番号</label>
+            <input type="tel" id="f-tel" name="電話番号" autocomplete="tel" placeholder="082-XXX-XXXX">
           </div>
         </div>
         <div class="form-group">
-          <label>お問い合わせ内容 <span class="req">必須</span></label>
-          <textarea required placeholder="お問い合わせ内容をご記入ください"></textarea>
+          <label for="f-msg">お問い合わせ内容 <span class="req">必須</span></label>
+          <textarea id="f-msg" name="お問い合わせ内容" required minlength="10" placeholder="お問い合わせ内容をご記入ください（10文字以上）"></textarea>
         </div>
         <label class="form-checkbox">
-          <input type="checkbox" required>
-          <span><a href="#">プライバシーポリシー</a>に同意して、お問い合わせ内容を送信します。</span>
+          <input type="checkbox" name="同意" value="同意" required>
+          <span><a href="#" onclick="event.preventDefault()">プライバシーポリシー</a>に同意して、お問い合わせ内容を送信します。</span>
         </label>
-        <button type="submit" class="form-submit magnetic">送信する</button>
+
+        <!-- Status panel (shown after submit) -->
+        <div id="formStatus" class="form-status" hidden></div>
+
+        <button type="submit" class="form-submit magnetic">
+          <span class="btn-label">送信する</span>
+          <span class="btn-spinner" aria-hidden="true"></span>
+        </button>
       </form>
     </div>
   </div>
@@ -236,6 +301,83 @@
   </div>
 </footer>
 
+<script>
+/* Contact form: async submit via fetch with full UI state handling */
+(function(){
+  const form = document.getElementById('contactForm');
+  if(!form) return;
+  const btn = form.querySelector('.form-submit');
+  const btnLabel = btn.querySelector('.btn-label');
+  const status = document.getElementById('formStatus');
+  const action = form.getAttribute('action');
+
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+
+    // Basic native validation
+    if(!form.checkValidity()){
+      form.reportValidity();
+      return;
+    }
+
+    // Demo fallback if Formspree endpoint is not set yet
+    if(action.includes('YOUR_FORMSPREE_ID')){
+      btn.classList.add('sent');
+      btnLabel.textContent = '送信完了（デモ）';
+      showStatus('success',
+        '<strong>送信デモ完了です。</strong>本番送信を有効化するには、Formspree（または同等のフォームサービス）のエンドポイントを設定してください。' +
+        '<br><small style="opacity:.75">contact.html の form action 属性内の YOUR_FORMSPREE_ID を実際のIDに差し替えてください。</small>');
+      return;
+    }
+
+    // Real submit
+    btn.classList.add('sending');
+    btn.disabled = true;
+    btnLabel.textContent = '送信中...';
+    status.hidden = true;
+
+    try{
+      const fd = new FormData(form);
+      const res = await fetch(action, {
+        method:'POST',
+        body: fd,
+        headers:{ 'Accept':'application/json' }
+      });
+      btn.classList.remove('sending');
+      if(res.ok){
+        btn.classList.add('sent');
+        btnLabel.textContent = '✓ 送信完了';
+        showStatus('success',
+          '<strong>お問い合わせを受け付けました。</strong>' +
+          '<br>担当者より2〜3営業日以内にご連絡いたします。お急ぎの場合は <a href="tel:0825071067" style="color:inherit;text-decoration:underline">082-507-1067</a> までお電話ください。');
+        form.querySelectorAll('input, select, textarea').forEach(f => {
+          if(f.type !== 'hidden') f.setAttribute('disabled','disabled');
+        });
+      } else {
+        const data = await res.json().catch(() => ({}));
+        throw new Error(data.error || 'サーバーエラー');
+      }
+    } catch(err){
+      btn.classList.remove('sending');
+      btn.classList.add('error');
+      btn.disabled = false;
+      btnLabel.textContent = '再送信する';
+      showStatus('error',
+        '<strong>送信に失敗しました。</strong>' +
+        '<br>恐れ入りますがお電話でのご連絡をお願いします：<a href="tel:0825071067" style="color:inherit;text-decoration:underline;font-weight:700">082-507-1067</a>' +
+        '<br><small style="opacity:.7">' + (err.message || 'ネットワークエラー') + '</small>');
+      setTimeout(()=>btn.classList.remove('error'), 4000);
+    }
+  });
+
+  function showStatus(type, html){
+    status.className = 'form-status ' + type;
+    status.innerHTML = '<div>' + html + '</div>';
+    status.hidden = false;
+    status.scrollIntoView({ behavior:'smooth', block:'center' });
+  }
+})();
+</script>
 <script src="assets/js/main.js"></script>
 </body>
 </html>
