@@ -36,39 +36,39 @@ body{background:#fff}
 .voice-block:nth-of-type(even){background:var(--bg-soft)}
 .voice-inner{max-width:1100px;margin:0 auto;padding:0 clamp(1.5rem,4vw,3rem)}
 
-/* Voice header - SIer / Blueprint (lightweight) */
+/* Voice header - Light yellow-green (lightweight) */
 .v-header-img{
   position:relative;width:100%;aspect-ratio:21/9;overflow:hidden;
-  border:1px solid var(--border);border-radius:6px;
-  box-shadow:0 10px 24px rgba(45,142,61,.08);
+  border:1px solid #cce7b8;border-radius:6px;
+  box-shadow:0 10px 24px rgba(122,193,66,.18);
   margin-bottom:2.5rem;
-  background:
-    linear-gradient(135deg, #0e1a17 0%, #142823 100%);
+  /* Brighter yellow-green tone (closer to logo leaf) */
+  background:linear-gradient(135deg, #e8f5cd 0%, #d4eba8 50%, #c3e289 100%);
   contain:paint;
 }
-/* Lightweight blueprint base - no blur, no multi-radial */
+/* Soft inner glow with logo yellow-green */
 .v-header-bg{
   position:absolute;inset:0;z-index:0;
-  background:radial-gradient(circle at 30% 60%, rgba(45,142,61,.18), transparent 65%);
+  background:radial-gradient(circle at 30% 60%, rgba(122,193,66,.25), transparent 65%);
 }
-/* CAD grid (lighter: 1 size only, no mask) */
+/* CAD grid on light bg */
 .v-header-img::before{
   content:'';position:absolute;inset:0;pointer-events:none;z-index:1;
   background-image:
-    linear-gradient(rgba(95,184,111,.14) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(95,184,111,.14) 1px, transparent 1px);
+    linear-gradient(rgba(58,138,45,.16) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(58,138,45,.16) 1px, transparent 1px);
   background-size:60px 60px;
-  opacity:.55;
+  opacity:.45;
 }
 .v-header-img::after{display:none}
 
-/* Decorative SIer layer (single corner gear only — no infinite spin) */
+/* Decorative SIer layer */
 .v-sier-deco{
   position:absolute;z-index:2;pointer-events:none;
-  color:rgba(95,184,111,.18);
+  color:rgba(58,138,45,.18);
 }
 .v-sier-deco.gear-corner{top:-30px;right:-30px;width:140px;height:140px}
-.v-sier-deco.gear-corner.bl{top:auto;right:auto;bottom:-30px;left:-30px;color:rgba(244,168,0,.14)}
+.v-sier-deco.gear-corner.bl{top:auto;right:auto;bottom:-30px;left:-30px;color:rgba(244,168,0,.22)}
 /* Hide additional decorations (kept hidden by CSS — markup unchanged) */
 .v-sier-deco.arm-r,.v-sier-deco.arm-l,.v-sier-deco.circuit,.v-sier-deco.circuit-r{display:none}
 
@@ -117,13 +117,13 @@ body{background:#fff}
 .v-cutout{
   position:absolute;bottom:-2%;height:118%;width:auto;max-width:none;
   z-index:4;pointer-events:none;
-  /* Lightweight outline: 4 directional + 1 shadow (was 16+) */
+  /* Outline: darker brand green for contrast on light bg */
   filter:
-    drop-shadow(2px 0 0 #5fb86f)
-    drop-shadow(-2px 0 0 #5fb86f)
-    drop-shadow(0 2px 0 #5fb86f)
-    drop-shadow(0 -2px 0 #5fb86f)
-    drop-shadow(0 14px 20px rgba(0,0,0,.45));
+    drop-shadow(2px 0 0 #2d8e3d)
+    drop-shadow(-2px 0 0 #2d8e3d)
+    drop-shadow(0 2px 0 #2d8e3d)
+    drop-shadow(0 -2px 0 #2d8e3d)
+    drop-shadow(0 14px 20px rgba(45,142,61,.35));
   opacity:0;transform:translateY(50px);
   transition:opacity .9s var(--ease) .15s, transform 1s var(--ease) .15s;
 }
