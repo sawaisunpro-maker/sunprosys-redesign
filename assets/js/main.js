@@ -106,6 +106,17 @@ document.addEventListener('DOMContentLoaded', () => {
   }, { threshold: 0.12 });
   document.querySelectorAll('.r,.r-l,.r-r,.r-s,.clip-reveal,.clip-up,.plate-reveal,.text-split').forEach(el => revObs.observe(el));
 
+  /* ─── Scroll-reveal for voice header panels (cutout slides up) ─── */
+  const dataRevObs = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('is-visible');
+        dataRevObs.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.25, rootMargin: '0px 0px -10% 0px' });
+  document.querySelectorAll('[data-reveal]').forEach(el => dataRevObs.observe(el));
+
   /* ─── Counter ─── */
   const countObs = new IntersectionObserver(entries => {
     entries.forEach(e => {

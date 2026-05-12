@@ -36,102 +36,127 @@ body{background:#fff}
 .voice-block:nth-of-type(even){background:var(--bg-soft)}
 .voice-inner{max-width:1100px;margin:0 auto;padding:0 clamp(1.5rem,4vw,3rem)}
 
-/* Voice header image - MANGA STYLE COMIC PANEL */
+/* Voice header - SIer / Blueprint professional style */
 .v-header-img{
   position:relative;width:100%;aspect-ratio:21/9;overflow:hidden;
-  border:4px solid #1a1a1a;
-  box-shadow:8px 8px 0 #1a1a1a, 0 12px 30px rgba(0,0,0,.18);
-  margin-bottom:2.5rem;
-  background:#fff;
+  border:1px solid var(--border);border-radius:6px;
+  box-shadow:0 10px 30px rgba(45,142,61,.10);
+  margin-bottom:2.5rem;background:#0f1815;
 }
-/* Halftone dots (comic style) */
+/* Dark blueprint base */
+.v-header-bg{
+  position:absolute;inset:0;z-index:0;
+  background:
+    radial-gradient(circle at 30% 50%, rgba(45,142,61,.18), transparent 60%),
+    radial-gradient(circle at 75% 60%, rgba(244,168,0,.10), transparent 50%),
+    linear-gradient(135deg, #0e1a17 0%, #142823 50%, #0f1815 100%);
+}
+/* CAD grid */
 .v-header-img::before{
   content:'';position:absolute;inset:0;pointer-events:none;z-index:1;
-  background-image:radial-gradient(circle, #1a1a1a 1.6px, transparent 1.6px);
-  background-size:14px 14px;
-  opacity:.25;
-  mask-image:radial-gradient(ellipse 70% 70% at 20% 80%, black 20%, transparent 70%);
-  -webkit-mask-image:radial-gradient(ellipse 70% 70% at 20% 80%, black 20%, transparent 70%);
+  background-image:
+    linear-gradient(rgba(95,184,111,.18) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(95,184,111,.18) 1px, transparent 1px),
+    linear-gradient(rgba(95,184,111,.08) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(95,184,111,.08) 1px, transparent 1px);
+  background-size:80px 80px, 80px 80px, 16px 16px, 16px 16px;
+  mask-image:linear-gradient(to right, black 0%, black 60%, transparent 100%);
+  -webkit-mask-image:linear-gradient(to right, black 0%, black 60%, transparent 100%);
+  opacity:.7;
 }
-/* Speed lines (放射状の集中線) */
+/* Top-right corner technical info */
 .v-header-img::after{
-  content:'';position:absolute;inset:0;pointer-events:none;z-index:2;
+  content:'';position:absolute;top:0;right:0;width:200px;height:120px;
+  pointer-events:none;z-index:2;
   background:
-    repeating-conic-gradient(
-      from 0deg at 50% 50%,
-      transparent 0deg, transparent 3deg,
-      rgba(26,26,26,.45) 3deg, rgba(26,26,26,.45) 3.4deg
-    );
-  mask-image:radial-gradient(circle at center, transparent 30%, black 75%);
-  -webkit-mask-image:radial-gradient(circle at center, transparent 30%, black 75%);
-  opacity:.35;
-  transition:opacity .5s var(--ease),transform 4s linear;
-  animation:speedLinesSpin 60s linear infinite;
+    linear-gradient(to bottom, rgba(244,168,0,.12), transparent),
+    repeating-linear-gradient(45deg, transparent 0, transparent 6px, rgba(244,168,0,.08) 6px, rgba(244,168,0,.08) 7px);
 }
-@keyframes speedLinesSpin{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}
-.v-header-img:hover::after{opacity:.7;animation-duration:6s}
-/* Soft background gradient (manga page tone) */
-.v-header-bg{
-  position:absolute;inset:0;
-  background-image:linear-gradient(135deg, #fff4e6 0%, #fff 40%, #e8f5ea 100%);
-  z-index:0;
-}
-/* Color variant per voice */
-.v-header-img.tone-y .v-header-bg{background-image:linear-gradient(135deg, #fff0c4 0%, #fff 40%, #ffe8a3 100%)}
-.v-header-img.tone-g .v-header-bg{background-image:linear-gradient(135deg, #d8eddb 0%, #fff 40%, #c0e8c8 100%)}
-.v-header-img.tone-mix .v-header-bg{background-image:linear-gradient(135deg, #d8eddb 0%, #fff 50%, #fff0c4 100%)}
 
-/* Onomatopoeia (擬音語) text */
-.v-onomato{
-  position:absolute;z-index:5;font-family:'Inter',sans-serif;font-weight:900;
-  color:#fff;-webkit-text-stroke:3px #1a1a1a;
-  text-stroke:3px #1a1a1a;letter-spacing:-.02em;
-  pointer-events:none;line-height:.9;
-  transform-origin:center;
-  filter:drop-shadow(4px 4px 0 #1a1a1a);
+/* Decorative SIer SVG layer (robot arm, circuits etc.) */
+.v-sier-deco{
+  position:absolute;z-index:2;pointer-events:none;
+  color:rgba(95,184,111,.45);
+  transition:transform 1.4s var(--ease),color .4s;
 }
-.v-onomato.top-l{top:8%;left:5%;font-size:clamp(2rem,4vw,3.5rem);transform:rotate(-12deg)}
-.v-onomato.top-r{top:8%;right:5%;font-size:clamp(2rem,4vw,3.5rem);transform:rotate(8deg)}
-.v-onomato.bot-l{bottom:12%;left:6%;font-size:clamp(1.6rem,3vw,2.8rem);transform:rotate(-6deg)}
-.v-onomato.bot-r{bottom:14%;right:6%;font-size:clamp(1.6rem,3vw,2.8rem);transform:rotate(10deg)}
-.v-onomato.yellow{color:var(--yellow);-webkit-text-stroke-color:#1a1a1a}
-.v-onomato.pink{color:#ff5b85;-webkit-text-stroke-color:#1a1a1a}
-.v-onomato.green{color:var(--green-light);-webkit-text-stroke-color:#1a1a1a}
+.v-sier-deco.arm-r{bottom:-10%;right:-4%;width:300px;height:300px}
+.v-sier-deco.arm-l{bottom:-10%;left:-4%;width:300px;height:300px;transform:scaleX(-1)}
+.v-sier-deco.circuit{top:8%;left:6%;width:140px;color:rgba(95,184,111,.35)}
+.v-sier-deco.circuit-r{top:8%;right:6%;width:140px;color:rgba(244,168,0,.4)}
+.v-sier-deco.gear-corner{top:-30px;right:-30px;width:140px;color:rgba(244,168,0,.18)}
+.v-sier-deco.gear-corner svg{animation:gearSpin 30s linear infinite}
+.v-sier-deco.gear-corner.bl{top:auto;right:auto;bottom:-30px;left:-30px;color:rgba(95,184,111,.18)}
+.v-sier-deco.gear-corner.bl svg{animation-direction:reverse;animation-duration:45s}
+.v-header-img:hover .v-sier-deco{color:rgba(244,168,0,.55)}
 
-/* Burst-shape (爆発吹き出し) */
-.v-burst{
-  position:absolute;z-index:4;pointer-events:none;
-  width:140px;height:140px;
-  background:var(--yellow);
-  clip-path:polygon(50% 0%, 60% 18%, 75% 8%, 75% 28%, 95% 25%, 82% 42%, 100% 50%, 82% 58%, 95% 75%, 75% 72%, 75% 92%, 60% 82%, 50% 100%, 40% 82%, 25% 92%, 25% 72%, 5% 75%, 18% 58%, 0% 50%, 18% 42%, 5% 25%, 25% 28%, 25% 8%, 40% 18%);
-  display:flex;align-items:center;justify-content:center;
-  font-size:.85rem;font-weight:900;color:#1a1a1a;text-align:center;line-height:1.1;
-  padding:1rem;border:none;
-  filter:drop-shadow(3px 3px 0 #1a1a1a);
-  animation:burstPulse 2s ease-in-out infinite alternate;
+/* Technical callouts (CAD-style annotations) */
+.v-callout{
+  position:absolute;z-index:5;font-family:'Inter','Courier New',monospace;
+  font-size:.62rem;letter-spacing:.18em;color:var(--yellow-light);
+  text-transform:uppercase;font-weight:700;line-height:1.6;
+  background:rgba(15,24,21,.85);backdrop-filter:blur(8px);
+  border:1px solid rgba(244,168,0,.4);
+  padding:.6rem .9rem;pointer-events:none;
+  opacity:0;transform:translateY(10px);
+  transition:opacity .6s var(--ease) .8s,transform .6s var(--ease) .8s;
+  white-space:nowrap;
 }
-@keyframes burstPulse{from{transform:scale(1) rotate(-3deg)}to{transform:scale(1.08) rotate(3deg)}}
-.v-burst.tr{top:6%;right:8%}
-.v-burst.bl{bottom:6%;left:8%}
+.v-header-img.is-visible .v-callout{opacity:1;transform:none}
+.v-callout::before{
+  content:'';position:absolute;width:60px;height:1px;background:var(--yellow);
+}
+.v-callout.tl{top:14%;left:8%}
+.v-callout.tl::before{left:-60px;top:50%}
+.v-callout.tr{top:14%;right:8%;text-align:right;color:var(--green-light);border-color:rgba(95,184,111,.4)}
+.v-callout.tr::before{right:-60px;top:50%;background:var(--green-light)}
+.v-callout.br{bottom:14%;right:8%;color:var(--green-light);border-color:rgba(95,184,111,.4)}
+.v-callout.br::before{right:-60px;top:50%;background:var(--green-light)}
+.v-callout .num{color:#fff;font-size:.85rem;letter-spacing:.05em;display:block;margin-top:.2rem}
 
-/* Cutout person — sticker style with manga outline */
+/* Spec card (右下にいる小さいスペック表示) */
+.v-spec{
+  position:absolute;bottom:1rem;right:1rem;z-index:5;
+  font-family:'Inter',monospace;
+  background:rgba(15,24,21,.92);backdrop-filter:blur(8px);
+  border:1px solid rgba(244,168,0,.3);color:#fff;
+  padding:.6rem .8rem;font-size:.65rem;line-height:1.7;letter-spacing:.06em;
+  opacity:0;transform:translateY(10px);
+  transition:opacity .6s var(--ease) 1.1s,transform .6s var(--ease) 1.1s;
+  min-width:160px;
+}
+.v-header-img.is-visible .v-spec{opacity:1;transform:none}
+.v-spec .row{display:flex;justify-content:space-between;gap:1rem}
+.v-spec .row .k{color:var(--yellow-light)}
+.v-spec .row .v{color:#fff;font-weight:700}
+.v-spec .row.title{padding-bottom:.3rem;margin-bottom:.3rem;border-bottom:1px solid rgba(244,168,0,.3);font-weight:700;color:var(--yellow);letter-spacing:.1em}
+
+/* Cutout person — SCROLL REVEAL + crisper outline */
 .v-cutout{
-  position:absolute;bottom:-3%;left:50%;transform:translateX(-50%);
-  height:118%;width:auto;max-width:none;z-index:3;pointer-events:none;
-  /* Thick white sticker outline + black manga line + drop shadow */
+  position:absolute;bottom:-2%;height:118%;width:auto;max-width:none;
+  z-index:4;pointer-events:none;
+  /* Crisper outline: thin black + subtle drop shadow only */
   filter:
-    drop-shadow(2px 0 0 #fff) drop-shadow(-2px 0 0 #fff)
-    drop-shadow(0 2px 0 #fff) drop-shadow(0 -2px 0 #fff)
-    drop-shadow(2px 2px 0 #fff) drop-shadow(-2px -2px 0 #fff)
-    drop-shadow(2px -2px 0 #fff) drop-shadow(-2px 2px 0 #fff)
-    drop-shadow(4px 0 0 #1a1a1a) drop-shadow(-4px 0 0 #1a1a1a)
-    drop-shadow(0 4px 0 #1a1a1a) drop-shadow(0 -4px 0 #1a1a1a)
-    drop-shadow(6px 8px 0 rgba(26,26,26,.4));
-  animation:cutoutFloat 5s ease-in-out infinite alternate;
-  transition:filter .4s var(--ease);
+    drop-shadow(1px 0 0 #fff) drop-shadow(-1px 0 0 #fff)
+    drop-shadow(0 1px 0 #fff) drop-shadow(0 -1px 0 #fff)
+    drop-shadow(2px 0 0 #0f1815) drop-shadow(-2px 0 0 #0f1815)
+    drop-shadow(0 2px 0 #0f1815) drop-shadow(0 -2px 0 #0f1815)
+    drop-shadow(0 16px 24px rgba(0,0,0,.5));
+  /* Initial state: hidden below the panel */
+  opacity:0;transform:translateY(60px);
+  transition:opacity 1.1s var(--ease) .15s, transform 1.2s var(--ease) .15s;
 }
-.v-cutout.right{left:auto;right:5%;transform:none;animation:cutoutFloatR 5s ease-in-out infinite alternate}
-.v-cutout.left{left:5%;transform:none;animation:cutoutFloatL 6s ease-in-out infinite alternate}
+.v-header-img.is-visible .v-cutout{opacity:1;transform:translateY(0)}
+/* After reveal, gentle idle float */
+.v-header-img.is-visible .v-cutout{animation:cutoutFloat 6s ease-in-out 1.4s infinite alternate}
+.v-cutout.right{right:5%}
+.v-cutout.left{left:5%}
+.v-cutout.center{left:50%;transform:translateX(-50%) translateY(60px)}
+.v-header-img.is-visible .v-cutout.center{transform:translateX(-50%) translateY(0);animation:cutoutFloatC 6s ease-in-out 1.4s infinite alternate}
+@keyframes cutoutFloatC{
+  0%{transform:translateX(-50%) translateY(0)}
+  50%{transform:translateX(-50%) translateY(-10px)}
+  100%{transform:translateX(-50%) translateY(-4px)}
+}
 @keyframes cutoutFloat{
   0%{transform:translateX(-50%) translateY(0) rotate(0deg)}
   50%{transform:translateX(-50%) translateY(-12px) rotate(.3deg)}
@@ -148,31 +173,27 @@ body{background:#fff}
   100%{transform:translateY(-16px) rotate(.3deg)}
 }
 .v-header-img:hover .v-cutout{animation-duration:2.5s;filter:drop-shadow(0 24px 40px rgba(45,142,61,.4))}
-/* Manga style speech bubble */
+/* Clean professional callout (replaces manga bubble) */
 .v-bubble{
-  position:absolute;top:14%;right:6%;z-index:6;
-  background:#fff;color:#1a1a1a;padding:.9rem 1.2rem;
-  border:3px solid #1a1a1a;
-  font-size:.85rem;font-weight:700;line-height:1.55;
+  position:absolute;top:18%;right:6%;z-index:6;
+  background:rgba(255,255,255,.97);backdrop-filter:blur(8px);
+  color:var(--text);padding:1.1rem 1.3rem;
+  border-radius:4px;border-left:4px solid var(--yellow);
+  font-size:.86rem;font-weight:500;line-height:1.7;
   font-family:'Noto Sans JP',sans-serif;
-  box-shadow:4px 4px 0 #1a1a1a;
-  opacity:1;transform:rotate(-2deg);
-  max-width:260px;pointer-events:none;
-  transition:transform .4s var(--ease-bounce);
+  box-shadow:0 12px 28px rgba(0,0,0,.4), 0 0 0 1px rgba(244,168,0,.25);
+  max-width:280px;pointer-events:none;
+  opacity:0;transform:translateY(15px);
+  transition:opacity .8s var(--ease) 1.4s,transform .8s var(--ease) 1.4s;
 }
+.v-header-img.is-visible .v-bubble{opacity:1;transform:none}
+.v-bubble.left-side{left:6%;right:auto;border-left:none;border-right:4px solid var(--yellow)}
 .v-bubble::before{
-  content:'';position:absolute;bottom:-22px;left:38px;width:0;height:0;
-  border:11px solid transparent;border-top-color:#1a1a1a;border-bottom:0;
+  content:'\201C';position:absolute;top:-.5rem;left:.8rem;
+  font-family:Georgia,serif;font-size:2.4rem;color:var(--yellow);font-weight:900;line-height:1;
 }
-.v-bubble::after{
-  content:'';position:absolute;bottom:-15px;left:42px;width:0;height:0;
-  border:8px solid transparent;border-top-color:#fff;border-bottom:0;
-}
-.v-bubble.left-side{left:6%;right:auto;transform:rotate(2deg)}
-.v-bubble.left-side::before{left:auto;right:38px}
-.v-bubble.left-side::after{left:auto;right:42px}
-.v-header-img:hover .v-bubble{transform:rotate(0) scale(1.05)}
-.v-bubble strong{color:#d83434;background:linear-gradient(180deg, transparent 60%, var(--yellow) 60%, var(--yellow) 90%, transparent 90%);padding:0 .15em}
+.v-bubble.left-side::before{left:auto;right:.8rem}
+.v-bubble strong{color:var(--green-dark);font-weight:700;background:linear-gradient(180deg, transparent 65%, rgba(244,168,0,.4) 65%, rgba(244,168,0,.4) 95%, transparent 95%);padding:0 .1em}
 
 /* Year badge on header */
 .v-header-label{
@@ -289,14 +310,22 @@ body{background:#fff}
 <!-- VOICE 01: 営業 / 2014 -->
 <section class="voice-block">
   <div class="voice-inner">
-    <div class="v-header-img tone-g">
+    <div class="v-header-img" data-reveal>
       <div class="v-header-bg"></div>
-      <div class="v-onomato top-l yellow">DON!</div>
-      <div class="v-burst tr">頼れる<br>ハブ役！</div>
+      <div class="v-sier-deco gear-corner"><svg viewBox="0 0 100 100" fill="currentColor"><path d="M50 28a22 22 0 1 0 0 44 22 22 0 0 0 0-44zm0 36a14 14 0 1 1 0-28 14 14 0 0 1 0 28z"/><path d="M50 4l3 11h-6l3-11zm0 92l3-11h-6l3 11zm46-46l-11 3v-6l11 3zm-92 0l11-3v6l-11-3zm78.5-32.5l-7 8.5-4.2-4.2 11.2-4.3zM21 79l-7 8.5L18.2 91l4.3-11.2zM82.5 79L91 87.5 79.8 91l4.3-11.2zM21 21l-7-8.5L18.2 9l4.3 11.2z"/></svg></div>
+      <div class="v-sier-deco gear-corner bl"><svg viewBox="0 0 100 100" fill="currentColor"><path d="M50 28a22 22 0 1 0 0 44 22 22 0 0 0 0-44zm0 36a14 14 0 1 1 0-28 14 14 0 0 1 0 28z"/><path d="M50 4l3 11h-6l3-11zm0 92l3-11h-6l3 11zm46-46l-11 3v-6l11 3zm-92 0l11-3v6l-11-3zm78.5-32.5l-7 8.5-4.2-4.2 11.2-4.3zM21 79l-7 8.5L18.2 91l4.3-11.2zM82.5 79L91 87.5 79.8 91l4.3-11.2zM21 21l-7-8.5L18.2 9l4.3 11.2z"/></svg></div>
+      <div class="v-sier-deco arm-r"><svg viewBox="0 0 200 200" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="50" y="170" width="100" height="20" fill="currentColor" opacity=".25"/><circle cx="100" cy="170" r="14"/><line x1="100" y1="170" x2="75" y2="100" stroke-width="16" opacity=".5"/><circle cx="75" cy="100" r="12"/><line x1="75" y1="100" x2="150" y2="60" stroke-width="14" opacity=".5"/><circle cx="150" cy="60" r="10"/><line x1="150" y1="60" x2="178" y2="32" stroke-width="6"/><rect x="168" y="22" width="22" height="18" stroke-width="2"/></svg></div>
+      <div class="v-sier-deco circuit"><svg viewBox="0 0 140 80" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M0,40 L30,40 L40,30 L70,30 L80,40 L140,40"/><circle cx="30" cy="40" r="3.5" fill="currentColor"/><circle cx="70" cy="30" r="3.5" fill="currentColor"/><path d="M40,30 L40,10 L80,10"/><circle cx="80" cy="10" r="3" fill="currentColor"/><path d="M80,40 L80,65 L120,65"/><circle cx="120" cy="65" r="3" fill="currentColor"/></svg></div>
       <img class="v-cutout right" src="assets/img/people/about01_image01_01.png" alt="営業職">
-      <div class="v-bubble left-side">お客様と技術者を<br><strong>つなぐ"器"</strong>を作るのが<br>営業の役目です。</div>
-      <div class="v-header-label"><span class="vn">VOICE 01</span><span class="vp">営業</span></div>
-      <div class="v-header-year">2014<small>JOINED</small></div>
+      <div class="v-callout tl">JOB_TITLE<span class="num">SALES</span></div>
+      <div class="v-callout tr">JOINED<span class="num">2014</span></div>
+      <div class="v-bubble left-side">お客様と技術者を<strong>つなぐ"器"</strong>を作るのが、営業の役目です。</div>
+      <div class="v-spec">
+        <div class="row title">EMP.SPEC // VOICE_01</div>
+        <div class="row"><span class="k">DEPT</span><span class="v">SALES</span></div>
+        <div class="row"><span class="k">JOIN</span><span class="v">2014</span></div>
+        <div class="row"><span class="k">ROLE</span><span class="v">HUB / COORD.</span></div>
+      </div>
     </div>
     <h2 class="v-title">お客様と技術者の架け橋として<br>最初の<span class="em">『器』</span>を作るのが営業の役目</h2>
 
@@ -330,14 +359,22 @@ body{background:#fff}
 <!-- VOICE 02: 機械製作 / 2018 育児中 -->
 <section class="voice-block">
   <div class="voice-inner">
-    <div class="v-header-img tone-y">
+    <div class="v-header-img" data-reveal>
       <div class="v-header-bg"></div>
-      <div class="v-onomato top-r pink">KIRA☆</div>
-      <div class="v-burst bl">仕事と<br>家庭<br>両立！</div>
+      <div class="v-sier-deco gear-corner"><svg viewBox="0 0 100 100" fill="currentColor"><path d="M50 28a22 22 0 1 0 0 44 22 22 0 0 0 0-44zm0 36a14 14 0 1 1 0-28 14 14 0 0 1 0 28z"/><path d="M50 4l3 11h-6l3-11zm0 92l3-11h-6l3 11zm46-46l-11 3v-6l11 3zm-92 0l11-3v6l-11-3zm78.5-32.5l-7 8.5-4.2-4.2 11.2-4.3zM21 79l-7 8.5L18.2 91l4.3-11.2zM82.5 79L91 87.5 79.8 91l4.3-11.2zM21 21l-7-8.5L18.2 9l4.3 11.2z"/></svg></div>
+      <div class="v-sier-deco gear-corner bl"><svg viewBox="0 0 100 100" fill="currentColor"><path d="M50 28a22 22 0 1 0 0 44 22 22 0 0 0 0-44zm0 36a14 14 0 1 1 0-28 14 14 0 0 1 0 28z"/><path d="M50 4l3 11h-6l3-11zm0 92l3-11h-6l3 11zm46-46l-11 3v-6l11 3zm-92 0l11-3v6l-11-3zm78.5-32.5l-7 8.5-4.2-4.2 11.2-4.3zM21 79l-7 8.5L18.2 91l4.3-11.2zM82.5 79L91 87.5 79.8 91l4.3-11.2zM21 21l-7-8.5L18.2 9l4.3 11.2z"/></svg></div>
+      <div class="v-sier-deco arm-l"><svg viewBox="0 0 200 200" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="50" y="170" width="100" height="20" fill="currentColor" opacity=".25"/><circle cx="100" cy="170" r="14"/><line x1="100" y1="170" x2="75" y2="100" stroke-width="16" opacity=".5"/><circle cx="75" cy="100" r="12"/><line x1="75" y1="100" x2="150" y2="60" stroke-width="14" opacity=".5"/><circle cx="150" cy="60" r="10"/><line x1="150" y1="60" x2="178" y2="32" stroke-width="6"/><rect x="168" y="22" width="22" height="18" stroke-width="2"/></svg></div>
+      <div class="v-sier-deco circuit-r"><svg viewBox="0 0 140 80" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M0,40 L60,40 L70,50 L120,50 L140,40"/><circle cx="60" cy="40" r="3.5" fill="currentColor"/><circle cx="120" cy="50" r="3.5" fill="currentColor"/><path d="M70,50 L70,70"/><circle cx="70" cy="70" r="3" fill="currentColor"/><path d="M120,50 L120,20 L80,20"/><circle cx="80" cy="20" r="3" fill="currentColor"/></svg></div>
       <img class="v-cutout left" src="assets/img/people/about01_image02_01.png" alt="機械製作">
-      <div class="v-bubble">男女問わず<br><strong>ワークライフバランス</strong>を<br>大切にできる会社です。</div>
-      <div class="v-header-label"><span class="vn">VOICE 02</span><span class="vp">機械製作</span></div>
-      <div class="v-header-year">2018<small>JOINED</small></div>
+      <div class="v-callout tr">JOB_TITLE<span class="num">MECHANICAL</span></div>
+      <div class="v-callout br">JOINED<span class="num">2018</span></div>
+      <div class="v-bubble">男女問わず<strong>ワークライフバランス</strong>を大切にできる会社です。</div>
+      <div class="v-spec">
+        <div class="row title">EMP.SPEC // VOICE_02</div>
+        <div class="row"><span class="k">DEPT</span><span class="v">MECHANICAL</span></div>
+        <div class="row"><span class="k">JOIN</span><span class="v">2018</span></div>
+        <div class="row"><span class="k">SKILL</span><span class="v">3D CAD</span></div>
+      </div>
     </div>
     <h2 class="v-title">男女に関わらず、<br><span class="em-y">ワークライフバランス</span>を大切にできる会社です</h2>
 
@@ -372,14 +409,22 @@ body{background:#fff}
 <!-- VOICE 03: 機械製作 / 2019 -->
 <section class="voice-block">
   <div class="voice-inner">
-    <div class="v-header-img tone-mix">
+    <div class="v-header-img" data-reveal>
       <div class="v-header-bg"></div>
-      <div class="v-onomato top-l green">GO!!</div>
-      <div class="v-burst tr">全力<br>担当！</div>
+      <div class="v-sier-deco gear-corner"><svg viewBox="0 0 100 100" fill="currentColor"><path d="M50 28a22 22 0 1 0 0 44 22 22 0 0 0 0-44zm0 36a14 14 0 1 1 0-28 14 14 0 0 1 0 28z"/><path d="M50 4l3 11h-6l3-11zm0 92l3-11h-6l3 11zm46-46l-11 3v-6l11 3zm-92 0l11-3v6l-11-3zm78.5-32.5l-7 8.5-4.2-4.2 11.2-4.3zM21 79l-7 8.5L18.2 91l4.3-11.2zM82.5 79L91 87.5 79.8 91l4.3-11.2zM21 21l-7-8.5L18.2 9l4.3 11.2z"/></svg></div>
+      <div class="v-sier-deco gear-corner bl"><svg viewBox="0 0 100 100" fill="currentColor"><path d="M50 28a22 22 0 1 0 0 44 22 22 0 0 0 0-44zm0 36a14 14 0 1 1 0-28 14 14 0 0 1 0 28z"/><path d="M50 4l3 11h-6l3-11zm0 92l3-11h-6l3 11zm46-46l-11 3v-6l11 3zm-92 0l11-3v6l-11-3zm78.5-32.5l-7 8.5-4.2-4.2 11.2-4.3zM21 79l-7 8.5L18.2 91l4.3-11.2zM82.5 79L91 87.5 79.8 91l4.3-11.2zM21 21l-7-8.5L18.2 9l4.3 11.2z"/></svg></div>
+      <div class="v-sier-deco arm-r"><svg viewBox="0 0 200 200" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="50" y="170" width="100" height="20" fill="currentColor" opacity=".25"/><circle cx="100" cy="170" r="14"/><line x1="100" y1="170" x2="75" y2="100" stroke-width="16" opacity=".5"/><circle cx="75" cy="100" r="12"/><line x1="75" y1="100" x2="150" y2="60" stroke-width="14" opacity=".5"/><circle cx="150" cy="60" r="10"/><line x1="150" y1="60" x2="178" y2="32" stroke-width="6"/><rect x="168" y="22" width="22" height="18" stroke-width="2"/></svg></div>
+      <div class="v-sier-deco circuit"><svg viewBox="0 0 140 80" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M0,40 L30,40 L40,30 L70,30 L80,40 L140,40"/><circle cx="30" cy="40" r="3.5" fill="currentColor"/><circle cx="70" cy="30" r="3.5" fill="currentColor"/><path d="M40,30 L40,10 L80,10"/><circle cx="80" cy="10" r="3" fill="currentColor"/><path d="M80,40 L80,65 L120,65"/><circle cx="120" cy="65" r="3" fill="currentColor"/></svg></div>
       <img class="v-cutout right" src="assets/img/people/about01_image03_01.png" alt="機械製作">
-      <div class="v-bubble left-side">自分の力量で<br><strong>最初から最後まで</strong><br>任せてもらえる環境です。</div>
-      <div class="v-header-label"><span class="vn">VOICE 03</span><span class="vp">機械製作</span></div>
-      <div class="v-header-year">2019<small>JOINED</small></div>
+      <div class="v-callout tl">JOB_TITLE<span class="num">MECHANICAL</span></div>
+      <div class="v-callout tr">JOINED<span class="num">2019</span></div>
+      <div class="v-bubble left-side">自分の力量で<strong>最初から最後まで</strong>任せてもらえる環境です。</div>
+      <div class="v-spec">
+        <div class="row title">EMP.SPEC // VOICE_03</div>
+        <div class="row"><span class="k">DEPT</span><span class="v">MECHANICAL</span></div>
+        <div class="row"><span class="k">JOIN</span><span class="v">2019</span></div>
+        <div class="row"><span class="k">SKILL</span><span class="v">LINE DESIGN</span></div>
+      </div>
     </div>
     <h2 class="v-title">自分の力量で<br>任せてもらえる環境に<br><span class="em">責任とやりがい</span>を感じます</h2>
 
@@ -413,14 +458,22 @@ body{background:#fff}
 <!-- VOICE 04: 制御・ソフト設計 / 2019 -->
 <section class="voice-block">
   <div class="voice-inner">
-    <div class="v-header-img tone-g">
+    <div class="v-header-img" data-reveal>
       <div class="v-header-bg"></div>
-      <div class="v-onomato top-r yellow">PIKA✦</div>
-      <div class="v-burst bl">先輩が<br>支える！</div>
+      <div class="v-sier-deco gear-corner"><svg viewBox="0 0 100 100" fill="currentColor"><path d="M50 28a22 22 0 1 0 0 44 22 22 0 0 0 0-44zm0 36a14 14 0 1 1 0-28 14 14 0 0 1 0 28z"/><path d="M50 4l3 11h-6l3-11zm0 92l3-11h-6l3 11zm46-46l-11 3v-6l11 3zm-92 0l11-3v6l-11-3zm78.5-32.5l-7 8.5-4.2-4.2 11.2-4.3zM21 79l-7 8.5L18.2 91l4.3-11.2zM82.5 79L91 87.5 79.8 91l4.3-11.2zM21 21l-7-8.5L18.2 9l4.3 11.2z"/></svg></div>
+      <div class="v-sier-deco gear-corner bl"><svg viewBox="0 0 100 100" fill="currentColor"><path d="M50 28a22 22 0 1 0 0 44 22 22 0 0 0 0-44zm0 36a14 14 0 1 1 0-28 14 14 0 0 1 0 28z"/><path d="M50 4l3 11h-6l3-11zm0 92l3-11h-6l3 11zm46-46l-11 3v-6l11 3zm-92 0l11-3v6l-11-3zm78.5-32.5l-7 8.5-4.2-4.2 11.2-4.3zM21 79l-7 8.5L18.2 91l4.3-11.2zM82.5 79L91 87.5 79.8 91l4.3-11.2zM21 21l-7-8.5L18.2 9l4.3 11.2z"/></svg></div>
+      <div class="v-sier-deco arm-l"><svg viewBox="0 0 200 200" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="50" y="170" width="100" height="20" fill="currentColor" opacity=".25"/><circle cx="100" cy="170" r="14"/><line x1="100" y1="170" x2="75" y2="100" stroke-width="16" opacity=".5"/><circle cx="75" cy="100" r="12"/><line x1="75" y1="100" x2="150" y2="60" stroke-width="14" opacity=".5"/><circle cx="150" cy="60" r="10"/><line x1="150" y1="60" x2="178" y2="32" stroke-width="6"/><rect x="168" y="22" width="22" height="18" stroke-width="2"/></svg></div>
+      <div class="v-sier-deco circuit-r"><svg viewBox="0 0 140 80" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M0,40 L60,40 L70,50 L120,50 L140,40"/><circle cx="60" cy="40" r="3.5" fill="currentColor"/><circle cx="120" cy="50" r="3.5" fill="currentColor"/><path d="M70,50 L70,70"/><circle cx="70" cy="70" r="3" fill="currentColor"/><path d="M120,50 L120,20 L80,20"/><circle cx="80" cy="20" r="3" fill="currentColor"/></svg></div>
       <img class="v-cutout left" src="assets/img/people/about01_image04_01.png" alt="制御・ソフト設計">
-      <div class="v-bubble">目標となる先輩たちに<br>囲まれた<strong>恵まれた職場</strong>。<br>未経験から成長できます。</div>
-      <div class="v-header-label"><span class="vn">VOICE 04</span><span class="vp">制御・ソフト設計</span></div>
-      <div class="v-header-year">2019<small>JOINED</small></div>
+      <div class="v-callout tr">JOB_TITLE<span class="num">CONTROL / SW</span></div>
+      <div class="v-callout br">JOINED<span class="num">2019</span></div>
+      <div class="v-bubble">目標となる先輩たちに囲まれた<strong>恵まれた職場</strong>。未経験から成長できます。</div>
+      <div class="v-spec">
+        <div class="row title">EMP.SPEC // VOICE_04</div>
+        <div class="row"><span class="k">DEPT</span><span class="v">CONTROL / SW</span></div>
+        <div class="row"><span class="k">JOIN</span><span class="v">2019</span></div>
+        <div class="row"><span class="k">SKILL</span><span class="v">PLC</span></div>
+      </div>
     </div>
     <h2 class="v-title">『自分もこうなりたい』と<br>目標となる先輩たちに囲まれた<br><span class="em-y">恵まれた職場</span>です</h2>
 
@@ -454,14 +507,22 @@ body{background:#fff}
 <!-- VOICE 05: 制御・ソフト設計 / 2017 -->
 <section class="voice-block">
   <div class="voice-inner">
-    <div class="v-header-img tone-mix">
+    <div class="v-header-img" data-reveal>
       <div class="v-header-bg"></div>
-      <div class="v-onomato bot-r pink">DOKI♥</div>
-      <div class="v-burst tr">毎日が<br>挑戦！</div>
+      <div class="v-sier-deco gear-corner"><svg viewBox="0 0 100 100" fill="currentColor"><path d="M50 28a22 22 0 1 0 0 44 22 22 0 0 0 0-44zm0 36a14 14 0 1 1 0-28 14 14 0 0 1 0 28z"/><path d="M50 4l3 11h-6l3-11zm0 92l3-11h-6l3 11zm46-46l-11 3v-6l11 3zm-92 0l11-3v6l-11-3zm78.5-32.5l-7 8.5-4.2-4.2 11.2-4.3zM21 79l-7 8.5L18.2 91l4.3-11.2zM82.5 79L91 87.5 79.8 91l4.3-11.2zM21 21l-7-8.5L18.2 9l4.3 11.2z"/></svg></div>
+      <div class="v-sier-deco gear-corner bl"><svg viewBox="0 0 100 100" fill="currentColor"><path d="M50 28a22 22 0 1 0 0 44 22 22 0 0 0 0-44zm0 36a14 14 0 1 1 0-28 14 14 0 0 1 0 28z"/><path d="M50 4l3 11h-6l3-11zm0 92l3-11h-6l3 11zm46-46l-11 3v-6l11 3zm-92 0l11-3v6l-11-3zm78.5-32.5l-7 8.5-4.2-4.2 11.2-4.3zM21 79l-7 8.5L18.2 91l4.3-11.2zM82.5 79L91 87.5 79.8 91l4.3-11.2zM21 21l-7-8.5L18.2 9l4.3 11.2z"/></svg></div>
+      <div class="v-sier-deco arm-r"><svg viewBox="0 0 200 200" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="50" y="170" width="100" height="20" fill="currentColor" opacity=".25"/><circle cx="100" cy="170" r="14"/><line x1="100" y1="170" x2="75" y2="100" stroke-width="16" opacity=".5"/><circle cx="75" cy="100" r="12"/><line x1="75" y1="100" x2="150" y2="60" stroke-width="14" opacity=".5"/><circle cx="150" cy="60" r="10"/><line x1="150" y1="60" x2="178" y2="32" stroke-width="6"/><rect x="168" y="22" width="22" height="18" stroke-width="2"/></svg></div>
+      <div class="v-sier-deco circuit"><svg viewBox="0 0 140 80" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M0,40 L30,40 L40,30 L70,30 L80,40 L140,40"/><circle cx="30" cy="40" r="3.5" fill="currentColor"/><circle cx="70" cy="30" r="3.5" fill="currentColor"/><path d="M40,30 L40,10 L80,10"/><circle cx="80" cy="10" r="3" fill="currentColor"/><path d="M80,40 L80,65 L120,65"/><circle cx="120" cy="65" r="3" fill="currentColor"/></svg></div>
       <img class="v-cutout right" src="assets/img/people/about01_image05_01.png" alt="制御・ソフト設計">
-      <div class="v-bubble left-side">オーダーメイドの仕事には<br><strong>刺激と達成感</strong>が<br>あふれています。</div>
-      <div class="v-header-label"><span class="vn">VOICE 05</span><span class="vp">制御・ソフト設計</span></div>
-      <div class="v-header-year">2017<small>JOINED</small></div>
+      <div class="v-callout tl">JOB_TITLE<span class="num">CONTROL / SW</span></div>
+      <div class="v-callout tr">JOINED<span class="num">2017</span></div>
+      <div class="v-bubble left-side">オーダーメイドの仕事には<strong>刺激と達成感</strong>があふれています。</div>
+      <div class="v-spec">
+        <div class="row title">EMP.SPEC // VOICE_05</div>
+        <div class="row"><span class="k">DEPT</span><span class="v">CONTROL / SW</span></div>
+        <div class="row"><span class="k">JOIN</span><span class="v">2017</span></div>
+        <div class="row"><span class="k">SKILL</span><span class="v">PLC / CIRCUIT</span></div>
+      </div>
     </div>
     <h2 class="v-title">お客様のニーズを把握し<br>具現化するオーダーメイドの仕事に<br><span class="em">刺激と達成感</span>を感じます</h2>
 
