@@ -8,99 +8,113 @@
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700;900&family=Inter:wght@300;400;500;700;900&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="assets/css/style.css">
 <style>
-/* HERO */
-.about-hero{position:relative;height:55vh;min-height:420px;overflow:hidden;background:#1a2920}
-.about-hero-bg{
-  position:absolute;inset:0;
-  background-image:url('https://sunprosys.co.jp/cont/wp-content/themes/sunpro_theme/img/top/top04_about.jpg');
-  background-size:cover;background-position:center;opacity:.55;
-  animation:heroZoom 8s ease-out forwards;
+/* ════════════ ABOUT PAGE — Faithful to original sunprosys.co.jp/about ════════════ */
+
+body{background:#fff}
+
+/* Page heading */
+.a-heading{margin-top:80px;width:100%;background:#1a2920;position:relative;overflow:hidden}
+.a-heading-img{width:100%;height:clamp(280px,40vh,420px);background-image:url('https://sunprosys.co.jp/cont/wp-content/themes/sunpro_theme/img/top/top04_about.jpg');background-size:cover;background-position:center;opacity:.55;animation:hZoom 8s ease-out forwards}
+@keyframes hZoom{from{transform:scale(1.12)}to{transform:scale(1)}}
+.a-heading-overlay{position:absolute;inset:0;background:linear-gradient(135deg,rgba(45,142,61,.55),rgba(26,41,32,.7));display:flex;align-items:center;justify-content:center;flex-direction:column;color:#fff;text-align:center;padding:0 1.5rem}
+.a-heading-en{font-size:.75rem;letter-spacing:.4em;text-transform:uppercase;color:rgba(255,255,255,.85);margin-bottom:1rem}
+.a-heading h1{font-size:clamp(2rem,5.5vw,4rem);font-weight:900;letter-spacing:-.02em;line-height:1.15}
+.a-heading h1 .em{background:linear-gradient(90deg,#fff,#ffc94d);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.a-heading .ja{display:block;font-size:clamp(.9rem,1.6vw,1.2rem);margin-top:.8rem;font-weight:500;color:rgba(255,255,255,.9)}
+
+/* Intro */
+.a-intro{padding:clamp(3.5rem,7vw,5rem) 0 clamp(2rem,4vw,3rem);background:#fff;text-align:center}
+.a-intro-en{font-size:.78rem;letter-spacing:.3em;color:var(--green);font-weight:700;text-transform:uppercase;margin-bottom:1rem}
+.a-intro h2{font-size:clamp(1.5rem,3.5vw,2.4rem);font-weight:900;color:var(--green-dark);line-height:1.5;margin-bottom:1.5rem}
+.a-intro p{max-width:780px;margin:1rem auto;font-size:.95rem;color:#3a4a40;line-height:2.05;text-align:left}
+
+/* Voice section - faithful to original layout */
+.voice-block{
+  padding:clamp(4rem,7vw,6rem) 0;background:#fff;
+  border-bottom:1px solid var(--border);
 }
-@keyframes heroZoom{from{transform:scale(1.15)}to{transform:scale(1)}}
-.about-hero-overlay{position:absolute;inset:0;background:linear-gradient(135deg, rgba(45,142,61,.6), rgba(26,41,32,.7))}
-.about-hero-content{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;flex-direction:column;color:#fff;text-align:center;padding:0 1.5rem}
-.about-hero-en{font-size:clamp(.7rem,1vw,.85rem);letter-spacing:.4em;text-transform:uppercase;color:rgba(255,255,255,.85);font-weight:400;margin-bottom:1rem}
-.about-hero h1{font-size:clamp(2.5rem,7vw,5.5rem);font-weight:900;line-height:1.1;letter-spacing:-.02em}
-.about-hero h1 .em{background:linear-gradient(90deg,#fff,#ffc94d);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
-.about-hero .ja{display:block;font-size:clamp(1rem,2vw,1.4rem);font-weight:500;margin-top:1rem;color:rgba(255,255,255,.9);letter-spacing:.05em}
-.about-hero-gears{position:absolute;top:-30px;left:-30px;color:rgba(255,255,255,.07)}
+.voice-block:nth-of-type(even){background:var(--bg-soft)}
+.voice-inner{max-width:1100px;margin:0 auto;padding:0 clamp(1.5rem,4vw,3rem)}
 
-/* INTRO */
-.intro{padding:clamp(5rem,10vh,9rem) 0;background:#fff;text-align:center;position:relative;overflow:hidden}
-.intro::before{content:'';position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:700px;height:700px;border-radius:50%;background:radial-gradient(circle, var(--green-soft), transparent 65%);opacity:.5}
-.intro-en{font-size:.78rem;letter-spacing:.3em;color:var(--green);font-weight:700;text-transform:uppercase;margin-bottom:1.2rem;position:relative}
-.intro h2{font-size:clamp(2rem,4vw,3.4rem);font-weight:900;line-height:1.45;position:relative;letter-spacing:-.01em}
-.intro h2 .em{background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
-.intro p{font-size:1rem;color:var(--text-soft);line-height:2.2;margin-top:2rem;max-width:760px;margin-left:auto;margin-right:auto;font-weight:300;position:relative}
-
-/* VOICE INTRO */
-.voice-intro{padding:clamp(4rem,8vh,7rem) 0;background:var(--bg-soft);text-align:center;position:relative;overflow:hidden}
-.voice-intro .s-label{margin:0 auto 1rem}
-.voice-intro h2{font-size:clamp(1.8rem,3.5vw,2.8rem);font-weight:900;line-height:1.3;margin-bottom:1.2rem}
-.voice-intro h2 .em{background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
-.voice-intro p{color:var(--text-soft);font-size:.94rem;line-height:1.95;max-width:680px;margin:0 auto}
-
-/* VOICES */
-.voice{padding:clamp(4rem,8vh,7rem) 0;background:#fff;position:relative;overflow:hidden}
-.voice:nth-of-type(even){background:var(--bg-soft)}
-.voice-inner{display:grid;grid-template-columns:1fr 1.1fr;gap:5rem;align-items:center;max-width:1280px;margin:0 auto;padding:0 clamp(1.5rem,5vw,4rem);position:relative;z-index:1}
-.voice.rev .voice-inner{direction:rtl}
-.voice.rev .voice-inner > *{direction:ltr}
-.voice-img{position:relative;overflow:hidden;aspect-ratio:4/5;background:#1a2920}
-.voice-img img.bg-photo{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform 1.2s var(--ease);filter:brightness(.65) saturate(.9)}
-.voice:hover .voice-img img.bg-photo{transform:scale(1.08);filter:brightness(.75) saturate(1)}
-.voice-img::after{content:'';position:absolute;inset:0;background:linear-gradient(135deg, rgba(45,142,61,.5) 0%, rgba(26,41,32,.7) 100%);z-index:1;mix-blend-mode:multiply}
-.voice-img.bg2::after{background:linear-gradient(135deg, rgba(244,168,0,.55) 0%, rgba(26,41,32,.7) 100%)}
-.voice-img.bg4::after{background:linear-gradient(135deg, rgba(255,201,77,.45) 0%, rgba(45,142,61,.55) 100%)}
-.voice-img-emoji{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:5rem;color:rgba(255,255,255,.95);z-index:2;filter:drop-shadow(0 12px 30px rgba(0,0,0,.4));transition:transform .8s var(--ease)}
-.voice:hover .voice-img-emoji{transform:scale(1.15) rotate(8deg)}
-.voice-img .gear-deco{position:absolute;color:rgba(255,255,255,.18);animation:gearSpin 22s linear infinite}
-.voice-img .gear-deco.r1{top:-30px;right:-30px}
-.voice-img .gear-deco.r2{bottom:-40px;left:-40px;animation-direction:reverse}
-.voice-img-tag{
-  position:absolute;top:1.5rem;left:1.5rem;background:rgba(255,255,255,.95);backdrop-filter:blur(10px);
-  padding:.5rem 1.1rem;font-size:.65rem;letter-spacing:.15em;color:var(--green);font-weight:700;text-transform:uppercase;z-index:3;
+/* Voice header image (big) */
+.v-header-img{
+  position:relative;width:100%;aspect-ratio:21/9;overflow:hidden;
+  border-radius:8px;box-shadow:0 12px 30px rgba(0,0,0,.12);
+  margin-bottom:2.5rem;
 }
-.voice-img-tag.y{color:var(--yellow-dark)}
-.voice-img-year{
-  position:absolute;bottom:1.5rem;right:1.5rem;color:#fff;z-index:3;
-  font-family:'Inter',sans-serif;font-weight:900;font-size:2.2rem;letter-spacing:-.02em;line-height:1;
+.v-header-img img{width:100%;height:100%;object-fit:cover;transition:transform 1s var(--ease)}
+.v-header-img:hover img{transform:scale(1.04)}
+.v-header-img::after{content:'';position:absolute;inset:0;background:linear-gradient(to top, rgba(0,0,0,.5) 0%, transparent 50%);pointer-events:none}
+.v-header-label{
+  position:absolute;top:1.5rem;left:1.5rem;z-index:2;
+  display:inline-flex;align-items:center;gap:.8rem;
+  background:rgba(255,255,255,.95);backdrop-filter:blur(10px);
+  padding:.6rem 1.2rem;border-radius:100px;
 }
-.voice-img-year small{display:block;font-size:.6rem;letter-spacing:.2em;font-weight:400;margin-top:.3rem;opacity:.85;text-transform:uppercase}
+.v-header-label .vn{font-size:.7rem;letter-spacing:.2em;color:var(--green);font-weight:700;font-family:'Inter',sans-serif}
+.v-header-label .vp{font-size:.78rem;color:var(--text);font-weight:700}
+.v-header-year{
+  position:absolute;bottom:1.5rem;right:1.5rem;z-index:2;color:#fff;
+  font-family:'Inter',sans-serif;font-weight:900;font-size:2.4rem;line-height:1;letter-spacing:-.02em;
+}
+.v-header-year small{display:block;font-size:.6rem;letter-spacing:.2em;font-weight:400;margin-top:.4rem;opacity:.85;text-transform:uppercase}
 
-.voice-num-row{display:flex;align-items:center;gap:1rem;margin-bottom:1.5rem;flex-wrap:wrap}
-.voice-num{font-size:.7rem;letter-spacing:.3em;color:var(--green);font-weight:700;font-family:'Inter',sans-serif}
-.voice-num::before{content:'';display:inline-block;width:30px;height:1px;background:var(--green);margin-right:.8rem;vertical-align:middle}
-.voice-position-tag{display:inline-block;padding:.35rem 1rem;background:var(--green-soft);color:var(--green-dark);border-radius:100px;font-size:.72rem;font-weight:700;letter-spacing:.05em}
-.voice-position-tag.y{background:var(--yellow-soft);color:var(--yellow-dark)}
-.voice-title{font-size:clamp(1.3rem,2.4vw,1.9rem);font-weight:900;line-height:1.55;margin-bottom:1.2rem}
-.voice-title .em{background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
-.voice-title .em-y{color:var(--yellow-dark)}
-.voice-body{font-size:.9rem;color:var(--text-soft);line-height:2.1}
-.voice-body p+p{margin-top:1rem}
-.voice-body h4{font-size:.78rem;color:var(--green);font-weight:700;letter-spacing:.1em;text-transform:uppercase;margin:1.5rem 0 .6rem;padding-left:1rem;border-left:3px solid var(--yellow);position:relative}
-.voice-meta{margin-top:1.8rem;display:flex;align-items:center;gap:1rem;font-size:.75rem;color:var(--text-mute);letter-spacing:.05em}
-.voice-meta strong{color:var(--text);font-weight:700;font-size:.85rem}
+/* Voice title (catchphrase headline) */
+.v-title{
+  font-size:clamp(1.5rem,3vw,2.4rem);font-weight:900;line-height:1.55;letter-spacing:.01em;
+  color:var(--text);margin-bottom:2rem;padding-left:1.4rem;
+  border-left:5px solid var(--green);
+}
+.v-title .em{background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.v-title .em-y{color:var(--yellow-dark)}
 
-/* PARALLAX */
-.par-banner{position:relative;height:50vh;min-height:360px;overflow:hidden;display:flex;align-items:center;background:#1a2920}
-.par-bg{position:absolute;inset:-15%;background-size:cover;background-position:center;opacity:.5}
-.par-overlay{position:absolute;inset:0;background:linear-gradient(135deg, rgba(45,142,61,.55), rgba(26,41,32,.75))}
-.par-content{position:relative;z-index:1;text-align:center;width:100%;color:#fff;padding:0 1.5rem}
-.par-en{font-size:.7rem;letter-spacing:.3em;color:var(--yellow-light);font-weight:700;text-transform:uppercase;margin-bottom:1rem}
-.par-quote{font-size:clamp(1.6rem,3.5vw,2.8rem);font-weight:900;line-height:1.45;color:#fff;max-width:780px;margin:0 auto;letter-spacing:-.01em}
+/* Content blocks: image + text alternating */
+.v-block{
+  display:grid;grid-template-columns:1fr 1.2fr;gap:2.5rem;
+  align-items:center;margin-bottom:2.5rem;
+}
+.v-block.rev{grid-template-columns:1.2fr 1fr;direction:rtl}
+.v-block.rev > *{direction:ltr}
+.v-block-img{
+  position:relative;aspect-ratio:4/3;overflow:hidden;border-radius:8px;
+  background:#eee;box-shadow:0 8px 20px rgba(0,0,0,.1);
+}
+.v-block-img img{width:100%;height:100%;object-fit:cover;transition:transform .8s var(--ease)}
+.v-block-img:hover img{transform:scale(1.06)}
+.v-block-img-tag{
+  position:absolute;top:1rem;left:1rem;z-index:2;
+  background:var(--yellow);color:#fff;
+  padding:.35rem .9rem;font-size:.62rem;letter-spacing:.15em;font-weight:700;
+  border-radius:4px;text-transform:uppercase;
+}
+.v-block-text h3{
+  font-size:.85rem;letter-spacing:.05em;color:var(--green);font-weight:700;
+  margin-bottom:.8rem;padding-left:.8rem;border-left:3px solid var(--yellow);
+}
+.v-block-text p{font-size:.92rem;color:#3a4a40;line-height:2.1;margin-bottom:.8rem}
+.v-block-text p:last-child{margin-bottom:0}
+.v-block-text strong{color:var(--green-dark);font-weight:700}
 
-/* CTA */
-.cta-section{padding:clamp(4rem,8vh,7rem) 0;background:#fff;text-align:center;position:relative;overflow:hidden}
-.cta-en{font-size:.7rem;letter-spacing:.3em;color:var(--green);font-weight:700;text-transform:uppercase;margin-bottom:1rem}
-.cta-section h2{font-size:clamp(1.6rem,3vw,2.6rem);font-weight:900;line-height:1.3}
-.cta-section h2 .em{background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
-.cta-section p{margin:1.2rem auto 2rem;max-width:560px;color:var(--text-soft);line-height:1.95}
+.v-meta{
+  margin-top:1rem;padding-top:1.2rem;border-top:1px solid var(--border);
+  font-size:.78rem;color:var(--text-mute);letter-spacing:.05em;
+}
+.v-meta strong{color:var(--text);font-weight:700;font-size:.88rem}
 
-@media(max-width:980px){
-  .voice-inner{grid-template-columns:1fr;gap:3rem}
-  .voice.rev .voice-inner{direction:ltr}
-  .voice-img{aspect-ratio:4/3;max-height:480px}
+/* CTA bottom */
+.a-cta{
+  padding:clamp(4rem,7vw,6rem) 0;background:linear-gradient(135deg,#2d8e3d 0%,#1e6b29 100%);
+  color:#fff;text-align:center;position:relative;overflow:hidden;
+}
+.a-cta::before{content:'';position:absolute;top:0;left:0;right:0;height:4px;background:var(--yellow)}
+.a-cta-en{font-size:.7rem;letter-spacing:.3em;color:var(--yellow-light);font-weight:700;text-transform:uppercase;margin-bottom:1rem}
+.a-cta h2{font-size:clamp(1.5rem,3vw,2.4rem);font-weight:900;line-height:1.4;margin-bottom:1rem}
+.a-cta p{font-size:.95rem;line-height:1.95;margin-bottom:2rem;opacity:.95}
+
+@media(max-width:768px){
+  .v-block,.v-block.rev{grid-template-columns:1fr;gap:1.2rem;direction:ltr}
+  .v-header-img{aspect-ratio:16/9}
+  .v-header-year{font-size:1.6rem}
 }
 </style>
 </head>
@@ -123,196 +137,220 @@
   <div class="burger"><span></span><span></span><span></span></div>
 </header>
 
-<!-- HERO -->
-<section class="about-hero">
-  <div class="about-hero-bg"></div>
-  <div class="about-hero-overlay"></div>
-  <div class="about-hero-content">
-    <div class="about-hero-en">— OUR THOUGHT —</div>
+<!-- HEADING -->
+<div class="a-heading">
+  <div class="a-heading-img"></div>
+  <div class="a-heading-overlay">
+    <div class="a-heading-en">— OUR THOUGHT —</div>
     <h1>私たちの<span class="em">想い</span></h1>
     <span class="ja">サンプロシステムで働く、ひとりひとりの声</span>
   </div>
-  <div class="about-hero-gears">
-    <svg width="280" height="280" viewBox="0 0 100 100" fill="currentColor" data-spin="-0.15">
-      <path d="M50 28a22 22 0 1 0 0 44 22 22 0 0 0 0-44zm0 36a14 14 0 1 1 0-28 14 14 0 0 1 0 28z"/>
-      <path d="M50 4l3 11h-6l3-11zm0 92l3-11h-6l3 11zm46-46l-11 3v-6l11 3zm-92 0l11-3v6l-11-3zm78.5-32.5l-7 8.5-4.2-4.2 11.2-4.3zM21 79l-7 8.5L18.2 91l4.3-11.2zM82.5 79L91 87.5 79.8 91l4.3-11.2zM21 21l-7-8.5L18.2 9l4.3 11.2z"/>
-    </svg>
-  </div>
-</section>
-
-<!-- INTRO -->
-<section class="intro">
-  <div class="container">
-    <div class="intro-en r">MESSAGE</div>
-    <h2 class="r d1">"確かな技術"と<br>"こだわりの<span class="em">モノづくり</span>"</h2>
-    <p class="r d2">
-      2000年の創業以来、私たちは「確かな技術」と「こだわりのモノづくり」を信条に、
-      お客様一人ひとりの課題に真摯に向き合ってきました。<br>
-      ここでは、サンプロシステムで働くメンバー一人ひとりの"想い"と
-      職場の空気感をお伝えします。
-    </p>
-  </div>
-</section>
-
-<!-- VOICE INTRO -->
-<section class="voice-intro">
-  <div class="container">
-    <p class="s-label r">Voices</p>
-    <h2 class="r d1">社員の<span class="em">声</span></h2>
-    <p class="r d2">それぞれが自分の役割と仕事に誇りを持って働いています。<br>
-    リアルな声を、ぜひお読みください。</p>
-  </div>
-</section>
-
-<!-- VOICE 01: 営業 / 2014年入社 -->
-<section class="voice">
-  <div class="voice-inner">
-    <div class="voice-img bg1 r-l clip-reveal">
-      <img class="bg-photo" src="https://sunprosys.co.jp/cont/wp-content/themes/sunpro_theme/img/top/main_image01.jpg" alt="営業の現場">
-      <div class="voice-img-tag">SALES</div>
-      <div class="gear-deco r1"><svg width="180" height="180" viewBox="0 0 100 100" fill="currentColor"><path d="M50 28a22 22 0 1 0 0 44 22 22 0 0 0 0-44zm0 36a14 14 0 1 1 0-28 14 14 0 0 1 0 28z"/><path d="M50 4l3 11h-6l3-11zm0 92l3-11h-6l3 11zm46-46l-11 3v-6l11 3zm-92 0l11-3v6l-11-3zm78.5-32.5l-7 8.5-4.2-4.2 11.2-4.3zM21 79l-7 8.5L18.2 91l4.3-11.2zM82.5 79L91 87.5 79.8 91l4.3-11.2zM21 21l-7-8.5L18.2 9l4.3 11.2z"/></svg></div>
-      <div class="voice-img-emoji">💼</div>
-      <div class="voice-img-year">2014<small>JOINED</small></div>
-    </div>
-    <div class="voice-content">
-      <div class="voice-num-row r"><div class="voice-num">VOICE 01</div><div class="voice-position-tag">営業</div></div>
-      <h2 class="voice-title r d1">お客様と技術者の架け橋として<br>最初の<span class="em">『器』</span>を作るのが営業の役目</h2>
-      <div class="voice-body r d2">
-        <h4>仕事内容</h4>
-        <p>お客様のご要望をお聞きして、ニーズに合ったご提案をし、設備の仕様や全体プランを決めて技術者にバトンを繋ぐ。コスト管理、納期調整、外部交渉など、広範囲の調整業務を担当します。</p>
-        <h4>職場の雰囲気</h4>
-        <p>家族との時間を大事にしながら安心して働ける会社です。個人事業主感覚で自分の仕事も時間も管理できます。福利厚生が充実し、保険サポートも手厚いのが心強いです。</p>
-        <h4>今後のチャレンジ</h4>
-        <p>交渉力・調整力を磨き、発想力を高めたい。昆虫好きで生物模倣に関心があり、生物の構造を模倣してシンプルかつ複雑な動きができる設備設計を目指しています。</p>
-      </div>
-      <div class="voice-meta r d3"><strong>営業職</strong>／2014年入社</div>
-    </div>
-  </div>
-</section>
-
-<!-- VOICE 02: 機械製作 / 2018年入社 -->
-<section class="voice rev">
-  <div class="voice-inner">
-    <div class="voice-img bg2 r-r clip-reveal">
-      <img class="bg-photo" src="https://sunprosys.co.jp/cont/wp-content/themes/sunpro_theme/img/top/top02_image01.jpg" alt="機械製作の現場">
-      <div class="voice-img-tag y">MECHANICAL</div>
-      <div class="gear-deco r2"><svg width="200" height="200" viewBox="0 0 100 100" fill="currentColor"><path d="M50 28a22 22 0 1 0 0 44 22 22 0 0 0 0-44zm0 36a14 14 0 1 1 0-28 14 14 0 0 1 0 28z"/><path d="M50 4l3 11h-6l3-11zm0 92l3-11h-6l3 11zm46-46l-11 3v-6l11 3zm-92 0l11-3v6l-11-3zm78.5-32.5l-7 8.5-4.2-4.2 11.2-4.3zM21 79l-7 8.5L18.2 91l4.3-11.2zM82.5 79L91 87.5 79.8 91l4.3-11.2zM21 21l-7-8.5L18.2 9l4.3 11.2z"/></svg></div>
-      <div class="voice-img-emoji">⚙️</div>
-      <div class="voice-img-year">2018<small>JOINED</small></div>
-    </div>
-    <div class="voice-content">
-      <div class="voice-num-row r"><div class="voice-num">VOICE 02</div><div class="voice-position-tag y">機械製作</div></div>
-      <h2 class="voice-title r d1">男女に関わらず、<br><span class="em-y">ワークライフバランス</span>を大切にできる会社です</h2>
-      <div class="voice-body r d2">
-        <h4>仕事内容</h4>
-        <p>3次元CADで機械設備の設計を担当しています。完全オーダーメイド製品なので、お客様のご要望や設置環境を考慮し、使う人の目線に立った使い勝手を重視しています。</p>
-        <h4>仕事のやりがい</h4>
-        <p>部品選定や発注、納期管理も社員の裁量で任せられます。決断には不安もありますが、任せてもらえるからこそ、より多くを吸収できると感じています。</p>
-        <h4>職場の雰囲気</h4>
-        <p>社内初の産休・育休を取得し、現在も時短勤務で子育てと両立しています。男女問わずワーク・ライフ・バランスを保ちやすく、育児に積極的な男性社員が多いのも特徴です。「仕事の代わりはいるけど、母親の代わりはいない」という社長のお言葉に支えられました。</p>
-      </div>
-      <div class="voice-meta r d3"><strong>機械製作</strong>／2018年入社／育児中</div>
-    </div>
-  </div>
-</section>
-
-<!-- VOICE 03: 機械製作 / 2019年入社 -->
-<section class="voice">
-  <div class="voice-inner">
-    <div class="voice-img bg3 r-l clip-reveal">
-      <img class="bg-photo" src="https://sunprosys.co.jp/cont/wp-content/themes/sunpro_theme/img/top/main_image02.jpg" alt="機械設計の現場">
-      <div class="voice-img-tag">MECHANICAL</div>
-      <div class="gear-deco r1"><svg width="200" height="200" viewBox="0 0 100 100" fill="currentColor"><path d="M50 28a22 22 0 1 0 0 44 22 22 0 0 0 0-44zm0 36a14 14 0 1 1 0-28 14 14 0 0 1 0 28z"/><path d="M50 4l3 11h-6l3-11zm0 92l3-11h-6l3 11zm46-46l-11 3v-6l11 3zm-92 0l11-3v6l-11-3zm78.5-32.5l-7 8.5-4.2-4.2 11.2-4.3zM21 79l-7 8.5L18.2 91l4.3-11.2zM82.5 79L91 87.5 79.8 91l4.3-11.2zM21 21l-7-8.5L18.2 9l4.3 11.2z"/></svg></div>
-      <div class="voice-img-emoji">🔧</div>
-      <div class="voice-img-year">2019<small>JOINED</small></div>
-    </div>
-    <div class="voice-content">
-      <div class="voice-num-row r"><div class="voice-num">VOICE 03</div><div class="voice-position-tag">機械製作</div></div>
-      <h2 class="voice-title r d1">自分の力量で<br>任せてもらえる環境に<br><span class="em">責任とやりがい</span>を感じます</h2>
-      <div class="voice-body r d2">
-        <h4>仕事のやりがい</h4>
-        <p>機械生産ラインの装置設計を担当しています。前職（造船設計）では稟議を上げて決められた流れで仕事をしていましたが、ここでは最初から最後まで自分の力量で仕事を任せてもらえます。責任は大きいですが達成感も大きく、成長に繋がります。積極性と責任感を持つ人に向いている職場だと思います。</p>
-        <h4>職場の雰囲気</h4>
-        <p>わからないことを聞けば先輩が気軽に指導してくれます。セミナー参加など学ぶ機会も積極的に提供してもらえます。週2回の社内英会話教室（自由参加）もあり、海外出張が多いので英語も役に立ちます。釣りやテニスなど、仕事外でのコミュニケーション活動も盛んで、アットホームな雰囲気です。</p>
-        <h4>今後のチャレンジ</h4>
-        <p>機械設計だけでなく、制御・ソフト設計も学び、両方を関連づけた設計ができるマルチな技術者を目指しています。</p>
-      </div>
-      <div class="voice-meta r d3"><strong>機械製作</strong>／2019年入社</div>
-    </div>
-  </div>
-</section>
-
-<!-- PARALLAX -->
-<div class="par-banner">
-  <div class="par-bg" data-parallax="0.25" style="background-image:url('https://sunprosys.co.jp/cont/wp-content/themes/sunpro_theme/img/top/main_image02.jpg')"></div>
-  <div class="par-overlay"></div>
-  <div class="par-content">
-    <div class="par-en r">CULTURE</div>
-    <h2 class="par-quote r d1">少数精鋭だから、<br>一人ひとりが主役。</h2>
-  </div>
 </div>
 
-<!-- VOICE 04: 制御・ソフト設計 / 2019年入社 -->
-<section class="voice">
-  <div class="voice-inner">
-    <div class="voice-img bg4 r-l clip-reveal">
-      <img class="bg-photo" src="https://sunprosys.co.jp/cont/wp-content/themes/sunpro_theme/img/top/top02_image02.jpg" alt="制御ソフト設計の現場">
-      <div class="voice-img-tag y">CONTROL / SOFTWARE</div>
-      <div class="gear-deco r2"><svg width="200" height="200" viewBox="0 0 100 100" fill="currentColor"><path d="M50 28a22 22 0 1 0 0 44 22 22 0 0 0 0-44zm0 36a14 14 0 1 1 0-28 14 14 0 0 1 0 28z"/><path d="M50 4l3 11h-6l3-11zm0 92l3-11h-6l3 11zm46-46l-11 3v-6l11 3zm-92 0l11-3v6l-11-3zm78.5-32.5l-7 8.5-4.2-4.2 11.2-4.3zM21 79l-7 8.5L18.2 91l4.3-11.2zM82.5 79L91 87.5 79.8 91l4.3-11.2zM21 21l-7-8.5L18.2 9l4.3 11.2z"/></svg></div>
-      <div class="voice-img-emoji">💻</div>
-      <div class="voice-img-year">2019<small>JOINED</small></div>
-    </div>
-    <div class="voice-content">
-      <div class="voice-num-row r"><div class="voice-num">VOICE 04</div><div class="voice-position-tag y">制御・ソフト設計</div></div>
-      <h2 class="voice-title r d1">『自分もこうなりたい』と<br>目標となる先輩たちに囲まれた<br><span class="em-y">恵まれた職場</span>です</h2>
-      <div class="voice-body r d2">
-        <h4>仕事のやりがい</h4>
-        <p>オーダーメイド製品の制御設計を担当しています。お客様の要望を探りながら、実際の使用を考えてプログラムします。要望をどう形にするかは自分に任されており、やりがいと重責を感じます。期待・信頼してもらえることが、何より嬉しいです。</p>
-        <h4>仕事の内容</h4>
-        <p>制御設計のほか、社会貢献事業として「子どもロボット教室」の講師も担当。小学生～中学生に、現場で使う高度な技術を体験してもらっています。自分が作ったものが動く楽しさを、子どもたちにも体験してほしいです。</p>
-        <h4>職場の雰囲気</h4>
-        <p>職業訓練校でPLC（プログラマブルロジックコントローラ）を学び、未経験で入社しました。相談しやすく親身な社風で、先輩たちは「何回聞いてもいい」と言ってくれます。身近に「こうなりたい」と思える先輩が多く、入社してよかったと感じています。</p>
-      </div>
-      <div class="voice-meta r d3"><strong>制御・ソフト設計</strong>／2019年入社</div>
-    </div>
+<!-- INTRO -->
+<section class="a-intro">
+  <div class="container">
+    <div class="a-intro-en">VOICE OF EMPLOYEES</div>
+    <h2>社員の声</h2>
+    <p>サンプロシステムで働くメンバー一人ひとりの"想い"と職場の空気感をお伝えします。仕事内容、職場の雰囲気、今後のチャレンジ──それぞれの言葉から、私たちの会社の姿を感じていただければ幸いです。</p>
   </div>
 </section>
 
-<!-- VOICE 05: 制御・ソフト設計 / 2017年入社 -->
-<section class="voice rev">
+<!-- VOICE 01: 営業 / 2014 -->
+<section class="voice-block">
   <div class="voice-inner">
-    <div class="voice-img bg5 r-r clip-reveal">
-      <img class="bg-photo" src="https://sunprosys.co.jp/cont/wp-content/themes/sunpro_theme/img/top/top02_image03.jpg" alt="制御ソフト設計の現場">
-      <div class="voice-img-tag">CONTROL / SOFTWARE</div>
-      <div class="gear-deco r1"><svg width="200" height="200" viewBox="0 0 100 100" fill="currentColor"><path d="M50 28a22 22 0 1 0 0 44 22 22 0 0 0 0-44zm0 36a14 14 0 1 1 0-28 14 14 0 0 1 0 28z"/><path d="M50 4l3 11h-6l3-11zm0 92l3-11h-6l3 11zm46-46l-11 3v-6l11 3zm-92 0l11-3v6l-11-3zm78.5-32.5l-7 8.5-4.2-4.2 11.2-4.3zM21 79l-7 8.5L18.2 91l4.3-11.2zM82.5 79L91 87.5 79.8 91l4.3-11.2zM21 21l-7-8.5L18.2 9l4.3 11.2z"/></svg></div>
-      <div class="voice-img-emoji">🚀</div>
-      <div class="voice-img-year">2017<small>JOINED</small></div>
+    <div class="v-header-img">
+      <img src="https://sunprosys.co.jp/cont/wp-content/themes/sunpro_theme/img/about/about01_image01_01.jpg" alt="営業職">
+      <div class="v-header-label"><span class="vn">VOICE 01</span><span class="vp">営業</span></div>
+      <div class="v-header-year">2014<small>JOINED</small></div>
     </div>
-    <div class="voice-content">
-      <div class="voice-num-row r"><div class="voice-num">VOICE 05</div><div class="voice-position-tag">制御・ソフト設計</div></div>
-      <h2 class="voice-title r d1">お客様のニーズを把握し<br>具現化するオーダーメイドの仕事に<br><span class="em">刺激と達成感</span>を感じます</h2>
-      <div class="voice-body r d2">
-        <h4>仕事の内容</h4>
-        <p>検査設備や組立設備などの電気回路・ソフト設計を担当しています。まずお客様と仕様打ち合わせを実施。ニーズをくみ取り具体化することが重要です。検査設備では、使用場所・計測結果の画面表示・記録取得などの要望を取り入れながら設計します。スイッチ・PLC・ブザー・ランプなどを組み合わせて、CADで図面作成し、その後プログラムを作成します。</p>
-        <h4>仕事のやりがい</h4>
-        <p>常に新しい案件に取り組めるため刺激があります。メーカー勤務時と異なり、オーダーメイド製品は達成感があります。一案件を最初から最後まで一人に任せられ、自分で決定できる──大企業にはない魅力です。</p>
-        <h4>今後チャレンジしたいこと</h4>
-        <p>ポリテクセンターのセミナーに参加させてもらっています。これまではソフト中心だったので、今後はハード部分も習得していきたいです。</p>
+    <h2 class="v-title">お客様と技術者の架け橋として<br>最初の<span class="em">『器』</span>を作るのが営業の役目</h2>
+
+    <div class="v-block">
+      <div class="v-block-img">
+        <img src="https://sunprosys.co.jp/cont/wp-content/themes/sunpro_theme/img/about/about01_image01_02.jpg" alt="">
+        <div class="v-block-img-tag">仕事内容</div>
       </div>
-      <div class="voice-meta r d3"><strong>制御・ソフト設計</strong>／2017年入社</div>
+      <div class="v-block-text">
+        <h3>WORK</h3>
+        <p>お客様のご要望をお聞きして、ニーズに合ったご提案をし、設備の仕様や全体プランを決めて技術者にバトンを繋ぎます。<strong>コスト管理、納期調整、外部交渉</strong>など、広範囲の調整業務を担当しています。</p>
+        <p>家族との時間を大事にしながら安心して働ける会社です。個人事業主感覚で自分の仕事も時間も管理できます。福利厚生が充実し、保険サポートも手厚いのが心強いです。</p>
+      </div>
     </div>
+
+    <div class="v-block rev">
+      <div class="v-block-img">
+        <img src="https://sunprosys.co.jp/cont/wp-content/themes/sunpro_theme/img/about/about01_image01_03.jpg" alt="">
+        <div class="v-block-img-tag">今後のチャレンジ</div>
+      </div>
+      <div class="v-block-text">
+        <h3>CHALLENGE</h3>
+        <p>交渉力・調整力を磨き、発想力を高めたいと考えています。昆虫好きで生物模倣に関心があり、<strong>生物の構造を模倣してシンプルかつ複雑な動きができる設備設計</strong>を目指しています。</p>
+      </div>
+    </div>
+
+    <div class="v-meta"><strong>営業職</strong>／2014年入社</div>
+  </div>
+</section>
+
+<!-- VOICE 02: 機械製作 / 2018 育児中 -->
+<section class="voice-block">
+  <div class="voice-inner">
+    <div class="v-header-img">
+      <img src="https://sunprosys.co.jp/cont/wp-content/themes/sunpro_theme/img/about/about01_image02_01.jpg" alt="機械製作">
+      <div class="v-header-label"><span class="vn">VOICE 02</span><span class="vp">機械製作</span></div>
+      <div class="v-header-year">2018<small>JOINED</small></div>
+    </div>
+    <h2 class="v-title">男女に関わらず、<br><span class="em-y">ワークライフバランス</span>を大切にできる会社です</h2>
+
+    <div class="v-block">
+      <div class="v-block-img">
+        <img src="https://sunprosys.co.jp/cont/wp-content/themes/sunpro_theme/img/about/about01_image02_02.jpg" alt="">
+        <div class="v-block-img-tag">仕事内容</div>
+      </div>
+      <div class="v-block-text">
+        <h3>WORK</h3>
+        <p>3次元CADで機械設備の設計を担当しています。完全オーダーメイド製品なので、お客様のご要望や設置環境を考慮し、<strong>使う人の目線に立った使い勝手</strong>を重視しています。</p>
+        <p>部品選定や発注、納期管理も社員の裁量で任せられます。決断には不安もありますが、任せてもらえるからこそ、より多くを吸収できると感じています。</p>
+      </div>
+    </div>
+
+    <div class="v-block rev">
+      <div class="v-block-img">
+        <img src="https://sunprosys.co.jp/cont/wp-content/themes/sunpro_theme/img/about/about01_image02_03.jpg" alt="">
+        <div class="v-block-img-tag">職場の雰囲気</div>
+      </div>
+      <div class="v-block-text">
+        <h3>WORKPLACE</h3>
+        <p>社内初の産休・育休を取得し、現在も時短勤務で子育てと両立しています。男女問わずワーク・ライフ・バランスを保ちやすく、育児に積極的な男性社員が多いのも特徴です。</p>
+        <p>社長からは「<strong>仕事の代わりはいるけど、母親の代わりはいない</strong>」とサポートのお言葉をいただきました。</p>
+      </div>
+    </div>
+
+    <div class="v-meta"><strong>機械製作</strong>／2018年入社／育児中</div>
+  </div>
+</section>
+
+<!-- VOICE 03: 機械製作 / 2019 -->
+<section class="voice-block">
+  <div class="voice-inner">
+    <div class="v-header-img">
+      <img src="https://sunprosys.co.jp/cont/wp-content/themes/sunpro_theme/img/about/about01_image03_01.jpg" alt="機械製作">
+      <div class="v-header-label"><span class="vn">VOICE 03</span><span class="vp">機械製作</span></div>
+      <div class="v-header-year">2019<small>JOINED</small></div>
+    </div>
+    <h2 class="v-title">自分の力量で<br>任せてもらえる環境に<br><span class="em">責任とやりがい</span>を感じます</h2>
+
+    <div class="v-block">
+      <div class="v-block-img">
+        <img src="https://sunprosys.co.jp/cont/wp-content/themes/sunpro_theme/img/about/about01_image03_02.jpg" alt="">
+        <div class="v-block-img-tag">仕事のやりがい</div>
+      </div>
+      <div class="v-block-text">
+        <h3>WORK</h3>
+        <p>機械生産ラインの装置設計を担当しています。前職（造船設計）では稟議を上げて決められた流れで仕事をしていましたが、ここでは<strong>最初から最後まで自分の力量で仕事を任せてもらえます</strong>。責任は大きいですが達成感も大きく、成長に繋がります。</p>
+        <p>わからないことを聞けば先輩が気軽に指導してくれます。セミナー参加など学ぶ機会も積極的に提供してもらえます。週2回の社内英会話教室（自由参加）もあり、海外出張が多いので英語も役に立ちます。釣りやテニスなど仕事外でのコミュニケーション活動も盛んで、アットホームな雰囲気です。</p>
+      </div>
+    </div>
+
+    <div class="v-block rev">
+      <div class="v-block-img">
+        <img src="https://sunprosys.co.jp/cont/wp-content/themes/sunpro_theme/img/about/about01_image03_03.jpg" alt="">
+        <div class="v-block-img-tag">今後のチャレンジ</div>
+      </div>
+      <div class="v-block-text">
+        <h3>CHALLENGE</h3>
+        <p>機械設計だけでなく、<strong>制御・ソフト設計も学び、両方を関連づけた設計</strong>ができるマルチな技術者を目指しています。</p>
+      </div>
+    </div>
+
+    <div class="v-meta"><strong>機械製作</strong>／2019年入社</div>
+  </div>
+</section>
+
+<!-- VOICE 04: 制御・ソフト設計 / 2019 -->
+<section class="voice-block">
+  <div class="voice-inner">
+    <div class="v-header-img">
+      <img src="https://sunprosys.co.jp/cont/wp-content/themes/sunpro_theme/img/about/about01_image04_01.jpg" alt="制御・ソフト設計">
+      <div class="v-header-label"><span class="vn">VOICE 04</span><span class="vp">制御・ソフト設計</span></div>
+      <div class="v-header-year">2019<small>JOINED</small></div>
+    </div>
+    <h2 class="v-title">『自分もこうなりたい』と<br>目標となる先輩たちに囲まれた<br><span class="em-y">恵まれた職場</span>です</h2>
+
+    <div class="v-block">
+      <div class="v-block-img">
+        <img src="https://sunprosys.co.jp/cont/wp-content/themes/sunpro_theme/img/about/about01_image04_02.jpg" alt="">
+        <div class="v-block-img-tag">仕事のやりがい</div>
+      </div>
+      <div class="v-block-text">
+        <h3>WORK</h3>
+        <p>オーダーメイド製品の制御設計を担当しています。お客様の要望を探りながら、実際の使用を考えてプログラムします。<strong>要望をどう形にするかは自分に任されており、やりがいと重責を感じます</strong>。期待・信頼してもらえることが、何より嬉しいです。</p>
+        <p>制御設計のほか、社会貢献事業として「子どもロボット教室」の講師も担当しています。小学生〜中学生に、現場で使う高度な技術を体験してもらっています。自分が作ったものが動く楽しさを、子どもたちにも体験してほしいです。</p>
+      </div>
+    </div>
+
+    <div class="v-block rev">
+      <div class="v-block-img">
+        <img src="https://sunprosys.co.jp/cont/wp-content/themes/sunpro_theme/img/about/about01_image04_03.jpg" alt="">
+        <div class="v-block-img-tag">職場の雰囲気</div>
+      </div>
+      <div class="v-block-text">
+        <h3>WORKPLACE</h3>
+        <p>職業訓練校でPLC（プログラマブルロジックコントローラ）を学び、未経験で入社しました。相談しやすく親身な社風で、先輩たちは「<strong>何回聞いてもいい</strong>」と言ってくれます。身近に「こうなりたい」と思える先輩が多く、入社してよかったと感じています。</p>
+      </div>
+    </div>
+
+    <div class="v-meta"><strong>制御・ソフト設計</strong>／2019年入社</div>
+  </div>
+</section>
+
+<!-- VOICE 05: 制御・ソフト設計 / 2017 -->
+<section class="voice-block">
+  <div class="voice-inner">
+    <div class="v-header-img">
+      <img src="https://sunprosys.co.jp/cont/wp-content/themes/sunpro_theme/img/about/about01_image05_01.jpg" alt="制御・ソフト設計">
+      <div class="v-header-label"><span class="vn">VOICE 05</span><span class="vp">制御・ソフト設計</span></div>
+      <div class="v-header-year">2017<small>JOINED</small></div>
+    </div>
+    <h2 class="v-title">お客様のニーズを把握し<br>具現化するオーダーメイドの仕事に<br><span class="em">刺激と達成感</span>を感じます</h2>
+
+    <div class="v-block">
+      <div class="v-block-img">
+        <img src="https://sunprosys.co.jp/cont/wp-content/themes/sunpro_theme/img/about/about01_image05_02.jpg" alt="">
+        <div class="v-block-img-tag">仕事の内容</div>
+      </div>
+      <div class="v-block-text">
+        <h3>WORK</h3>
+        <p>検査設備や組立設備などの<strong>電気回路・ソフト設計</strong>を担当しています。まずお客様と仕様打ち合わせを実施し、ニーズをくみ取り具体化することが重要です。検査設備では、使用場所・計測結果の画面表示・記録取得などの要望を取り入れながら設計します。スイッチ・PLC・ブザー・ランプなどを組み合わせてCADで図面作成し、その後プログラムを作成します。</p>
+        <p>常に新しい案件に取り組めるため刺激があります。メーカー勤務時と異なり、<strong>オーダーメイド製品は達成感</strong>があります。一案件を最初から最後まで一人に任せられ、自分で決定できる──大企業にはない魅力です。</p>
+      </div>
+    </div>
+
+    <div class="v-block rev">
+      <div class="v-block-img">
+        <img src="https://sunprosys.co.jp/cont/wp-content/themes/sunpro_theme/img/about/about01_image05_03.jpg" alt="">
+        <div class="v-block-img-tag">今後のチャレンジ</div>
+      </div>
+      <div class="v-block-text">
+        <h3>CHALLENGE</h3>
+        <p>ポリテクセンターのセミナーに参加させてもらっています。これまではソフト中心だったので、<strong>今後はハード部分も習得</strong>していきたいです。</p>
+      </div>
+    </div>
+
+    <div class="v-meta"><strong>制御・ソフト設計</strong>／2017年入社</div>
   </div>
 </section>
 
 <!-- CTA -->
-<section class="cta-section">
+<section class="a-cta">
   <div class="container">
-    <div class="cta-en r">CONTACT</div>
-    <h2 class="r d1">一緒に、<br><span class="em">ものづくりをしませんか？</span></h2>
-    <p class="r d2">採用情報・会社情報もぜひご覧ください。</p>
-    <div class="r d3" style="display:flex;gap:1rem;justify-content:center;flex-wrap:wrap">
-      <a href="recruit.html" class="btn btn-primary magnetic">採用情報<span class="arrow"></span></a>
-      <a href="company.html" class="btn btn-outline magnetic">会社情報<span class="arrow"></span></a>
+    <div class="a-cta-en">CONTACT</div>
+    <h2>一緒に、ものづくりをしませんか？</h2>
+    <p>採用情報・会社情報もぜひご覧ください。</p>
+    <div style="display:flex;gap:1rem;justify-content:center;flex-wrap:wrap">
+      <a href="recruit.html" class="btn btn-yellow magnetic">採用情報<span class="arrow"></span></a>
+      <a href="company.html" class="btn btn-outline magnetic" style="background:transparent;color:#fff;border-color:#fff">会社情報<span class="arrow"></span></a>
     </div>
   </div>
 </section>
