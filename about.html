@@ -339,25 +339,38 @@ body{background:#fff}
 <svg width="0" height="0" style="position:absolute;pointer-events:none" aria-hidden="true">
   <defs>
     <filter id="cutout-paper" x="-25%" y="-15%" width="150%" height="170%" color-interpolation-filters="sRGB">
-      <!-- 1. Soften the source alpha slightly to absorb any input jaggedness -->
-      <feGaussianBlur in="SourceAlpha" stdDeviation="1.2" result="alphaSoft"/>
-      <!-- 2. Smooth dilate → wide white halo mask, fully anti-aliased -->
-      <feMorphology in="alphaSoft" operator="dilate" radius="18" result="haloMask"/>
-      <!-- 3. Slightly bigger mask for the dark ring -->
+      <!-- ★ MORPHOLOGICAL SMOOTHING: blur → threshold
+              Blur first smooths pixel-level jaggedness into a gradient,
+              then a steep threshold re-extracts a CRISP edge at the
+              smoothed curve position. Result = smooth curve + sharp edge
+              (like a vector path traced by a precision curve cutter). -->
+      <feGaussianBlur in="SourceAlpha" stdDeviation="2.5" result="alphaBlurred"/>
+      <feComponentTransfer in="alphaBlurred" result="alphaVector">
+        <feFuncA type="linear" slope="10" intercept="-4.5"/>
+      </feComponentTransfer>
+      <!-- Now alphaVector is a smooth-curve binary silhouette. -->
+
+      <!-- 1. Dilate the smoothed silhouette → white halo mask -->
+      <feMorphology in="alphaVector" operator="dilate" radius="18" result="haloMask"/>
+
+      <!-- 2. Bigger mask for dark ring -->
       <feMorphology in="haloMask" operator="dilate" radius="3" result="ringBase"/>
       <feFlood flood-color="#1a4f23" result="ringCol"/>
       <feComposite in="ringCol" in2="ringBase" operator="in" result="darkRing"/>
-      <!-- 4. Fill the smooth halo mask with white -->
+
+      <!-- 3. Fill halo mask with white -->
       <feFlood flood-color="#ffffff" result="white"/>
       <feComposite in="white" in2="haloMask" operator="in" result="whiteHalo"/>
-      <!-- 5. HARD offset shadow — no Gaussian blur on the offset step -->
+
+      <!-- 4. HARD offset shadow — no blur -->
       <feOffset in="ringBase" dx="8" dy="12" result="shAlpha"/>
       <feFlood flood-color="#1a2920" result="shCol"/>
       <feComposite in="shCol" in2="shAlpha" operator="in" result="shFull"/>
       <feComponentTransfer in="shFull" result="shadow">
         <feFuncA type="linear" slope="0.55"/>
       </feComponentTransfer>
-      <!-- 6. Stack: hard shadow → dark ring → white halo → person -->
+
+      <!-- 5. Stack -->
       <feMerge>
         <feMergeNode in="shadow"/>
         <feMergeNode in="darkRing"/>
