@@ -8,14 +8,20 @@ document.addEventListener('DOMContentLoaded', () => {
   /* ─── Page loaded ─── */
   setTimeout(() => document.body.classList.add('loaded'), 1300);
 
-  /* ─── Custom gear cursor ─── */
+  /* ─── Custom bolt cursor ─── */
   if (window.matchMedia('(hover:hover)').matches) {
     const cur = document.createElement('div'); cur.id = 'cursor';
     const ring = document.createElement('div'); ring.id = 'cursor-ring';
-    // SVG gear cursor ring
-    ring.innerHTML = `<svg viewBox="0 0 48 48" fill="none">
-      <path d="M24 14a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm0 16a6 6 0 1 1 0-12 6 6 0 0 1 0 12z" stroke="#2d8e3d" stroke-width="1.5"/>
-      <path d="M24 4l1.5 4M24 44l1.5-4M44 24l-4-1.5M8 24l-4-1.5M38.5 9.5L36 12M12 36l-2.5 2.5M38.5 38.5L36 36M12 12l-2.5-2.5" stroke="#2d8e3d" stroke-width="1.5" stroke-linecap="round"/>
+    // SVG hex-bolt cursor ring (rotates like a bolt being turned)
+    ring.innerHTML = `<svg viewBox="0 0 48 48" fill="none" stroke="#2d8e3d" stroke-linejoin="round" stroke-linecap="round">
+      <!-- Outer hex head -->
+      <polygon points="24,5 41,14.5 41,33.5 24,43 7,33.5 7,14.5" stroke-width="2.4"/>
+      <!-- Bevel ring (inner hex) -->
+      <polygon points="24,11 35.5,18 35.5,30 24,37 12.5,30 12.5,18" stroke-width="1.2" opacity=".55"/>
+      <!-- Slotted/Phillips center -->
+      <circle cx="24" cy="24" r="5.5" stroke-width="1.5"/>
+      <line x1="24" y1="20" x2="24" y2="28" stroke-width="1.8"/>
+      <line x1="20" y1="24" x2="28" y2="24" stroke-width="1.8"/>
     </svg>`;
     document.body.appendChild(cur); document.body.appendChild(ring);
     let mx=0,my=0,rx=0,ry=0;
