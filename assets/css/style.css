@@ -354,6 +354,79 @@ nav.h-nav a.active{color:var(--green)}
 .breadcrumb .sep{margin:0 .6rem;opacity:.6}
 
 /* ═══════════════════════════════════
+   PICTOGRAMS (robot/SI themed icons)
+═══════════════════════════════════ */
+.pic{
+  display:inline-block;width:48px;height:48px;color:var(--green);vertical-align:middle;
+}
+.pic-sm{width:28px;height:28px}
+.pic-md{width:64px;height:64px}
+.pic-lg{width:96px;height:96px}
+.pic-xl{width:160px;height:160px}
+.pic-y{color:var(--yellow)}
+.pic-w{color:#fff}
+.pic-d{color:var(--green-dark)}
+.pic-mute{color:var(--green-soft)}
+
+/* Floating pictogram decoration */
+.pic-float{
+  position:absolute;opacity:.15;pointer-events:none;color:var(--green);
+  animation:picFloat 8s ease-in-out infinite alternate;
+}
+.pic-float.y{color:var(--yellow);opacity:.18}
+.pic-float.fast{animation-duration:5s}
+.pic-float.slow{animation-duration:14s}
+@keyframes picFloat{
+  0%{transform:translateY(0) rotate(-3deg)}
+  50%{transform:translateY(-18px) rotate(2deg)}
+  100%{transform:translateY(-6px) rotate(-2deg)}
+}
+
+/* Pictogram band — horizontal scrolling row of pictograms between sections */
+.pic-band{
+  background:linear-gradient(135deg, #1a2920 0%, #2d8e3d 100%);
+  color:#fff;padding:1.4rem 0;overflow:hidden;position:relative;
+  border-top:3px solid var(--yellow);border-bottom:3px solid var(--yellow);
+}
+.pic-band::before,.pic-band::after{
+  content:'';position:absolute;top:0;bottom:0;width:80px;z-index:2;pointer-events:none;
+}
+.pic-band::before{left:0;background:linear-gradient(to right, rgba(26,41,32,.95), transparent)}
+.pic-band::after{right:0;background:linear-gradient(to left, rgba(45,142,61,.95), transparent)}
+.pic-band-track{display:flex;gap:3rem;white-space:nowrap;animation:picMarquee 40s linear infinite;align-items:center}
+.pic-band-track .item{display:inline-flex;align-items:center;gap:.8rem;color:#fff}
+.pic-band-track .item .pic{width:36px;height:36px;color:var(--yellow-light)}
+.pic-band-track .item span{font-size:.78rem;letter-spacing:.2em;text-transform:uppercase;font-weight:700;color:rgba(255,255,255,.85)}
+.pic-band-track .item .sep{color:rgba(255,255,255,.3);margin:0 .5rem}
+@keyframes picMarquee{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+
+/* Pictogram badge - inline with section labels */
+.pic-badge{
+  display:inline-flex;align-items:center;justify-content:center;
+  width:52px;height:52px;border-radius:14px;
+  background:var(--green-soft);color:var(--green-dark);
+  transition:transform .4s var(--ease),background .3s,color .3s;
+  flex-shrink:0;
+}
+.pic-badge svg{width:30px;height:30px}
+.pic-badge:hover{transform:rotate(15deg) scale(1.08);background:var(--green);color:#fff}
+.pic-badge.y{background:var(--yellow-soft);color:var(--yellow-dark)}
+.pic-badge.y:hover{background:var(--yellow);color:#fff}
+.pic-badge.dark{background:var(--green-dark);color:var(--yellow-light)}
+
+/* Pictogram cluster - background decoration with scattered icons */
+.pic-cluster{position:absolute;inset:0;pointer-events:none;overflow:hidden;z-index:0}
+
+/* Bouncing/spinning animations for pictograms */
+.pic-spin{animation:gearSpin 12s linear infinite}
+.pic-spin-fast{animation:gearSpin 4s linear infinite}
+.pic-spin-rev{animation:gearSpin 12s linear infinite reverse}
+.pic-pulse{animation:picPulse 2.4s ease-in-out infinite alternate}
+@keyframes picPulse{from{transform:scale(1);opacity:.7}to{transform:scale(1.1);opacity:1}}
+.pic-bob{animation:picBob 3s ease-in-out infinite alternate}
+@keyframes picBob{from{transform:translateY(0)}to{transform:translateY(-10px)}}
+
+/* ═══════════════════════════════════
    FOOTER
 ═══════════════════════════════════ */
 footer{
