@@ -339,31 +339,30 @@ body{background:#fff}
 <svg width="0" height="0" style="position:absolute;pointer-events:none" aria-hidden="true">
   <defs>
     <filter id="cutout-paper" x="-25%" y="-15%" width="150%" height="170%">
-      <!-- 1. Smooth dilate of the silhouette → wide white area, perfectly clean edge -->
+      <!-- 1. Smooth dilate → wide white halo mask (smooth shape, no jags) -->
       <feMorphology in="SourceAlpha" operator="dilate" radius="18" result="haloMask"/>
-      <!-- 2. Thin dark ring just outside for clear boundary -->
-      <feMorphology in="haloMask" operator="dilate" radius="1.5" result="outlineBase"/>
-      <feFlood flood-color="#1e6b29" result="outlineCol"/>
+      <!-- 2. Sharpen alpha (steep linear ramp): removes soft anti-alias fringe
+              while keeping smooth curvature (no pixel-jag) -->
+      <feComponentTransfer in="haloMask" result="haloCrisp">
+        <feFuncA type="linear" slope="6" intercept="-2.5"/>
+      </feComponentTransfer>
+      <!-- 3. Bold dark ring (3px) for clear, visible boundary -->
+      <feMorphology in="haloCrisp" operator="dilate" radius="3" result="outlineBase"/>
+      <feFlood flood-color="#1a4f23" result="outlineCol"/>
       <feComposite in="outlineCol" in2="outlineBase" operator="in" result="darkRing"/>
-      <!-- 3. Fill the halo mask with white -->
+      <!-- 4. Fill the crisp halo mask with white -->
       <feFlood flood-color="#ffffff" result="white"/>
-      <feComposite in="white" in2="haloMask" operator="in" result="whiteHalo"/>
-      <!-- 7a. Soft drop shadow (深い影) — floating effect -->
-      <feGaussianBlur in="outlineBase" stdDeviation="10" result="dsBlur"/>
-      <feOffset in="dsBlur" dx="0" dy="20" result="dsOffset"/>
-      <feComponentTransfer in="dsOffset" result="dropShadow">
+      <feComposite in="white" in2="haloCrisp" operator="in" result="whiteHalo"/>
+      <!-- 5. HARD offset shadow — no Gaussian blur, just a clean displaced silhouette -->
+      <feOffset in="outlineBase" dx="8" dy="12" result="shadowAlpha"/>
+      <feFlood flood-color="#1a2920" result="shadowCol"/>
+      <feComposite in="shadowCol" in2="shadowAlpha" operator="in" result="shadowFull"/>
+      <feComponentTransfer in="shadowFull" result="shadow">
         <feFuncA type="linear" slope="0.55"/>
       </feComponentTransfer>
-      <!-- 7b. Ambient shadow (柔らかい広がり) — adds depth -->
-      <feGaussianBlur in="outlineBase" stdDeviation="20" result="ambBlur"/>
-      <feOffset in="ambBlur" dx="0" dy="6" result="ambOffset"/>
-      <feComponentTransfer in="ambOffset" result="ambShadow">
-        <feFuncA type="linear" slope="0.3"/>
-      </feComponentTransfer>
-      <!-- 8. Stack: ambient → drop shadow → dark ring → white halo → person -->
+      <!-- 6. Stack: hard shadow → dark ring → white halo → person -->
       <feMerge>
-        <feMergeNode in="ambShadow"/>
-        <feMergeNode in="dropShadow"/>
+        <feMergeNode in="shadow"/>
         <feMergeNode in="darkRing"/>
         <feMergeNode in="whiteHalo"/>
         <feMergeNode in="SourceGraphic"/>
